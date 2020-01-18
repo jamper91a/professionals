@@ -16,6 +16,12 @@ module.exports.policies = {
     'login': true
   },
   'customer/create': true,
-  'professional/create': true
+  'professional/create': true,
+
+  /**
+   * Country
+   */
+  'country/*': ['isAuthenticated', 'isAdmin'],
+  'country/find': true
 
 };

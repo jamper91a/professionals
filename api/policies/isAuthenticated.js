@@ -15,12 +15,11 @@ module.exports = (req, res, next) => {
       if (info.name === 'JsonWebTokenError') info.status = 401;
       if (error || !user) return res.serverError(error || info);
 
-      req.employee = user;
       req.user = user;
 
-      next();
+      return next();
     } catch (e) {
-      res.serverError(e)
+      res.serverError(e);
     }
   })(req, res);
 };
