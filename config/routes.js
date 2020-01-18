@@ -25,7 +25,11 @@ module.exports.routes = {
   /**
    * Customers
    */
-  'POST /customer': 'customer/create'
+  'POST /customer': 'customer/create',
+  /**
+   * Professionals
+   */
+  'POST professional': 'professional/create'
 
 
 };

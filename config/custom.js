@@ -23,4 +23,8 @@ module.exports.custom = {
   USER_ADMIN: 1,
   USER_CUSTOMER: 2,
   USER_PROFESSIONAL: 3,
+  //Status
+  STATUS_ONLINE: 1,
+  STATUS_BUSY: 2,
+  STATUS_OFFLINE: 3
 };
