@@ -21,7 +21,11 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
   'POST /login': 'User.login',
-  '/logout': 'AuthController.logout',
+
+  /**
+   * Customers
+   */
+  'POST /customer': 'customer/create'
 
 
 };

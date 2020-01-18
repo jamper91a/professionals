@@ -15,5 +15,6 @@ module.exports.policies = {
   UserController: {
     'login': true
   },
+  'customer/create': true
 
 };
