@@ -29,7 +29,12 @@ module.exports.routes = {
   /**
    * Professionals
    */
-  'POST professional': 'professional/create'
+  'POST professional': 'professional/create',
+
+  /**
+   * Admin Views
+   */
+  '/admin': 'Admin.index'
 
 
 };
