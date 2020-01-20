@@ -3,5 +3,15 @@
 	"A brand new app.": "A brand new app.",
 	"error_G04": "error_G04",
 	"error_G03": "error_G03",
-	"company": "company"
+	"company": "company",
+	"notFound": "Not found",
+	"Email_Adress": "Email Address",
+	"Email": "Email",
+	"Password": "Password",
+	"sign_in": "Sign in",
+	"Dont_you_have_account": "Don't you have account",
+	"Sign_Up_Here": "Sign Up Here",
+	"": "",
+	"Email_Address": "Email Address",
+	"E_INVALID_ARGINS": "Email / Password not valid"
 }

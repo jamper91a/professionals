@@ -6,27 +6,41 @@ module.exports = {
 
   description: 'Display "Login" page.',
 
+  inputs: {
+    username: {
+      type: "string"
+    },
+    password: {
+      type: "string"
+    },
+  },
 
   exits: {
-
-    success: {
-      statusCode: 200,
-      description: 'Requesting user is a guest, so show the public landing page.',
-      viewTemplatePath: 'pages/admin/login'
-    },
-
-    redirect: {
-      responseType: 'redirect',
-      description: 'Requesting user is logged in, so redirect to the internal welcome page.'
-    },
-
   },
 
 
-  fn: async function () {
-      return {};
+  fn: async function (inputs) {
+    switch (this.req.method) {
+      case 'GET':
+        return this.res.view('pages/admin/login', {layout: 'layouts/login', error: ''});
+        break;
+      case 'POST':
+        inputs.req = this.req;
+        inputs.res = this.res;
+        try {
+          const user = await sails.helpers.user.login.with(inputs);
+          this.res.cookie('jwt', user.token, sails.config.custom.jwt.cookie);
+          return this.res.redirect('/admin/index');
+        } catch (e) {
+          return this.res.view('pages/admin/login', {layout: 'layouts/login', error: e.code});
+          // return{e};
+        }
 
-  }
+        break;
+    }
+
+  },
+
 
 
 };

@@ -21,10 +21,7 @@ module.exports = {
       }
     },
     password: {
-      type: "string",
-      custom: function (value) {
-        return value.length >= 6 && value.match(/[a-z]/i) && value.match(/[0-9]/);
-      }
+      type: "string"
     },
   },
 
@@ -47,7 +44,9 @@ module.exports = {
       try {
         passport.authenticate('local', function (err, user, info) {
           if (!user) {
-            reject(new Error('notFound'));
+            let error = new Error('notFound');
+            error.code = 'notFound';
+            reject(error);
             // throw {notFound: {}};
           }
           if (err) {

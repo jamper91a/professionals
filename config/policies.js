@@ -20,6 +20,7 @@ module.exports.policies = {
   /**
    * Customer
    */
+  'customer/*': ['isAuthenticated', 'isAdmin'],
   'customer/create': true,
 
   /**

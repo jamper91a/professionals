@@ -8,24 +8,25 @@
           </a>
         </div>
         <div class="login-form">
-          <form action="/login" method="post">
+          <% if(error){ %><%=__(error)%><% }%>
+          <form action="/admin/login" method="post">
             <div class="form-group">
-              <label>Email Address</label>
-              <input class="au-input au-input--full" type="email" name="username" placeholder="Email">
+              <label><%=__('Email_Address')%></label>
+              <input class="au-input au-input--full" type="email" name="username" placeholder="<%=__('Email')%>" value="jamper91@hotmail.com">
             </div>
             <div class="form-group">
-              <label>Password</label>
-              <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+              <label><%=__('Password')%></label>
+              <input class="au-input au-input--full" type="password" name="password" placeholder="<%=__('Password')%>" value="123123">
             </div>
-            <div class="login-checkbox">
-              <label>
-                <input type="checkbox" name="remember">Remember Me
-              </label>
-              <label>
-                <a href="#">Forgotten Password?</a>
-              </label>
-            </div>
-            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+<!--            <div class="login-checkbox">-->
+<!--              <label>-->
+<!--                <input type="checkbox" name="remember">Remember Me-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <a href="#">Forgotten Password?</a>-->
+<!--              </label>-->
+<!--            </div>-->
+            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit"><%=__('sign_in')%></button>
 <!--            <div class="social-login-content">-->
 <!--              <div class="social-button">-->
 <!--                <button class="au-btn au-btn&#45;&#45;block au-btn&#45;&#45;blue m-b-20">sign in with facebook</button>-->
@@ -35,8 +36,11 @@
           </form>
           <div class="register-link">
             <p>
-              Don't you have account?
-              <a href="#">Sign Up Here</a>
+              <%=__('Dont_you_have_account')%>
+              <a href="#">
+
+                <%=__('Sign_Up_Here')%>
+              </a>
             </p>
           </div>
         </div>
