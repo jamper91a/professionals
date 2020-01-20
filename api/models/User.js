@@ -24,6 +24,12 @@ module.exports = {
       type: 'string',
       required: true
     },
+    banned: {
+      type: 'number'
+    },
+    enabled: {
+      type: 'number'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

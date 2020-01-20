@@ -37,11 +37,13 @@ module.exports.routes = {
   'GET /admin/index': 'admin/view-index',
   'GET /admin/login': {action: 'admin/view-login'},
   'POST /admin/login': {action: 'admin/view-login'},
+  'GET /admin/customer/': {action: 'admin/customer/view-all'},
 
   /**
    * Api
    */
   'POST /api/login': 'api/user/login',
+  'GET /api/customer/': 'api/customer/find',
 
 
 };

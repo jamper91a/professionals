@@ -32,7 +32,7 @@ const JWT_STRATEGY_CONFIG = {
   // jwtFromRequest: ExtractJwt.versionOneCompatibility({authScheme: 'Bearer', tokenBodyField: 'access_token'}),
   jwtFromRequest: ExtractJwt.fromExtractors([
     cookieExtractor,
-    // ExtractJwt.versionOneCompatibility({authScheme: 'Bearer', tokenBodyField: 'access_token'})
+    ExtractJwt.versionOneCompatibility({authScheme: 'Bearer', tokenBodyField: 'access_token'})
   ]),
   tokenQueryParameterName: 'access_token',
   session: false,

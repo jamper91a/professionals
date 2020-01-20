@@ -13,5 +13,12 @@
 	"Sign_Up_Here": "Sign Up Here",
 	"": "",
 	"Email_Address": "Email Address",
-	"E_INVALID_ARGINS": "Email / Password not valid"
+	"E_INVALID_ARGINS": "Email / Password not valid",
+	"Name": "Name",
+	"Balance": "Balance",
+	"Date": "Date",
+	"Send": "Send",
+	"Edit": "Edit",
+	"Delete": "Delete",
+	"Ban": "Ban"
 }

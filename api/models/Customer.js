@@ -17,7 +17,8 @@ module.exports = {
       defaultsTo: 0
     },
     picture: {
-      type: "string"
+      type: "string",
+      allowNull: true
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
