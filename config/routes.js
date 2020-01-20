@@ -39,7 +39,12 @@ module.exports.routes = {
    * Admin Views
    */
   'GET /admin/index': 'admin/view-index',
-  'GET /admin/login': 'admin/view-login',
+  'GET /admin/login': {
+    action: 'admin/view-login',
+    locals: {
+      layout: 'layouts/login'
+    }
+  },
 
   /**
    * Api
