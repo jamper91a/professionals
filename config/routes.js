@@ -19,9 +19,13 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/homepage' },
-  'POST /login': 'User.login',
+  //'/': { view: 'pages/homepage' },
 
+
+  /**
+   * User
+   */
+  'POST /login': 'user/login',
   /**
    * Customers
    */
@@ -34,7 +38,13 @@ module.exports.routes = {
   /**
    * Admin Views
    */
-  '/admin': 'Admin.index'
+  'GET /admin/index': 'admin/view-index',
+  'GET /admin/login': 'admin/view-login',
+
+  /**
+   * Api
+   */
+  'POST /api/login': 'api/user/login',
 
 
 };

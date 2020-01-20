@@ -8,7 +8,7 @@
  * For more information on configuration, check out:
  * https://sailsjs.com/config/http
  */
-
+// var cookieParser = require('cookie-parser');
 module.exports.http = {
 
   /****************************************************************************

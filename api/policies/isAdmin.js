@@ -8,5 +8,10 @@
 
 module.exports = (req, res, next) => {
   if(req.user.group === sails.config.custom.USER_ADMIN) return next();
-  return res.forbidden();
+  if (req.wantsJSON) {
+    return res.forbidden();
+  }
+  // otherwise if this is an HTML-wanting browser, do a redirect.
+  return res.redirect('/admin/login');
+
 };

@@ -15,11 +15,13 @@
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "passport-jwt-cookiecombo": "^1.0.5",
     "passport-local": "^1.0.0",
     "sails": "^1.2.3",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",
-    "sails-hook-sockets": "^2.0.0"
+    "sails-hook-sockets": "^2.0.0",
+    "sails-mysql": "^1.0.1"
   },
   "devDependencies": {
     "eslint": "5.16.0"

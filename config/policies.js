@@ -12,9 +12,14 @@ module.exports.policies = {
 
   '*': ['isAuthenticated'],
 
-  UserController: {
-    'login': true
-  },
+
+  /**
+   * User
+   */
+  'user/login': true,
+  /**
+   * Customer
+   */
   'customer/create': true,
 
   /**
@@ -22,7 +27,7 @@ module.exports.policies = {
    */
   'professional/*': ['isAuthenticated', 'isAdmin'],
   'professional/create': true,
-  'professional/list': true,
+  // 'professional/list': true,
 
   /**
    * Country
@@ -34,6 +39,10 @@ module.exports.policies = {
    * Admin
    */
   'admin/*': ['isAuthenticated', 'isAdmin'],
-  'admin/login': true
+  'admin/view-login': true,
 
+  /**
+   * Api
+   */
+  'api/user/login': true,
 };

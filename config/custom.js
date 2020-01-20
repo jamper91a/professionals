@@ -26,5 +26,20 @@ module.exports.custom = {
   //Status
   STATUS_ONLINE: 1,
   STATUS_BUSY: 2,
-  STATUS_OFFLINE: 3
+  STATUS_OFFLINE: 3,
+
+  jwt: {
+    secret: 'k{B^um3fzwP-68cN',
+    options: {
+       audience: 'http://localhost:1337',
+      expiresIn: '12h', // 1d
+       // issuer: 'example.io'
+    },
+    cookie: {
+      httpOnly: true,
+      sameSite: true,
+      // signed: true,
+      // secure: true
+    }
+  }
 };

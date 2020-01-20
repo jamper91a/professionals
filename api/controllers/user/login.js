@@ -1,16 +1,14 @@
+
 module.exports = {
 
 
-  friendlyName: 'Create',
+  friendlyName: 'Login',
 
 
-  description: 'Create user.',
+  description: 'Login user.',
 
 
   inputs: {
-    name:{
-      type: "string",
-    },
     username: {
       type: "string",
       custom: function (value) {
@@ -25,35 +23,35 @@ module.exports = {
         return value.length >= 6 && value.match(/[a-z]/i) && value.match(/[0-9]/);
       }
     },
-    country: {
-      type: "number"
-    },
-    group: {
-      type: "number"
-    }
   },
 
 
   exits: {
-
     success: {
     },
-    serverError: {
+    badRequest: {
       description: 'An general error',
+      responseType: 'serverError'
+    },
+    notFound: {
+      description: 'An general error',
+      responseType: 'serverError'
     }
-
   },
 
 
-  fn: async function (inputs, exits) {
+  fn: async function (inputs) {
+    inputs.req = this.req;
+    inputs.res = this.res;
     try {
-      var user = await User.create(inputs).fetch();
-      return exits.success(user);
+      const user = await sails.helpers.user.login.with(inputs);
+      this.res.cookie('jwt', user.token, sails.config.custom.jwt.cookie);
+      return this.res.redirect('/admin/index');
     } catch (e) {
-      return exits.serverError(e);
+      throw {serverError: e};
     }
+
   }
 
 
 };
-
