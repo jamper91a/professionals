@@ -63,11 +63,29 @@ var jsFilesToInject = [
 
   // Load `sails.io` before everything else.
   'dependencies/sails.io.js',
+  <!-- Jquery JS-->
+  'dependencies/jquery-3.4.1.min.js',
+  <!-- Bootstrap JS-->
+  'dependencies/vendor/bootstrap-4.1/popper.min.js',
+  'dependencies/vendor/bootstrap-4.1/bootstrap.min.js',
+  <!-- Vendor JS       -->
+  'dependencies/vendor/slick/slick.min.js',
+  'dependencies/vendor/wow/wow.min.js',
+  'dependencies/vendor/animsition/animsition.min.js',
+  'dependencies/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js',
+  'dependencies/vendor/counter-up/jquery.waypoints.min.js',
+  'dependencies/vendor/counter-up/jquery.counterup.min.js',
+  'dependencies/vendor/circle-progress/circle-progress.min.js',
+  'dependencies/vendor/perfect-scrollbar/perfect-scrollbar.min.js',
+  // 'dependencies/vendor/perfect-scrollbar/perfect-scrollbar.js',
+  'dependencies/vendor/chartjs/Chart.bundle.min.js',
+  'dependencies/vendor/select2/select2.min.js',
+  'dependencies/main.js',
 
   // Bring in `.js` files for any other client-side JavaScript dependencies.
   // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)
   // > Be sure to list dependencies that depend on each other in the right order!
-  'dependencies/**/*.js',
+  // 'dependencies/**/*.js',
 
   // All of the rest of your custom client-side js files will be injected here,
   // in no particular order.  To customize the ordering, add additional items
