@@ -31,20 +31,26 @@
         <td>
           <div class="table-data__info">
             <h6><%=customer.user.name%></h6>
+            <% if (customer.user.banned || !customer.user.enabled) {%>
+            <span class="badge badge-warning">
+                <%if(customer.user.banned) {%><a href="#"><%=__('Banned')%></a> <%}%>
+                <%if(!customer.user.enabled) {%><a href="#"><%=__('Not_Actived')%></a> <%}%>
+            </span>
+            <% } %>
           </div>
         </td>
         <td>
           <span class="table-data__info"><%=customer.user.username%></span>
         </td>
         <td>
-          <span class="role admin">$<%=customer.balance%></span>
+          <span class="table-data__info">$<%=customer.balance%></span>
         </td>
         <td>
           <span class="table-data__info"><%=customer.createdAt%></span>
         </td>
         <td>
           <div class="table-data-feature">
-            <button class="item" data-toggle="tooltip" data-placement="top" title="<%=__('Ban')%>">
+            <button onclick="banUser(<%=customer.user.id%>)" class="item" data-toggle="tooltip" data-placement="top" title="<%=__('Ban')%>">
               <i class="zmdi zmdi-close-circle-o"></i>
             </button>
               <button class="item" data-toggle="tooltip" data-placement="top" title="<%=__('Delete')%>">

@@ -20,5 +20,7 @@
 	"Send": "Send",
 	"Edit": "Edit",
 	"Delete": "Delete",
-	"Ban": "Ban"
+	"Ban": "Ban",
+	"Banned": "Banned",
+	"Not_Actived": "Not_Actived"
 }

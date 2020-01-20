@@ -48,4 +48,5 @@ module.exports.policies = {
   'api/*': ['isAuthenticated', 'isAdmin'],
   'api/user/login': true,
   'api/customer/find': ['isAuthenticated', 'isAdmin'],
+  'api/user/ban': ['isAuthenticated', 'isAdmin'],
 };
