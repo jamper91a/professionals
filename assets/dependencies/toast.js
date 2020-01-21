@@ -1,4 +1,4 @@
-
+//https://codeseven.github.io/toastr/demo.html
 class Toast {
 
   static options(){

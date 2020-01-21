@@ -46,3 +46,8 @@ function reloadTable() {
       $('.table').html(data);
   });
 }
+
+function experiment() {
+  // eslint-disable-next-line no-undef
+  OverHang.warning('A warning exmaple');
+}
