@@ -35,7 +35,7 @@ module.exports = {
         }
       });
       // All done.
-      return {customers};
+      return customers;
     } catch (e) {
       throw e;
     }

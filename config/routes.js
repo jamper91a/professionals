@@ -45,6 +45,7 @@ module.exports.routes = {
   'POST /api/login': 'api/user/login',
   'GET /api/customer/': 'api/customer/find',
   'POST /api/user/ban': 'api/user/ban',
+  'POST /api/user/remove': 'api/user/remove',
 
 
 };

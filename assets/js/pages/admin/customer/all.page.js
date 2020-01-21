@@ -5,8 +5,17 @@ function selectUser(userId) {
 function banUser(banned) {
   // eslint-disable-next-line no-undef
   WebServices.banUser(this.userId, banned, function (data) {
-    // eslint-disable-next-line no-undef
-    $('#staticModal').modal('hide');
+
+    switch (banned) {
+      case 0:
+        // eslint-disable-next-line no-undef
+        $('#unbanmodal').modal('hide');
+        break;
+      case 1:
+        // eslint-disable-next-line no-undef
+        $('#banmodal').modal('hide');
+        break;
+    }
     // eslint-disable-next-line handle-callback-err
   }, function (err) {
     alert('error');
@@ -15,9 +24,9 @@ function banUser(banned) {
 
 function deleteUser() {
   // eslint-disable-next-line no-undef
-  WebServices.banUser(this.userId, banned, function (data) {
+  WebServices.deleteUser(this.userId, function (data) {
     // eslint-disable-next-line no-undef
-    $('#staticModal').modal('hide');
+    $('#deletemodal').modal('hide');
     // eslint-disable-next-line handle-callback-err
   }, function (err) {
     alert('error');
