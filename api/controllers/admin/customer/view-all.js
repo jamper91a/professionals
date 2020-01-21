@@ -20,7 +20,9 @@ module.exports = {
     try {
       const customers = await sails.helpers.customer.find();
       return {
-        customers: customers
+        customers: customers,
+        translations: {
+          OK:sails.__('OK')},
       };
     } catch (e) {
       throw {serverError: e};

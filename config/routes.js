@@ -38,6 +38,7 @@ module.exports.routes = {
   'GET /admin/login': {action: 'admin/view-login'},
   'POST /admin/login': {action: 'admin/view-login'},
   'GET /admin/customer/': {action: 'admin/customer/view-all'},
+  'PATCH /admin/customer/': {action: 'admin/customer/view-all-data'},
 
   /**
    * Api

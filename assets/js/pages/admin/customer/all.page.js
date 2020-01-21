@@ -16,6 +16,9 @@ function banUser(banned) {
         $('#banmodal').modal('hide');
         break;
     }
+    // eslint-disable-next-line no-undef
+    Util.toastSuccess(null, window.SAILS_LOCALS.translations.OK);
+    reloadTable();
     // eslint-disable-next-line handle-callback-err
   }, function (err) {
     alert('error');
@@ -30,5 +33,12 @@ function deleteUser() {
     // eslint-disable-next-line handle-callback-err
   }, function (err) {
     alert('error');
+  });
+}
+
+function reloadTable() {
+  // eslint-disable-next-line no-undef,handle-callback-err
+  Util.patch('/admin/customer', {}, function (err, data) {
+    $('.table').html(data);
   });
 }
