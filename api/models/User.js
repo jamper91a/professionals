@@ -43,6 +43,10 @@ module.exports = {
     },
     country: {
       model: "country"
+    },
+    customer: {
+      collection: 'customer',
+      via: 'user'
     }
   },
 

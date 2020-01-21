@@ -31,10 +31,9 @@
         <td>
           <div class="table-data__info">
             <h6><%=customer.user.name%></h6>
-            <% if (customer.user.banned || !customer.user.enabled) {%>
+            <% if (customer.user.banned){%>
             <span class="badge badge-warning">
                 <%if(customer.user.banned) {%><a href="#"><%=__('Banned')%></a> <%}%>
-                <%if(!customer.user.enabled) {%><a href="#"><%=__('Not_Actived')%></a> <%}%>
             </span>
             <% } %>
           </div>
@@ -49,13 +48,20 @@
           <span class="table-data__info"><%=customer.createdAt%></span>
         </td>
         <td>
-          <div class="table-data-feature">
-            <button onclick="banUser(<%=customer.user.id%>)" class="item" data-toggle="tooltip" data-placement="top" title="<%=__('Ban')%>">
-              <i class="zmdi zmdi-close-circle-o"></i>
+          <div class="table-data__info">
+
+            <%if(customer.user.banned) {%>
+            <button data-toggle="modal" data-target="#unbanmodal" onclick="selectUser(<%=customer.user.id%>)" type="button" class="btn btn-outline-warning">
+              <i class="zmdi zmdi-close-circle-o"></i>&nbsp; <%=__('UnBan')%>
             </button>
-              <button class="item" data-toggle="tooltip" data-placement="top" title="<%=__('Delete')%>">
-                <i class="zmdi zmdi-delete"></i>
-              </button>
+            <%} else {%>
+            <button data-toggle="modal" data-target="#banmodal" onclick="selectUser(<%=customer.user.id%>)" type="button" class="btn btn-outline-danger">
+              <i class="zmdi zmdi-close-circle-o"></i>&nbsp; <%=__('Ban')%>
+            </button>
+            <%}%>
+            <button data-toggle="modal" data-target="#deletemodal" onclick="selectUser(<%=customer.user.id%>)" type="button" class="btn btn-outline-danger">
+              <i class="zmdi zmdi-delete"></i>&nbsp; <%=__('Delete')%>
+            </button>
           </div>
         </td>
       </tr>
@@ -68,3 +74,73 @@
   </div>
 </div>
 <!-- END USER DATA-->
+
+<!-- modal Ban -->
+<div class="modal fade" id="banmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="smallmodalLabel"><%=__('Ban_User')%></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <%=__('Are_you_sure_you_want_to_ban_this_user')%>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%=__('Cancel')%></button>
+        <button onclick="banUser(1)" type="button" class="btn btn-primary"><%=__('Confirm')%></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal Ban -->
+<!-- modal UnBan -->
+<div class="modal fade" id="unbanmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="smallmodalLabel"><%=__('Un_Ban_User')%></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <%=__('Are_you_sure_you_want_to_un_ban_this_user')%>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%=__('Cancel')%></button>
+        <button onclick="banUser(0)" type="button" class="btn btn-primary"><%=__('Confirm')%></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal UnBan -->
+<!-- modal Delete -->
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="smallmodalLabel"><%=__('Delete_User')%></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <%=__('Are_you_sure_you_want_to_delete_this_user')%>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%=__('Cancel')%></button>
+        <button onclick="deleteUser()" type="button" class="btn btn-primary"><%=__('Confirm')%></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal small -->

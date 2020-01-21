@@ -17,10 +17,19 @@
 	"Name": "Name",
 	"Balance": "Balance",
 	"Date": "Date",
-	"Send": "Send",
 	"Edit": "Edit",
 	"Delete": "Delete",
 	"Ban": "Ban",
 	"Banned": "Banned",
-	"Not_Actived": "Not_Actived"
+	"Not_Actived": "Not Actived",
+	"Ban_User": "Ban User",
+	"Are_you_sure_you_want_to_ban_this_user": "Are you sure you want to ban this user?",
+	"Are_you_sure_you_want_to_un_ban_this_user": "Are you sure you want to un ban this user?",
+	"Cancel": "Cancel",
+	"Confirm": "Confirm",
+	"UnBan": "UnBan",
+	"Delte": "Delte",
+	"Un_Ban_User": "Un_Ban_User",
+	"Delete_User": "Delete_User",
+	"Are_you_sure_you_want_to_delete_this_user": "Are_you_sure_you_want_to_delete_this_user"
 }
