@@ -16,10 +16,11 @@ module.exports = {
 
 
   exits: {
+
   },
 
 
-  fn: async function (inputs, exits) {
+  fn: async function (inputs) {
     //Create user
     try {
       inputs.user.group = sails.config.custom.USER_CUSTOMER;
@@ -32,7 +33,7 @@ module.exports = {
         };
         const newCustomer  = await Customer.create(customer).fetch();
         if(newCustomer){
-          return  exits.success(newCustomer);
+          return newCustomer;
         }else{
           throw {serverError: {message: "Customer not created"}};
         }
@@ -43,8 +44,8 @@ module.exports = {
     } catch (e) {
       throw {serverError: e};
     }
-
   }
 
 
 };
+

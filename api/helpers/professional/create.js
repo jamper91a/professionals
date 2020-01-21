@@ -1,7 +1,7 @@
 module.exports = {
 
 
-  friendlyName: 'Create Professional',
+  friendlyName: 'Create',
 
 
   description: 'Create professional.',
@@ -24,13 +24,15 @@ module.exports = {
 
 
   exits: {
-    success:{},
-    serverError: {}
+
+    success: {
+      description: 'All done.',
+    },
+
   },
 
 
   fn: async function (inputs) {
-
     //Create user
     try{
       inputs.user.group = sails.config.custom.USER_PROFESSIONAL;
@@ -56,8 +58,8 @@ module.exports = {
     } catch (e) {
       throw {serverError: e};
     }
-
   }
 
 
 };
+

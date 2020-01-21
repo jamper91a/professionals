@@ -21,16 +21,6 @@ module.exports.routes = {
 
   //'/': { view: 'pages/homepage' },
 
-
-  /**
-   * Customers
-   */
-  'POST /customer': 'customer/create',
-  /**
-   * Professionals
-   */
-  'POST professional': 'professional/create',
-
   /**
    * Admin Views
    */
@@ -46,6 +36,8 @@ module.exports.routes = {
   'GET /api/customer/': 'api/customer/find',
   'POST /api/user/ban': 'api/user/ban',
   'POST /api/user/remove': 'api/user/remove',
+  'POST /api/customer': 'customer/create',
+  'POST /api/professional': 'professional/create',
 
   /**
    * Partial Views

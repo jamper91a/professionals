@@ -13,28 +13,7 @@ module.exports.policies = {
   '*': ['isAuthenticated'],
 
 
-  /**
-   * User
-   */
-  'user/login': true,
-  /**
-   * Customer
-   */
-  'customer/*': ['isAuthenticated', 'isAdmin'],
-  'customer/create': true,
 
-  /**
-   * Professionals
-   */
-  'professional/*': ['isAuthenticated', 'isAdmin'],
-  'professional/create': true,
-  // 'professional/list': true,
-
-  /**
-   * Country
-   */
-  'country/*': ['isAuthenticated', 'isAdmin'],
-  'country/find': true,
 
   /**
    * Admin
@@ -45,6 +24,13 @@ module.exports.policies = {
   /**
    * Api
    */
-  'api/*': ['isAuthenticated', 'isAdmin'],
+  'api/*': ['isAuthenticated'],
   'api/user/login': true,
+  'api/customer/*': ['isAuthenticated', 'isAdmin'],
+  'api/customer/create': true,
+  'api/professional/*': ['isAuthenticated', 'isAdmin'],
+  'api/professional/create': true,
+  // 'api/professional/list': true,
+  'country/*': ['isAuthenticated', 'isAdmin'],
+  'country/find': true,
 };
