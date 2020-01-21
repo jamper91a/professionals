@@ -8,7 +8,14 @@
           </a>
         </div>
         <div class="login-form">
-          <% if(error){ %><%=__(error)%><% }%>
+          <% if(error){ %>
+          <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+            <%=__(error)%>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <% }%>
           <form action="/admin/login" method="post">
             <div class="form-group">
               <label><%=__('Email_Address')%></label>

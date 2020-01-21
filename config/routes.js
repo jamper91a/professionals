@@ -34,6 +34,7 @@ module.exports.routes = {
   /**
    * Admin Views
    */
+  'GET /admin/': 'admin/view-index',
   'GET /admin/index': 'admin/view-index',
   'GET /admin/login': {action: 'admin/view-login'},
   'POST /admin/login': {action: 'admin/view-login'},

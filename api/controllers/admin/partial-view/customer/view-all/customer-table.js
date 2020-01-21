@@ -1,10 +1,11 @@
 module.exports = {
 
 
-  friendlyName: 'View all data',
+  friendlyName: 'Customer table',
 
 
-  description: 'Display "All data" page.',
+  description: 'This view will generate just the table with the customers. It will be used to "refresh" the data after an' +
+    'user is banned or deleted',
 
 
   exits: {
