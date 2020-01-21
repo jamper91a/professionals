@@ -38,8 +38,6 @@ module.exports.routes = {
   'GET /admin/login': {action: 'admin/view-login'},
   'POST /admin/login': {action: 'admin/view-login'},
   'GET /admin/customer/': {action: 'admin/customer/view-all'},
-  'PATCH /admin/customer/': {action: 'admin/customer/view-all-data'},
-
   /**
    * Api
    */
@@ -48,5 +46,9 @@ module.exports.routes = {
   'POST /api/user/ban': 'api/user/ban',
   'POST /api/user/remove': 'api/user/remove',
 
+  /**
+   * Partial Views
+   */
+  'PATCH /pv/admin/customer/customer-table': {action: 'admin/partial-view/customer/view-all/customer-table'},
 
 };

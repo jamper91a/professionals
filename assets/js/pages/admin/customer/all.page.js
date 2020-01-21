@@ -17,7 +17,7 @@ function banUser(banned) {
         break;
     }
     // eslint-disable-next-line no-undef
-    Util.toastSuccess(null, window.SAILS_LOCALS.translations.OK);
+    Toast.success(null, window.SAILS_LOCALS.translations.Successful_Operation);
     reloadTable();
     // eslint-disable-next-line handle-callback-err
   }, function (err) {
@@ -30,6 +30,8 @@ function deleteUser() {
   WebServices.deleteUser(this.userId, function (data) {
     // eslint-disable-next-line no-undef
     $('#deletemodal').modal('hide');
+    // eslint-disable-next-line no-undef
+    Toast.success(null, window.SAILS_LOCALS.translations.Successful_Operation);
     // eslint-disable-next-line handle-callback-err
   }, function (err) {
     alert('error');
@@ -38,7 +40,9 @@ function deleteUser() {
 
 function reloadTable() {
   // eslint-disable-next-line no-undef,handle-callback-err
-  Util.patch('/admin/customer', {}, function (err, data) {
-    $('.table').html(data);
+  Api.patch('/pv/admin/customer/customer-table', {}, function (err, data) {
+    if(data)
+      // eslint-disable-next-line no-undef
+      $('.table').html(data);
   });
 }

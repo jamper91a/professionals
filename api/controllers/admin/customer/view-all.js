@@ -22,7 +22,7 @@ module.exports = {
       return {
         customers: customers,
         translations: {
-          OK:sails.__('OK')},
+          Successful_Operation:sails.__('Successful_Operation')},
       };
     } catch (e) {
       throw {serverError: e};
