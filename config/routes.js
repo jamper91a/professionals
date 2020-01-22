@@ -28,15 +28,17 @@ module.exports.routes = {
   'GET /register': 'customer/register/view-index',
   'POST /register': 'customer/register/view-index',
   'GET /user/logout': 'user/logout',
+  'GET /user/login': 'user/view-login',
+  'POST /user/login': 'user/view-login',
 
   /**
    * Admin Views
    */
   'GET /admin/': 'admin/view-index',
   'GET /admin/index': 'admin/view-index',
-  'GET /admin/login': {action: 'admin/view-login'},
-  'POST /admin/login': {action: 'admin/view-login'},
-  'GET /admin/customer/': {action: 'admin/customer/view-all'},
+  'GET /admin/login': 'admin/view-login',
+  'POST /admin/login': 'admin/view-login',
+  'GET /admin/customer/': 'admin/customer/view-all',
   /**
    * Api
    */

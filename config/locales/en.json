@@ -61,5 +61,11 @@
 	"Billing": "Billing",
 	"Logout": "Logout",
 	"Language": "Language",
-	"Location": "Location"
+	"Location": "Location",
+	"Accouters": "Accouters",
+	"Login": "Login",
+	"Email Address": "Email Address",
+	"Sign in": "Sign in",
+	"Dont you have account?": "Dont you have account?",
+	"Sign Up Here": "Sign Up Here"
 }

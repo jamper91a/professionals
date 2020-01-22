@@ -17,6 +17,7 @@ module.exports.policies = {
    * WEB
    */
   'customer/register/view-index': true,
+  'user/view-login': true,
 
   /**
    * Admin

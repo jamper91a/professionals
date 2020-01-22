@@ -21,7 +21,7 @@ module.exports = {
 
     this.res.clearCookie('jwt');
     this.req.user = null;
-    return this.req.redirect('/');
+    return this.res.redirect('/');
 
   }
 
