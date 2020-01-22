@@ -1,0 +1,63 @@
+<div class="page-content--bge5">
+  <div class="container">
+    <div class="login-wrap">
+      <div class="login-content">
+        <div class="login-logo">
+          <a href="#">
+            <img src="images/icon/logo.png" alt="<%=__('company')%>">
+          </a>
+        </div>
+        <div class="login-form">
+          <form action="" method="post">
+            <div class="form-group">
+              <label><%=__('Name')%></label>
+              <input required class="au-input au-input--full" type="text" name="name" placeholder="<%=__('Name')%>">
+            </div>
+            <div class="form-group">
+              <label><%=__('Email_Address')%></label>
+              <input required class="au-input au-input--full" type="email" name="username" placeholder="<%=__('Email')%>">
+            </div>
+            <div class="form-group">
+              <label><%=__('Password')%></label>
+              <input required class="au-input au-input--full" type="password" name="password" placeholder="<%=__('Password')%>">
+            </div>
+            <div class="form-group">
+              <label><%=__('Repeat Password')%></label>
+              <input required class="au-input au-input--full" type="password" name="password2" placeholder="<%=__('Repeat Password')%>">
+            </div>
+            <div class="form-group">
+              <label><%=__('Country')%></label>
+              <select required name="country" id="country" class="form-control">
+                <% countries.forEach(function (country) {%>
+                <%if (countryOrigin === country.name) {%>
+                  <option value="<%=country.id%>" selected="selected"><%=__(country.name)%>- <%=countryOrigin%></option>
+                <%} else{%>
+                  <option value="<%=country.id%>"><%=__(country.name)%>- <%=countryOrigin%></option>
+                <%}})%>
+              </select>
+            </div>
+            <div class="login-checkbox">
+              <label>
+                <input type="checkbox" name="aggree">
+                <%=__('Agree the terms and policy')%>
+              </label>
+            </div>
+            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit"><%=__('Register')%></button>
+<!--            <div class="social-login-content">-->
+<!--              <div class="social-button">-->
+<!--                <button class="au-btn au-btn&#45;&#45;block au-btn&#45;&#45;blue m-b-20">register with facebook</button>-->
+<!--                <button class="au-btn au-btn&#45;&#45;block au-btn&#45;&#45;blue2">register with twitter</button>-->
+<!--              </div>-->
+<!--            </div>-->
+          </form>
+          <div class="register-link">
+            <p>
+              <%=__('Already have account?')%>
+              <a href="#"><%=__('Sign_In')%></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
