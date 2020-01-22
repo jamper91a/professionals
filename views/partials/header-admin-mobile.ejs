@@ -1,10 +1,9 @@
-<!-- HEADER MOBILE-->
-<header class="header-mobile header-mobile-2 d-block d-lg-none">
+<header class="header-mobile d-block d-lg-none">
     <div class="header-mobile__bar">
         <div class="container-fluid">
             <div class="header-mobile-inner">
                 <a class="logo" href="index.html">
-                    <img src="images/icon/logo-white.png" alt="<%=__('company')%>" />
+                    <img src="/images/icon/logo.png" alt="<%=__('company')%>" />
                 </a>
                 <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -19,23 +18,14 @@
             <ul class="navbar-mobile__list list-unstyled">
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-tachometer-alt"></i><%=__('Professionals')%></a>
+                        <i class="fas fa-tachometer-alt"></i><%=__('Customers')%></a>
                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                         <li>
-                            <a href="index.html"><%=__('Lawyers')%></a>
-                        </li>
-                        <li>
-                            <a href="index2.html"><%=__('Accounters')%></a>
-                        </li>
-                        <li>
-                            <a href="index3.html"><%=__('Teachers')%></a>
-                        </li>
-                        <li>
-                            <a href="index4.html"><%=__('Nutrition')%></a>
+                            <a href="/admin/customer"><%=__('All')%></a>
                         </li>
                     </ul>
                 </li>
-                <!--<li>
+<!--                <li>
                     <a href="chart.html">
                         <i class="fas fa-chart-bar"></i>Charts</a>
                 </li>
@@ -113,53 +103,3 @@
         </div>
     </nav>
 </header>
-<div class="sub-header-mobile-2 d-block d-lg-none">
-    <%if(req.user){%>
-    <div class="header__tool">
-        <div class="account-wrap">
-            <div class="account-item account-item--style2 clearfix js-item-menu">
-                <div class="image">
-                    <img src="images/icon/avatar-01.jpg" alt="<%=__(req.user.name)%>" />
-                </div>
-                <div class="content">
-                    <a class="js-acc-btn" href="#"><%=__(req.user.name)%></a>
-                </div>
-                <div class="account-dropdown js-dropdown">
-                    <div class="info clearfix">
-                        <div class="image">
-                            <a href="#">
-                                <img src="images/icon/avatar-01.jpg" alt="<%=__(req.user.name)%>" />
-                            </a>
-                        </div>
-                        <div class="content">
-                            <h5 class="name">
-                                <a href="#"><%=__(req.user.name)%></a>
-                            </h5>
-                            <span class="email"><%=__(req.user.username)%></span>
-                        </div>
-                    </div>
-                    <div class="account-dropdown__body">
-                        <div class="account-dropdown__item">
-                            <a href="#">
-                                <i class="zmdi zmdi-account"></i><%=__('Account')%></a>
-                        </div>
-                        <div class="account-dropdown__item">
-                            <a href="#">
-                                <i class="zmdi zmdi-settings"></i><%=__('Setting')%></a>
-                        </div>
-                        <div class="account-dropdown__item">
-                            <a href="#">
-                                <i class="zmdi zmdi-money-box"></i><%=__('Billing')%></a>
-                        </div>
-                    </div>
-                    <div class="account-dropdown__footer">
-                        <a href="/user/logout">
-                            <i class="zmdi zmdi-power"></i><%=__('Logout')%></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <%}%>
-</div>
-<!-- END HEADER MOBILE -->

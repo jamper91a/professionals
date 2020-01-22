@@ -19,11 +19,14 @@ module.exports = {
   fn: async function () {
     try {
       const customers = await sails.helpers.customer.find();
-      return {
-        customers: customers,
-        translations: {
-          Successful_Operation:sails.__('Successful_Operation')},
-      };
+      return this.res.view(
+        'pages/admin/index',
+        {
+          layout: 'layouts/admin',
+          customers: customers,
+          translations: {
+            Successful_Operation:sails.__('Successful_Operation')}
+        });
     } catch (e) {
       throw {serverError: e};
     }

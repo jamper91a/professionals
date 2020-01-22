@@ -65,18 +65,24 @@
 
   <body class="animsition">
   <div class="page-wrapper">
-    <!-- HEADER DESKTOP-->
-    <%- partial('../partials/header-desktop.ejs') %>
-    <!-- END HEADER DESKTOP-->
-
     <!-- HEADER MOBILE-->
-    <%- partial('../partials/header-mobile.ejs') %>
-    <!-- END HEADER MOBILE -->
+    <%- partial('../partials/header-admin-mobile.ejs') %>
+    <!-- END HEADER MOBILE-->
 
-    <!-- PAGE CONTENT-->
-    <div class="page-content--bgf7">
+    <!-- MENU SIDEBAR-->
+    <%- partial('../partials/menu-admin-sidebar.ejs') %>
+    <!-- END MENU SIDEBAR-->
+
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+      <!-- HEADER DESKTOP-->
+      <%- partial('../partials/header-admin-desktop.ejs') %>
+      <!-- HEADER DESKTOP-->
+
       <%- body %>
     </div>
+    <!-- END PAGE CONTAINER-->
+
 
   </div>
 

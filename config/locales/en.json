@@ -45,5 +45,21 @@
 	"NZ": "NZ",
 	"AU": "AU",
 	"US": "US",
-	"CA": "CA"
+	"CA": "CA",
+	"Customers": "Customers",
+	"All": "All",
+	"LogOut": "LogOut",
+	"Professionals": "Professionals",
+	"Lawyers": "Lawyers",
+	"Accounters": "Accounters",
+	"Teachers": "Teachers",
+	"Nutrition": "Nutrition",
+	"Jorge": "Jorge",
+	"jamper91@hotmail.com": "jamper91@hotmail.com",
+	"Account": "Account",
+	"Setting": "Setting",
+	"Billing": "Billing",
+	"Logout": "Logout",
+	"Language": "Language",
+	"Location": "Location"
 }

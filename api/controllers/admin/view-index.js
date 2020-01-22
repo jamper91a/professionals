@@ -8,17 +8,11 @@ module.exports = {
 
 
   exits: {
-
-    success: {
-      viewTemplatePath: 'pages/admin/index'
-    }
-
   },
 
 
   fn: async function () {
-
-    return {};
+    return this.res.view('pages/admin/index', {layout: 'layouts/admin'});
 
   }
 

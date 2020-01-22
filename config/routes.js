@@ -19,7 +19,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  //'/': { view: 'pages/homepage' },
+  '/': 'view-home',
 
   /**
    * WEB
@@ -27,6 +27,7 @@ module.exports.routes = {
 
   'GET /register': 'customer/register/view-index',
   'POST /register': 'customer/register/view-index',
+  'GET /user/logout': 'user/logout',
 
   /**
    * Admin Views
