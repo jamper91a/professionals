@@ -25,6 +25,12 @@ module.exports = {
         return value.length >= 6 && value.match(/[a-z]/i) && value.match(/[0-9]/);
       }
     },
+    password2: {
+      type: "string",
+      custom: function (value) {
+        return value.length >= 6 && value.match(/[a-z]/i) && value.match(/[0-9]/);
+      }
+    },
     country: {
       type: "number"
     },
@@ -47,8 +53,13 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
-      var user = await User.create(inputs).fetch();
-      return exits.success(user);
+      if(inputs.password === inputs.password2){
+        delete inputs.password2;
+        var user = await User.create(inputs).fetch();
+        return exits.success(user);
+      }else{
+        return exits.serverError(sails.__('Passwords does not match'));
+      }
     } catch (e) {
       return exits.serverError(e);
     }

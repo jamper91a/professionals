@@ -13,7 +13,10 @@ module.exports.policies = {
   '*': ['isAuthenticated'],
 
 
-
+  /**
+   * WEB
+   */
+  'customer/register/view-index': true,
 
   /**
    * Admin

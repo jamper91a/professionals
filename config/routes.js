@@ -22,6 +22,13 @@ module.exports.routes = {
   //'/': { view: 'pages/homepage' },
 
   /**
+   * WEB
+   */
+
+  'GET /register': 'customer/register/view-index',
+  'POST /register': 'customer/register/view-index',
+
+  /**
    * Admin Views
    */
   'GET /admin/': 'admin/view-index',

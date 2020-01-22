@@ -18,6 +18,7 @@
     "passport-jwt": "^4.0.0",
     "passport-jwt-cookiecombo": "^1.0.5",
     "passport-local": "^1.0.0",
+    "request-country": "^0.1.5",
     "sails": "^1.2.3",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",

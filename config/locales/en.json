@@ -33,5 +33,17 @@
 	"Delete_User": "Delete_User",
 	"Are_you_sure_you_want_to_delete_this_user": "Are_you_sure_you_want_to_delete_this_user",
 	"OK": "OK",
-	"Successful_Operation": "Successful_Operation"
+	"Successful_Operation": "Successful_Operation",
+	"Register": "Register",
+	"Already_have_account": "Already_have_account",
+	"Sign_In": "Sign_In",
+	"Agree the terms and policy": "Agree the terms and policy",
+	"Repeat Password": "Repeat Password",
+	"Already have account?": "Already have account?",
+	"Passwords does not match": "Passwords does not match",
+	"Country": "Country",
+	"NZ": "NZ",
+	"AU": "AU",
+	"US": "US",
+	"CA": "CA"
 }
