@@ -8,7 +8,10 @@ module.exports = {
 
 
   inputs: {
-
+    customer: {
+      type: "number",
+      required: true
+    }
   },
 
 
@@ -21,20 +24,23 @@ module.exports = {
   },
 
 
-  fn: async function () {
+  fn: async function ({customer}) {
     try {
-      const customer = await Customer.findOne({user: this.req.user.id});
       //Get chat's histoty
-      const chats = await Chat.find(
+      let chats = await Chat.find(
         {
           where: {
-            customer: customer.id
+            customer: customer
           },
           sort: 'id DESC'
 
         }).populate('conversation');
+      chats = sails.helpers.util.formatDates(chats);
+      console.log("chats");
+      console.log(chats);
       return {chats};
     } catch (e) {
+      console.error(e);
       return e;
     }
   }

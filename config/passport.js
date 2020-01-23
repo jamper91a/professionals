@@ -117,8 +117,9 @@ const _onJwtStrategyAuth = async (req, payload, next) => {
   if(payload.user) {
     try {
       const user = await User.findOne({id: payload.user.id});
+      payload.user = user;
       if(user){
-          return next(null, user, {});
+          return next(null, payload, {});
       }else{
         return next(null, null, sails.config.errors.USER_NOT_FOUND);
       }

@@ -4,7 +4,7 @@
         <div class="header3-wrap">
             <div class="header__logo">
                 <a href="#">
-                    <img src="images/icon/logo-white.png" alt="<%=__('company')%>" />
+                    <img src="/images/icon/logo-white.png" alt="<%=__('company')%>" />
                 </a>
             </div>
             <div class="header__navbar">
@@ -29,12 +29,31 @@
                             </li>
                         </ul>
                     </li>
+                    <%if(!req.user){%>
                     <li>
                         <a href="/user/login" target="_blank">
-                            <i class="fas fa-shopping-basket"></i>
-                            <span class="bot-line"></span><%=__('Login')%>
+                            <span class="bot-line"></span><%=__('Sign in')%>
                         </a>
                     </li>
+                    <li>
+                        <a href="/register" target="_blank">
+                            <span class="bot-line"></span><%=__('Register')%>
+                        </a>
+                    </li>
+                    <%}else{
+                        if(req.user.group === sails.config.custom.USER_CUSTOMER) {
+                    %>
+                    <li>
+                        <a href="/customer/historic" target="_blank">
+                            <span class="bot-line"></span><%=__('Historic')%>
+                        </a>
+                    </li>
+
+                    <%}else if (req.user.group === sails.config.custom.USER_PROFESSIONAL){%>
+
+                    <%}%>
+                    <%}%>
+
                     <!--<li>
                         <a href="table.html">
                             <i class="fas fa-trophy"></i>
@@ -178,7 +197,7 @@
                 <div class="account-wrap">
                     <div class="account-item account-item--style2 clearfix js-item-menu">
                         <div class="image">
-                            <img src="images/icon/avatar-01.jpg" alt="<%=__(req.user.name)%>" />
+                            <img src="/images/icon/avatar-01.jpg" alt="<%=__(req.user.name)%>" />
                         </div>
                         <div class="content">
                             <a class="js-acc-btn" href="#"><%=__(req.user.name)%></a>
@@ -187,7 +206,7 @@
                             <div class="info clearfix">
                                 <div class="image">
                                     <a href="#">
-                                        <img src="images/icon/avatar-01.jpg" alt="<%=__(req.user.name)%>" />
+                                        <img src="/images/icon/avatar-01.jpg" alt="<%=__(req.user.name)%>" />
                                     </a>
                                 </div>
                                 <div class="content">

@@ -29,9 +29,8 @@ module.exports = {
       _.forEach(customers, function (customer) {
         if(customer.user.enabled===0) delete customer;
         else{
-          customer.createdAt = moment(customer.createdAt).format('YYYY-MM-DD');
-          customer.user.createdAt = moment(customer.user.createdAt).format('YYYY-MM-DD');
-          customer.user.updatedAt = moment(customer.user.updatedAt).format('YYYY-MM-DD');
+          customer = sails.helpers.util.formatDate(customer);
+          customer.user = sails.helpers.util.formatDate(customer.user);
         }
       });
       // All done.

@@ -22,7 +22,7 @@ module.exports.policies = {
   /**
    * Customer pages
    */
-  'customer/view-historic' : ['isCustomer'],
+  'customer/view-historic' : ['isAuthenticated','isCustomer'],
 
   /**
    * Admin

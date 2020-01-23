@@ -26,7 +26,9 @@ module.exports = (req, res, next) => {
           return res.serverError(error || info);
       }
 
-      req.user = user;
+      req.user = user.user;
+      req.customer = user.customer;
+      req.professional = user.professional;
 
       return next();
     } catch (e) {

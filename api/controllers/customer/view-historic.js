@@ -18,8 +18,12 @@ module.exports = {
 
   fn: async function () {
 
-    const historic = await sails.helpers.customer.historic();
-    return historic;
+    try {
+      const historic = await sails.helpers.customer.historic(this.req.customer.id);
+      return {historic};
+    } catch (e) {
+      throw e;
+    }
 
   }
 
