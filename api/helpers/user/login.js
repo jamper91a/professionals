@@ -1,5 +1,5 @@
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
+
 module.exports = {
 
 
@@ -42,7 +42,7 @@ module.exports = {
 
     const promise = new Promise(function(resolve, reject) {
       try {
-        passport.authenticate('local', function (err, user, info) {
+        passport.authenticate('local', async function (err, user, info) {
           if (!user) {
             let error = new Error('notFound');
             error.code = 'notFound';
@@ -55,19 +55,19 @@ module.exports = {
           }
 
           if (user) {
+            //Check if is customer or professional
+            let customer, professional;
+            switch (user.group) {
+              case sails.config.custom.USER_CUSTOMER:
+                customer = await Customer.find({user: user.id});
+                break;
+              case sails.config.custom.USER_PROFESSIONAL:
+                professional = await Professional.find({user: user.id});
+                break;
+            }
             try {
-              const token = jwt.sign(
-                {
-                  user: user,
-                },
-                sails.config.custom.jwt.secret,
-                sails.config.custom.jwt.options);
-              let data = {
-                user,
-                token
-              };
+              const data = sails.helpers.jwt.generate(user, customer, professional);
               resolve(data);
-
             } catch (e) {
               throw {error: e};
             }
@@ -81,12 +81,6 @@ module.exports = {
         throw {error: e};
       }
     });
-    // await promise.then((data)=>{
-    //   return data;
-    //   // eslint-disable-next-line handle-callback-err
-    // }, (err)=>{
-    //   throw {error: err};
-    // });
     return promise;
   }
 

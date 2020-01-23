@@ -14,10 +14,15 @@ module.exports.policies = {
 
 
   /**
-   * WEB
+   * Public WEB
    */
   'customer/register/view-index': true,
   'user/view-login': true,
+
+  /**
+   * Customer pages
+   */
+  'customer/view-historic' : ['isCustomer'],
 
   /**
    * Admin

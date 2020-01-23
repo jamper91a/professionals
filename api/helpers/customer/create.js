@@ -33,7 +33,7 @@ module.exports = {
         };
         const newCustomer  = await Customer.create(customer).fetch();
         if(newCustomer){
-          return newCustomer;
+          return {user: newUser, customer: newCustomer};
         }else{
           throw {serverError: {message: "Customer not created"}};
         }

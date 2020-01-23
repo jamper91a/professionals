@@ -30,6 +30,7 @@ module.exports.routes = {
   'GET /user/logout': 'user/logout',
   'GET /user/login': 'user/view-login',
   'POST /user/login': 'user/view-login',
+  'GET /customer/historic': 'customer/view-historic',
 
   /**
    * Admin Views

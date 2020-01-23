@@ -18,8 +18,8 @@ module.exports = {
 
   fn: async function () {
 
-    // Respond with view.
-    return {};
+    const historic = await sails.helpers.customer.historic();
+    return historic;
 
   }
 

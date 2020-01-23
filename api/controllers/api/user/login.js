@@ -39,8 +39,8 @@ module.exports = {
     inputs.req = this.req;
     inputs.res = this.res;
     try {
-      const user = await sails.helpers.user.login.with(inputs);
-      return user;
+      const data = await sails.helpers.user.login.with(inputs);
+      return data;
     } catch (e) {
       throw {serverError: e};
     }

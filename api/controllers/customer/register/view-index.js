@@ -29,12 +29,11 @@ module.exports = {
 
 
   fn: async function (inputs) {
+    //Get coutries
+    const countryOrigin=requestCountry(this.req.ip, 'US');
+    const countries = await Country.find({});
     switch (this.req.method) {
       case 'GET':
-        //Get coutries
-        console.log(this.req.ip);
-        const countryOrigin=requestCountry(this.req.ip, 'US');
-        const countries = await Country.find({});
         return this.res.view('pages/customer/register/index', {layout: 'layouts/login', error: '', countries, countryOrigin: countryOrigin});
         break;
       case 'POST':
@@ -46,17 +45,23 @@ module.exports = {
           country: inputs.country
         };
         try {
-          const user = await sails.helpers.customer.create.with(inputs);
-          this.res.cookie('jwt', user.token, sails.config.custom.jwt.cookie);
-          return this.res.redirect('/');
+          const data = await sails.helpers.customer.create(inputs.user);
+          try {
+            const jwt = await sails.helpers.jwt.generate(data.user, data.customer, {});
+            this.res.cookie('jwt', jwt.token, sails.config.custom.jwt.cookie);
+            return this.res.redirect('/');
+          } catch (e) {
+            throw {error: e};
+          }
+
         } catch (e) {
           if(e.raw && e.raw.serverError && e.raw.serverError.code === 'E_INVALID_ARGINS'){
             if(e.raw.serverError.problems && e.raw.serverError.problems.length>0) {
               const error_message = e.raw.serverError.problems[0].split('\n')[0];
-              return this.res.view('pages/customer/register/index', {layout: 'layouts/login', error: error_message});
+              return this.res.view('pages/customer/register/index', {layout: 'layouts/login', error: error_message, countries, countryOrigin: countryOrigin});
             }
           }
-          return this.res.view('pages/customer/register/index', {layout: 'layouts/login', error: e});
+          return this.res.view('pages/customer/register/index', {layout: 'layouts/login', error: e, countries, countryOrigin: countryOrigin});
 
           // return{e};
         }

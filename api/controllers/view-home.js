@@ -9,10 +9,6 @@ module.exports = {
 
   exits: {
 
-    success: {
-      viewTemplatePath: 'pages/home'
-    }
-
   },
 
 
