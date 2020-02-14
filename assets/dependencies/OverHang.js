@@ -1,7 +1,7 @@
 //https://paulkr.github.io/overhang.js/
 class OverHang {
 
-    static options = {
+    options = {
       "closeButton": true,
       "debug": false,
       "newestOnTop": true,

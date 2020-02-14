@@ -27,6 +27,8 @@ module.exports.routes = {
 
   'GET /register': 'customer/register/view-index',
   'POST /register': 'customer/register/view-index',
+  'GET /professional/register': 'professional/view-register',
+  'POST /professional/register': 'professional/view-register',
   'GET /user/logout': 'user/logout',
   'GET /user/login': 'user/view-login',
   'POST /user/login': 'user/view-login',

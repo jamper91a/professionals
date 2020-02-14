@@ -16,6 +16,7 @@ module.exports.policies = {
   /**
    * Public WEB
    */
+  'professional/view-register': true,
   'customer/register/view-index': true,
   'user/view-login': true,
 

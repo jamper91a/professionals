@@ -1,4 +1,4 @@
-let userId;
+// let userId;
 function selectUser(userId) {
   this.userId = userId;
 }
