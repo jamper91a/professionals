@@ -9,21 +9,18 @@ module.exports = {
 
   exits: {
 
-    // success: {
-    //   viewTemplatePath: 'pages/admin/customer/all'
-    // }
-
   },
 
 
   fn: async function () {
+
     try {
-      const customers = await sails.helpers.customer.find();
+      const professionals = await sails.helpers.professional.findAll();
       return this.res.view(
-        'pages/admin/customer/all',
+        'pages/admin/professional/all',
         {
           layout: 'layouts/admin',
-          customers: customers,
+          professionals: professionals,
           translations: {
             Successful_Operation:sails.__('Successful_Operation')}
         });

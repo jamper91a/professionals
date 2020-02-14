@@ -7,7 +7,8 @@
 
 
 module.exports = (req, res, next) => {
-  if(req.user.group === sails.config.custom.USER_ADMIN) return next();
+  if(req.user.group === sails.config.custom.USER_ADMIN)
+    return next();
   if (req.wantsJSON) {
     return res.forbidden();
   }

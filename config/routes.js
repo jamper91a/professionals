@@ -40,6 +40,7 @@ module.exports.routes = {
   'GET /admin/login': 'admin/view-login',
   'POST /admin/login': 'admin/view-login',
   'GET /admin/customer/': 'admin/customer/view-all',
+  'GET /admin/professional/': 'admin/professional/view-all',
   /**
    * Api
    */
@@ -54,5 +55,6 @@ module.exports.routes = {
    * Partial Views
    */
   'PATCH /pv/admin/customer/customer-table': {action: 'admin/partial-view/customer/view-all/customer-table'},
+  'PATCH /pv/admin/professional/professional-table': {action: 'admin/partial-view/professional/view-all/professional-table'},
 
 };
