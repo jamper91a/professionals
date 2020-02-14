@@ -41,9 +41,11 @@ module.exports = {
     //Get coutries
     const countryOrigin=requestCountry(this.req.ip, 'US');
     const countries = await Country.find({});
+    const rates = await Rate.find({});
+    const professions = await Profession.find({});
     switch (this.req.method) {
       case 'GET':
-        return this.res.view('pages/professional/register', {layout: 'layouts/login', error: '', countries, countryOrigin: countryOrigin});
+        return this.res.view('pages/professional/register', {layout: 'layouts/login', error: '', countries, rates, professions, countryOrigin: countryOrigin});
         break;
       case 'POST':
         let dataProfessional = {};
@@ -57,7 +59,7 @@ module.exports = {
         dataProfessional.profession = inputs.profession;
         dataProfessional.rate = inputs.rate;
         try {
-          const data = await sails.helpers.professional.create(dataProfessional);
+          const data = await sails.helpers.professional.create.with(dataProfessional);
           try {
             const jwt = await sails.helpers.jwt.generate(data.user, {}, data.professional);
             this.res.cookie('jwt', jwt.token, sails.config.custom.jwt.cookie);

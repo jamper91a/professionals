@@ -44,6 +44,7 @@ module.exports = {
           profession: inputs.profession,
           rate: inputs.rate,
           state: sails.config.custom.STATUS_OFFLINE,
+          user: newUser.id
         };
         const newProfessional  = await Professional.create(professional).fetch();
         if(newProfessional){

@@ -78,5 +78,14 @@
 	"Duration": "Duration",
 	"Professional": "Professional",
 	"Messages": "Messages",
-	"score": "score"
+	"score": "score",
+	"Profession": "Profession",
+	"Accounter": "Accounter",
+	"Lawyer": "Lawyer",
+	"Rates": "Rates",
+	"Basic": "Basic",
+	"Medium": "Medium",
+	"Premium": "Premium",
+	"Rate": "Rate",
+	"Choose": "Choose"
 }

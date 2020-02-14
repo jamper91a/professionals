@@ -1,3 +1,4 @@
+<%- exposeLocalsToBrowser() %>
 <div class="page-content--bge5">
   <div class="container">
     <div class="login-wrap">
@@ -38,10 +39,27 @@
               <select required name="country" id="country" class="form-control">
                 <% countries.forEach(function (country) {%>
                 <%if (countryOrigin === country.name) {%>
-                <option value="<%=country.id%>" selected="selected"><%=__(country.name)%>- <%=countryOrigin%></option>
+                <option value="<%=country.id%>" selected="selected"><%=__(country.name)%></option>
                 <%} else{%>
                 <option value="<%=country.id%>"><%=__(country.name)%>- <%=countryOrigin%></option>
                 <%}})%>
+              </select>
+            </div>
+            <div class="form-group">
+              <label><%=__('Profession')%></label>
+              <select required name="profession" id="profession" class="form-control">
+                <option value="0"><%=__('Choose')%></option>
+                <% professions.forEach(function (profession) {%>
+                <option value="<%=profession.id%>"><%=__(profession.name)%></option>
+                <%})%>
+              </select>
+            </div>
+            <div class="form-group" id="rateGroup" style="display: none">
+              <label><%=__('Rate')%></label>
+              <select required name="rate" id="rate" class="form-control">
+                <% rates.forEach(function (rate) {%>
+                <option value="<%=rate.id%>"><%=__(rate.name)%> - <%=rate.profession%></option>
+                <%})%>
               </select>
             </div>
             <div class="login-checkbox">
@@ -50,6 +68,7 @@
                 <%=__('Agree the terms and policy')%>
               </label>
             </div>
+
             <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit"><%=__('Register')%></button>
             <!--            <div class="social-login-content">-->
             <!--              <div class="social-button">-->
