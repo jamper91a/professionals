@@ -1,6 +1,9 @@
-class Util {
-
+const PROFESSIONAL_STATES = {
+  ONLINE: 1,
+  OFFLINE: 2,
+  JUST_CALLS:3,
+  JUST_CHAT:4,
+  BUSY: 5
 }
-
 
 

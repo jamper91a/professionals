@@ -23,10 +23,14 @@ module.exports.custom = {
   USER_ADMIN: 1,
   USER_CUSTOMER: 2,
   USER_PROFESSIONAL: 3,
-  //Status
-  STATUS_ONLINE: 1,
-  STATUS_BUSY: 2,
-  STATUS_OFFLINE: 3,
+  //PROFESISONAL STATES
+  PROFESSIONAL_STATES: {
+    ONLINE: 1,
+    OFFLINE: 2,
+    JUST_CALLS:3,
+    JUST_CHAT:4,
+    BUSY: 5
+  },
 
   jwt: {
     secret: 'k{B^um3fzwP-68cN',

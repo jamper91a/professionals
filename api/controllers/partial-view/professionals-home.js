@@ -29,10 +29,12 @@ module.exports = {
       const professionals = await sails.helpers.professional.findBy.with(inputs);
       const countries = await sails.helpers.country.findAll();
       const professions = await sails.helpers.profession.findAll();
+      const PROFESSIONAL_STATES = sails.config.custom.PROFESSIONAL_STATES;
       const htmlEmailContents = await sails.renderView('pages/partial-view/professionals-home', {
         professionals,
         countries,
         professions,
+        PROFESSIONAL_STATES,
         // Don't include the Sails app's default layout in the rendered template.
         layout: false
       });
