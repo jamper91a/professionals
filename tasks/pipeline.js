@@ -39,7 +39,12 @@ var cssFilesToInject = [
   // All of the rest of your custom `.css` files will be injected here,
   // in no particular order.  To customize the ordering, add additional
   // items here, _above_ this one.
-  'styles/**/*.css'
+  'styles/fonts/**/*.css',
+  'styles/pages/**/*.css',
+  'styles/vendor/**/*.css',
+  'styles/css/*.css',
+  'styles/importer.css',
+  // 'styles/**/*.css',
 ];
 
 

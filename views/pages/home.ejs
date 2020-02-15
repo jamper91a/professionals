@@ -1,35 +1,35 @@
 <!-- BREADCRUMB-->
-<section class="au-breadcrumb2">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="au-breadcrumb-content">
-          <div class="au-breadcrumb-left">
-            <span class="au-breadcrumb-span">You are here:</span>
-            <ul class="list-unstyled list-inline au-breadcrumb__list">
-              <li class="list-inline-item active">
-                <a href="#">Home</a>
-              </li>
-              <li class="list-inline-item seprate">
-                <span>/</span>
-              </li>
-              <li class="list-inline-item">Dashboard</li>
-            </ul>
-          </div>
-          <form class="au-form-icon--sm" action="" method="post">
-            <input class="au-input--w300 au-input--style2" type="text" placeholder="Search for datas &amp; reports...">
-            <button class="au-btn--submit2" type="submit">
-              <i class="zmdi zmdi-search"></i>
-            </button>
-          </form>
+<!--<section class="au-breadcrumb2">-->
+<!--  <div class="container">-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<div class="container-fluid">
+  <br>
+  <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="rs-select2--light rs-select2--md">
+          <select class="js-select2" id="country">
+            <option selected="selected"><%=__('Country')%></option>
+            <option value="">Option 1</option>
+            <option value="">Option 2</option>
+          </select>
+          <div class="dropDownSelect2"></div>
         </div>
       </div>
-    </div>
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="rs-select2--light rs-select2--md">
+          <select class="js-select2" name="profession">
+            <option selected="selected"><%=__('Profession')%></option>
+            <option value="">3 Days</option>
+            <option value="">1 Week</option>
+          </select>
+          <div class="dropDownSelect2"></div>
+        </div>
+      </div>
   </div>
-</section>
-<!-- END BREADCRUMB-->
-
-<div class="container-fluid">
+  <br>
   <div class="row">
     <% professionals.forEach(function(professional) { %>
       <%- partial('../partials/professional-mini.ejs', {professional}) %>
