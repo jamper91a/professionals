@@ -1,0 +1,28 @@
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
+<div class="col-md-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="mx-auto d-block">
+                <img class="rounded-circle mx-auto d-block" src="images/icon/avatar-01.jpg" alt="Card image cap">
+                <h5 class="text-sm-center mt-2 mb-1"><%=professional.user.name%></h5>
+                <div class="location text-sm-center">
+                    <i class="fa fa-map-marker"></i><%=__(professional.user.country.name)%></div>
+            </div>
+            <hr>
+            <div class="card-text text-sm-center">
+                <%=__(professional.profession.name)%>
+            </div>
+
+        </div>
+        <div class="card-footer text-center">
+            <button type="button" class="btn btn-success btn-lg col-md-5">
+                <i class="fa fa-phone"></i>
+                <%=__('Call')%>
+            </button>
+            <button type="button" class="btn btn-success btn-lg col-md-5">
+                <i class="fa fa-comments"></i>
+                <%=__('Chat')%>
+            </button>
+        </div>
+    </div>
+</div>
