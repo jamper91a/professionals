@@ -4,6 +4,14 @@ const PROFESSIONAL_STATES = {
   JUST_CALLS:3,
   JUST_CHAT:4,
   BUSY: 5
+};
+
+
+function callProfessional(professionalId) {
+  alert("CALL PROFESSIONAL: " + professionalId)
+}
+function chatProfessional(professionalId) {
+  alert("CHAT PROFESSIONAL: " + professionalId)
 }
 
 

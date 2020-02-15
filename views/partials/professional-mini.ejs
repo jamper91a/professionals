@@ -26,7 +26,7 @@
             </div>
             <div class="row">
                 <%
-                    var callCssClass, chatCssClass;
+                    var callCssClass, chatCssClass, disableCall = false, disableChat = false;
                     switch (professional.state.id) {
                         case PROFESSIONAL_STATES.ONLINE:
                             callCssClass = 'btn-success';
@@ -35,41 +35,70 @@
                         case PROFESSIONAL_STATES.BUSY:
                             callCssClass = 'btn-warning';
                             chatCssClass = 'btn-warning';
+                            disableCall = true;
+                            disableChat = true;
                             break;
                         case PROFESSIONAL_STATES.JUST_CALLS:
                             callCssClass = 'btn-success';
                             chatCssClass = 'btn-danger';
+                            disableChat = true;
                             break;
                         case PROFESSIONAL_STATES.JUST_CHAT:
                             callCssClass = 'btn-danger';
                             chatCssClass = 'btn-success';
+                            disableCall = true;
                             break;
                         case PROFESSIONAL_STATES.OFFLINE:
                             callCssClass = 'btn-secondary';
                             chatCssClass = 'btn-secondary';
+                            disableCall = true;
+                            disableChat = true;
                             break;
                     }
  %>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <!--                    Button visible from medium devices-->
-                    <button data-type-button="call-1-<%=professional.id%>" data-professional="<%=professional.id%>" type="button" class="btn <%=callCssClass%> btn-lg d-none d-md-inline text">
+                    <button onclick="callProfessional(<%=professional.id%>)"
+                            data-type-button="call-1-<%=professional.id%>"
+                            data-professional="<%=professional.id%>"
+                            type="button"
+                            class="btn <%=callCssClass%> btn-lg d-none d-md-inline text"
+                            <%=disableCall ? 'disabled': ''%>>
                         <i class="fa fa-phone"></i>
                         <%=__('Call')%>
                     </button>
                     <!--                    Button visible in super small and small devices-->
-                    <button data-type-button="call-2-<%=professional.id%>" data-professional="<%=professional.id%>" type="button" class="btn <%=callCssClass%> btn-block d-block d-sm-block d-md-none">
+                    <button
+                            onclick="callProfessional(<%=professional.id%>)"
+                            data-type-button="call-2-<%=professional.id%>"
+                            data-professional="<%=professional.id%>"
+                            type="button"
+                            class="btn <%=callCssClass%> btn-block d-block d-sm-block d-md-none"
+                            <%=disableCall ? 'disabled': ''%>>
                         <i class="fa fa-phone"></i>
                         <%=__('Call')%>
                     </button><br>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
 <!--                    Button visible from medium devices-->
-                    <button data-type-button="chat-1-<%=professional.id%>" data-professional="<%=professional.id%>" type="button" class="btn <%=chatCssClass%> btn-lg d-none d-md-inline">
+                    <button
+                            onclick="chatProfessional(<%=professional.id%>)"
+                            data-type-button="chat-1-<%=professional.id%>"
+                            data-professional="<%=professional.id%>"
+                            type="button"
+                            class="btn <%=chatCssClass%> btn-lg d-none d-md-inline"
+                            <%=disableChat ? 'disabled': ''%>>
                         <i class="fa fa-comments"></i>
                         <%=__('Chat')%>
                     </button>
 <!--                    Button visible in super small and small devices-->
-                    <button data-type-button="chat-1-<%=professional.id%>" data-professional="<%=professional.id%>" type="button" class="btn <%=chatCssClass%> btn-block d-block d-sm-block d-md-none">
+                    <button
+                            onclick="chatProfessional(<%=professional.id%>)"
+                            data-type-button="chat-1-<%=professional.id%>"
+                            data-professional="<%=professional.id%>"
+                            type="button"
+                            class="btn <%=chatCssClass%> btn-block d-block d-sm-block d-md-none"
+                            <%=disableChat ? 'disabled': ''%>>
                         <i class="fa fa-comments"></i>
                         <%=__('Chat')%>
                     </button><br>
