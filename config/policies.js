@@ -42,8 +42,12 @@ module.exports.policies = {
   'api/country/*': ['isAuthenticated', 'isAdmin'],
   'api/country/find': true,
   'api/professional/*': ['isAuthenticated', 'isAdmin'],
-  'api/professional/create': true
+  'api/professional/create': true,
 
+  /**
+   * Sockets
+   */
+  'api/professional/subscribe': true
   /**
    * Partial views
    */

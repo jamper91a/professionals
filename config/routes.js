@@ -51,9 +51,14 @@ module.exports.routes = {
   'GET /api/country/': 'api/country/find-all',
   'POST /api/user/ban': 'api/user/ban',
   'POST /api/user/remove': 'api/user/remove',
-  'POST /api/customer': 'customer/create',
-  'POST /api/professional': 'professional/create',
+  'POST /api/customer': 'api/customer/create',
+  'POST /api/professional': 'api/professional/create',
+  'POST /api/professional/changeStatus': 'api/professional/change-status',
 
+  /**
+   * Sockets
+   */
+  'GET /api/professionals/subscribe': 'sockets/professionals',
   /**
    * Partial Views
    */

@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 let homeCountry=0, homeProfession=0;
 $(document).ready(function() {
+  //Subscribe to professionals socket
+  Sockets.professionals();
   $('#profession').change(function(){
     //Profession selected
     homeProfession = parseInt($(this).find("option:selected").attr('value'));
@@ -21,3 +23,5 @@ function reloadProfessionals() {
       $('#professionals').html(data);
   });
 }
+
+

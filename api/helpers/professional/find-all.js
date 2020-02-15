@@ -23,6 +23,7 @@ module.exports = {
 
   fn: async function () {
     try {
+      //Subscribe to socket
       let professionals = await Professional.find()
         .populate('user')
         .populate('profession')
