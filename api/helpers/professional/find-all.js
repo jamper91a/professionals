@@ -23,7 +23,11 @@ module.exports = {
 
   fn: async function () {
     try {
-      let professionals = await Professional.find().populate('user').populate('profession').paginate(0, 50);
+      let professionals = await Professional.find()
+        .populate('user')
+        .populate('profession')
+        .populate('state')
+        .paginate(0, 50);
       professionals = _.filter(professionals, function(professional) { return professional.user.enabled===1; });
       for await (let professional of professionals) {
         //Find information about their location
@@ -31,9 +35,11 @@ module.exports = {
         if(professional.user.enabled===0) delete professional;
         else{
           const country = await Country.findOne({id: professional.user.country});
+          const rate = await Rate.findOne({id: professional.rate}).populate('currency');
           professional = sails.helpers.util.formatDate(professional);
           professionals.user = sails.helpers.util.formatDate(professional.user);
           professional.user.country = country;
+          professional.rate = rate;
         }
       }
       // All done.

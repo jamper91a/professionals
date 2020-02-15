@@ -1,5 +1,5 @@
 /**
- * Professional.js
+ * Customer.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,12 +12,12 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    picture: {
+    name: {
+      type: "string"
+    },
+    symbol: {
       type: "string",
       allowNull: true
-    },
-    score: {
-      type: "number"
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -28,19 +28,6 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    profession: {
-      model: "profession"
-    },
-    rate: {
-      model: "rate"
-    },
-    state: {
-      model: "state"
-    },
-    user:{
-      model: "user",
-      unique: true
-    }
   },
 
 };

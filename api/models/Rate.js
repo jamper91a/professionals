@@ -32,6 +32,12 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     profession: {
       model: "profession"
+    },
+    currency: {
+      model: "currency"
+    },
+    country: {
+      model: "country"
     }
   },
 
