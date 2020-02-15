@@ -20,7 +20,7 @@ module.exports = {
   fn: async function () {
 
     try {
-      const professionals = await sails.helpers.professional.find();
+      const professionals = await sails.helpers.professional.findAll();
       return professionals;
     } catch (e) {
       throw {serverError: e};

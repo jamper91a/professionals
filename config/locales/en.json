@@ -87,5 +87,7 @@
 	"Medium": "Medium",
 	"Premium": "Premium",
 	"Rate": "Rate",
-	"Choose": "Choose"
+	"Choose": "Choose",
+	"Call": "Call",
+	"Chat": "Chat"
 }

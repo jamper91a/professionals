@@ -13,8 +13,13 @@ module.exports = {
 
 
   fn: async function () {
-
-    return this.res.view('pages/home');
+    //Find all the professionals
+    try {
+      const professionals = await sails.helpers.professional.findAll();
+      return this.res.view('pages/home', {professionals});
+    } catch (e) {
+      sails.log.error(e);
+    }
 
   }
 
