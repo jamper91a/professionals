@@ -16,7 +16,9 @@ module.exports = {
     //Find all the professionals
     try {
       const professionals = await sails.helpers.professional.findAll();
-      return this.res.view('pages/home', {professionals});
+      const countries = await sails.helpers.country.findAll();
+      const professions = await sails.helpers.profession.findAll();
+      return this.res.view('pages/home', {professionals, countries, professions});
     } catch (e) {
       sails.log.error(e);
     }

@@ -18,7 +18,7 @@ module.exports = {
 
   fn: async function () {
     try {
-      const customers = await sails.helpers.customer.find();
+      const customers = await sails.helpers.customer.findAll();
       return this.res.view(
         'pages/admin/customer/all',
         {

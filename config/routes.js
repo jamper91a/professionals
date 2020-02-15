@@ -47,7 +47,8 @@ module.exports.routes = {
    * Api
    */
   'POST /api/login': 'api/user/login',
-  'GET /api/customer/': 'api/customer/find',
+  'GET /api/customer/': 'api/customer/find-all',
+  'GET /api/country/': 'api/country/find-all',
   'POST /api/user/ban': 'api/user/ban',
   'POST /api/user/remove': 'api/user/remove',
   'POST /api/customer': 'customer/create',
@@ -58,5 +59,6 @@ module.exports.routes = {
    */
   'PATCH /pv/admin/customer/customer-table': {action: 'admin/partial-view/customer/view-all/customer-table'},
   'PATCH /pv/admin/professional/professional-table': {action: 'admin/partial-view/professional/view-all/professional-table'},
+  'PATCH /pv/professionals-home': {action: 'partial-view/professionals-home'},
 
 };
