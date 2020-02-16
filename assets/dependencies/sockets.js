@@ -66,6 +66,21 @@ class Sockets {
     });
   }
 
+  static mySocket(){
+    console.log("socket: user");
+    io.socket.get('/api/user/subscribe', function(data, jwr) {
+      console.log("socket: user");
+      console.log('Server responded with status code ' + jwr.statusCode + ' and data: ', data);
+
+    });
+    //Socket io
+    io.socket.on('newMessage', function(data, jwr) {
+      console.log("socket: user");
+      console.log(data);
+
+    });
+  }
+
 }
 
 

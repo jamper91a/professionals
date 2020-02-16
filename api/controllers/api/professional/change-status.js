@@ -27,7 +27,7 @@ module.exports = {
     try {
       const professional = await sails.helpers.professional.changeStatus.with(inputs);
       // All done.
-      sails.sockets.broadcast('professionals', 'changeStatus', professional);
+
       return professional;
     } catch (e) {
       throw {serverError: e};

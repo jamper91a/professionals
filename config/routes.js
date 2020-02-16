@@ -59,6 +59,7 @@ module.exports.routes = {
    * Sockets
    */
   'GET /api/professionals/subscribe': 'sockets/professionals',
+  'GET /api/user/subscribe': 'sockets/user',
   /**
    * Partial Views
    */

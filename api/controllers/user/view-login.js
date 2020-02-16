@@ -28,6 +28,7 @@ module.exports = {
       case 'POST':
         inputs.req = this.req;
         inputs.res = this.res;
+
         try {
           const user = await sails.helpers.user.login.with(inputs);
           this.res.cookie('jwt', user.token, sails.config.custom.jwt.cookie);

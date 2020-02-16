@@ -189,5 +189,13 @@
     <script src="/js/pages/professional/register.page.js"></script>
     <script src="/js/pages/user/login.page.js"></script>
     <!--SCRIPTS END-->
+  <!--Script to connect to the socket-->
+  <%if(req.user){%>
+    <script>
+        //Subscribe to professionals socket
+        Sockets.mySocket();
+    </script>
+  <%}%>
+
   </body>
 </html>

@@ -31,12 +31,12 @@
                     </li>
                     <%if(!req.user){%>
                     <li>
-                        <a href="/user/login" target="_blank">
+                        <a href="/user/login" >
                             <span class="bot-line"></span><%=__('Sign in')%>
                         </a>
                     </li>
                     <li>
-                        <a href="/register" target="_blank">
+                        <a href="/register" >
                             <span class="bot-line"></span><%=__('Register')%>
                         </a>
                     </li>
@@ -44,7 +44,7 @@
                         if(req.user.group === sails.config.custom.USER_CUSTOMER) {
                     %>
                     <li>
-                        <a href="/customer/historic" target="_blank">
+                        <a href="/customer/historic" >
                             <span class="bot-line"></span><%=__('Historic')%>
                         </a>
                     </li>
@@ -163,25 +163,25 @@
                         <div class="account-dropdown__body">
                             <div class="account-dropdown__item">
                                 <a href="#">
-                                    <i class="zmdi zmdi-account"></i><%=__('Account')%></a>
+                                    <i class="zmdi zmdi-account"></i><%#=__('Account')%></a>
                             </div>
                             <div class="account-dropdown__item">
                                 <a href="#">
-                                    <i class="zmdi zmdi-settings"></i><%=__('Setting')%></a>
+                                    <i class="zmdi zmdi-settings"></i><%#=__('Setting')%></a>
                             </div>
                             <div class="account-dropdown__item">
                                 <a href="#">
-                                    <i class="zmdi zmdi-money-box"></i><%=__('Billing')%></a>
+                                    <i class="zmdi zmdi-money-box"></i><%#=__('Billing')%></a>
                             </div>
                         </div>
                         <div class="account-dropdown__body">
                             <div class="account-dropdown__item">
                                 <a href="#">
-                                    <i class="zmdi zmdi-globe"></i><%=__('Language')%></a>
+                                    <i class="zmdi zmdi-globe"></i><%#=__('Language')%></a>
                             </div>
                             <div class="account-dropdown__item">
                                 <a href="#">
-                                    <i class="zmdi zmdi-pin"></i><%=__('Location')%></a>
+                                    <i class="zmdi zmdi-pin"></i><%#=__('Location')%></a>
                             </div>
                             &lt;!&ndash;<div class="account-dropdown__item">
                                 <a href="#">
@@ -197,23 +197,23 @@
                 <div class="account-wrap">
                     <div class="account-item account-item--style2 clearfix js-item-menu">
                         <div class="image">
-                            <img src="/images/icon/avatar-01.jpg" alt="<%=__(req.user.name)%>" />
+                            <img src="/images/icon/avatar-01.jpg" alt="<%=req.user.name%>" />
                         </div>
                         <div class="content">
-                            <a class="js-acc-btn" href="#"><%=__(req.user.name)%></a>
+                            <a class="js-acc-btn" href="#"><%=req.user.name%></a>
                         </div>
                         <div class="account-dropdown js-dropdown">
                             <div class="info clearfix">
                                 <div class="image">
                                     <a href="#">
-                                        <img src="/images/icon/avatar-01.jpg" alt="<%=__(req.user.name)%>" />
+                                        <img src="/images/icon/avatar-01.jpg" alt="<%=req.user.name%>" />
                                     </a>
                                 </div>
                                 <div class="content">
                                     <h5 class="name">
-                                        <a href="#"><%=__(req.user.name)%></a>
+                                        <a href="#"><%=req.user.name%></a>
                                     </h5>
-                                    <span class="email"><%=__(req.user.username)%></span>
+                                    <span class="email"><%=req.user.username%></span>
                                 </div>
                             </div>
                             <div class="account-dropdown__body">
@@ -243,3 +243,4 @@
     </div>
 </header>
 <!-- END HEADER DESKTOP-->
+

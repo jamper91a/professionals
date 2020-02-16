@@ -30,7 +30,7 @@ module.exports = {
     try {
 
       let professional = await Professional.updateOne({id: inputs.professionalId}).set({state: inputs.state});
-
+      sails.sockets.broadcast('professionals', 'changeStatus', professional);
       return professional;
     } catch (e) {
       throw e;

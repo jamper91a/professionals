@@ -20,6 +20,8 @@ module.exports = {
   fn: async function () {
 
     this.res.clearCookie('jwt');
+    const socketId = this.req.user.user.id;
+    await sails.helpers.socket.close(socketId);
     this.req.user = null;
     return this.res.redirect('/');
 

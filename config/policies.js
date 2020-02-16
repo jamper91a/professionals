@@ -10,8 +10,8 @@
 
 module.exports.policies = {
 
-  // '*': ['isUser'],
-  '*': true,
+  '*': ['isUser'],
+  // '*': true,
 
 
   /**
@@ -40,14 +40,15 @@ module.exports.policies = {
   'api/customer/*': ['isAuthenticated', 'isAdmin'],
   'api/customer/create': true,
   'api/country/*': ['isAuthenticated', 'isAdmin'],
-  'api/country/find': true,
+  'api/country/find-all': true,
   'api/professional/*': ['isAuthenticated', 'isAdmin'],
   'api/professional/create': true,
 
   /**
    * Sockets
    */
-  'api/professional/subscribe': true
+  'sockets/professionals': true,
+  'sockets/user': ['isAuthenticated']
   /**
    * Partial views
    */
