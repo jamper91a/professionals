@@ -22,11 +22,14 @@ function chatProfessional(professionalId) {
 
 function changeProfessionalStatus(statusId) {
   WebServices.changeProfessionalStatus(statusId,
-    function () {
+    function (professional) {
 
       OverHang.success(I.get('state_changed'));
+      const state = professional.state.name;
+      professional.state.name = state.replace(" ","_");
       //Change the status in the area
-      $("#notify_current_state").html('');
+      $("#notify_current_state").html(I.get(`PROFESSIONAL_STATES_${professional.state.name}`));
+      $("#notify_current_state_mobile").html(I.get(`PROFESSIONAL_STATES_${professional.state.name}`));
   }, function () {
     OverHang.error('State not change');
 

@@ -30,6 +30,8 @@ module.exports = {
     try {
 
       let professional = await Professional.updateOne({id: inputs.professionalId}).set({state: inputs.state});
+      const state = await State.findOne({id:inputs.state});
+      professional.state = state;
       sails.sockets.broadcast('professionals', 'changeStatus', professional);
       return professional;
     } catch (e) {

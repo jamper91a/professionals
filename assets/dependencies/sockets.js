@@ -26,7 +26,7 @@ class Sockets {
 
       //Check which classes to add depending of the status
       let callCssClass, chatCssClass;
-      switch (professional.state) {
+      switch (professional.state.id) {
         case PROFESSIONAL_STATES.ONLINE:
           callCssClass = 'btn-success';
           chatCssClass = 'btn-success';

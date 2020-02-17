@@ -1,5 +1,10 @@
 {
   "values":{
-    "state_changed": "State Changed"
+    "state_changed": "State Changed",
+    "PROFESSIONAL_STATES_ONLINE": "ONLINE",
+    "PROFESSIONAL_STATES_OFFLINE": "OFFLINE",
+    "PROFESSIONAL_STATES_JUST_CALLS": "JUST CALLS",
+    "PROFESSIONAL_STATES_JUST_CHATS": "JUST CHAT",
+    "PROFESSIONAL_STATES_BUSY": "BUSY"
   }
 }
