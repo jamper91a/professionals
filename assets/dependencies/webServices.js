@@ -17,6 +17,16 @@ class WebServices {
         return success(data);
     })
   }
+
+  static changeProfessionalStatus(state, success, error) {
+    let url = "/api/professional/changeStatus";
+    Api.post(url, {state}, function (err, data) {
+      if(err)
+        return error(err);
+      if(data)
+        return success(data);
+    })
+  }
 }
 
 

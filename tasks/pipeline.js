@@ -86,6 +86,7 @@ var jsFilesToInject = [
   'dependencies/vendor/chartjs/Chart.bundle.min.js',
   'dependencies/vendor/select2/select2.min.js',
   'dependencies/main.js',
+  'dependencies/i18n/I.js',
 
   // Bring in `.js` files for any other client-side JavaScript dependencies.
   // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)

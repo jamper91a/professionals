@@ -59,10 +59,10 @@ module.exports = {
             let customer, professional;
             switch (user.group) {
               case sails.config.custom.USER_CUSTOMER:
-                customer = await Customer.find({user: user.id});
+                customer = await Customer.findOne({user: user.id});
                 break;
               case sails.config.custom.USER_PROFESSIONAL:
-                professional = await Professional.find({user: user.id});
+                professional = await Professional.findOne({user: user.id});
                 break;
             }
             try {

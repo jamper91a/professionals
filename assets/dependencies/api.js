@@ -1,4 +1,6 @@
 class Api {
+
+
   static post(url, data, callback) {
     $.post(url, data, function(data, status, xhr){
       if(status === "success"){

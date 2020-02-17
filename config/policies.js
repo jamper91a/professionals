@@ -43,6 +43,7 @@ module.exports.policies = {
   'api/country/find-all': true,
   'api/professional/*': ['isAuthenticated', 'isAdmin'],
   'api/professional/create': true,
+  'api/professional/change-status': ['isAuthenticated', 'isProfessional'],
 
   /**
    * Sockets

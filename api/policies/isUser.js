@@ -11,9 +11,9 @@ module.exports = (req, res, next) => {
   passport.authenticate('jwt',  (error, user, info) => {
 
     try {
-      if(user) {
-        req.user = user;
-      }
+      req.user = user.user;
+      req.customer = user.customer;
+      req.professional = user.professional;
       return next();
     } catch (e) {
       req.user = null;

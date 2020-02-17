@@ -117,8 +117,16 @@ const _onJwtStrategyAuth = async (req, payload, next) => {
   if(payload.user) {
     try {
       const user = await User.findOne({id: payload.user.id});
-      payload.user = user;
       if(user){
+        payload.user = user;
+        if(payload.professional) {
+          const professional = await Professional.findOne({id: payload.professional.id}).populate('state');
+          payload.professional = professional;
+        }
+        if(payload.customer){
+          const customer = await Customer.findOne({id: payload.customer.id});
+          payload.customer = customer;
+        }
           return next(null, payload, {});
       }else{
         return next(null, null, sails.config.errors.USER_NOT_FOUND);

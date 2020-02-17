@@ -1,7 +1,7 @@
 //https://paulkr.github.io/overhang.js/
 class OverHang {
-
-    options = {
+  static get options() {
+    return  {
       "closeButton": true,
       "debug": false,
       "newestOnTop": true,
@@ -18,6 +18,9 @@ class OverHang {
       "showMethod": "fadeIn",
       "hideMethod": "fadeOut"
     };
+  };
+
+
 
   static show(type = 'success',message, closeConfirm=false, duration = 3, overlay = false){
     $("body").overhang({

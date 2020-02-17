@@ -91,5 +91,22 @@
 	"Call": "Call",
 	"Chat": "Chat",
 	"All Countries": "All Countries",
-	"All Professions": "All Professions"
+	"All Professions": "All Professions",
+	"Online": "Online",
+	"I can accept chats and calls": "I can accept chats and calls",
+	"I_can_accept_chats_and_calls": "I_can_accept_chats_and_calls",
+	"No": "No",
+	"I can_accept_chats_and_calls": "I can_accept_chats_and_calls",
+	"I can accept just calls": "I can accept just calls",
+	"Just Calls": "Just Calls",
+	"Just Chats": "Just Chats",
+	"I can accept just chats": "I can accept just chats",
+	"Busy": "Busy",
+	"I am busy": "I am busy",
+	"Current State": "Current State",
+	"OFFLINE": "OFFLINE",
+	"JUST CHATS": "JUST CHATS",
+	"ONLINE": "ONLINE",
+	"Current state": "Current state",
+	"JUST CALLS": "JUST CALLS"
 }
