@@ -27,6 +27,16 @@ class WebServices {
         return success(data);
     })
   }
+
+  static createChat(professionalId, success, error) {
+    let url = "/api/chat/create";
+    Api.post(url, {professionalId}, function (err, data) {
+      if(err)
+        return error(err.responseJSON.data);
+      if(data)
+        return success(data);
+    })
+  }
 }
 
 

@@ -31,6 +31,17 @@ module.exports.custom = {
     JUST_CHAT:4,
     BUSY: 5
   },
+  //CHAT STATES
+  CHAT_STATES: {
+    CREATED: 6,
+    STARTED: 7,
+    FINISHED:8
+  },
+  //USER STATE ON CHAT
+  CHAT_USER_STATE: {
+    CONNECTED: 9,
+    DISCONNECTED: 10
+  },
 
   jwt: {
     secret: 'k{B^um3fzwP-68cN',
@@ -45,5 +56,8 @@ module.exports.custom = {
       // signed: true,
       // secure: true
     }
+  },
+  twilio:{
+    service_id: 'IS0872b122d1d64804ab94877961b169ee'
   }
 };

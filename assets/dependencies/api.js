@@ -7,6 +7,8 @@ class Api {
         return callback(null, data);
       }
       return callback(xhr, null);
+    }).fail(function(error) {
+      return callback(error, null);
     });
   }
   static get(url, data, callback) {
@@ -15,6 +17,8 @@ class Api {
         return callback(null, data);
       }
       return callback(xhr, null);
+    }).fail(function(error) {
+      return callback(error, null);
     });
   }
   static patch(url, data, callback) {
@@ -28,6 +32,8 @@ class Api {
       error: function(result){
         callback(result, result);
     }
+    }).fail(function(error) {
+      return callback(error, null);
     });
   }
 }

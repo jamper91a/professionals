@@ -21,6 +21,7 @@ class I {
   }
 
     static get(key) {
+      key = key.replace(/ /g,"_");
       switch (this.userLang) {
         case 'en':
           return this.en(key);

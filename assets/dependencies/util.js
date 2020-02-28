@@ -17,7 +17,12 @@ function callProfessional(professionalId) {
   alert("CALL PROFESSIONAL: " + professionalId)
 }
 function chatProfessional(professionalId) {
-  alert("CHAT PROFESSIONAL: " + professionalId)
+  //alert("CHAT PROFESSIONAL: " + professionalId);
+  WebServices.createChat(professionalId, function (chat) {
+    OverHang.error('Chat created' + chat.id);
+  }, function (error) {
+    OverHang.error(I.get(error.exit));
+  })
 }
 
 function changeProfessionalStatus(statusId) {

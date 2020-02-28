@@ -34,6 +34,15 @@ module.exports = {
     },
     conversation: {
       model: "conversation"
+    },
+    chatState: {
+      model: "state"
+    },
+    customerState: {
+      model: "state"
+    },
+    professionalState: {
+      model: "state"
     }
   },
 

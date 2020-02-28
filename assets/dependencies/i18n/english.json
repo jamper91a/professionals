@@ -5,6 +5,7 @@
     "PROFESSIONAL_STATES_OFFLINE": "OFFLINE",
     "PROFESSIONAL_STATES_JUST_CALLS": "JUST CALLS",
     "PROFESSIONAL_STATES_JUST_CHATS": "JUST CHAT",
-    "PROFESSIONAL_STATES_BUSY": "BUSY"
+    "PROFESSIONAL_STATES_BUSY": "BUSY",
+    "customerCanNotChat": "You have not finished your previous chat"
   }
 }

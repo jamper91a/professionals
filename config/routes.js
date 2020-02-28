@@ -33,6 +33,7 @@ module.exports.routes = {
   'GET /user/login': 'user/view-login',
   'POST /user/login': 'user/view-login',
   'GET /customer/historic': 'customer/view-historic',
+  'GET /chat': 'chat/view-chat',
 
   /**
    * Admin Views
@@ -47,6 +48,7 @@ module.exports.routes = {
    * Api
    */
   'POST /api/login': 'api/user/login',
+  'POST /api/chat/create': 'api/chat/create',
   'GET /api/customer/': 'api/customer/find-all',
   'GET /api/country/': 'api/country/find-all',
   'POST /api/user/ban': 'api/user/ban',
