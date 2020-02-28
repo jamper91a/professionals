@@ -12,7 +12,9 @@ const PROFESSIONAL_STATES = {
 };
 const SOCKET_EVENTS = {
     NEW_CHAT_INCOME: 'newChat',
-    READER_CHANGE_STATUS: 'changeStatus'
+    READER_CHANGE_STATUS: 'changeStatus',
+    NEW_MESSAGE: 'newMessage',
+    USER_CONNECTED_CHAT: 'userConnectedChat'
 };
 
 

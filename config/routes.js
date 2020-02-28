@@ -62,6 +62,9 @@ module.exports.routes = {
    */
   'GET /api/professionals/subscribe': 'sockets/professionals',
   'GET /api/user/subscribe': 'sockets/user',
+  'GET /api/chat/subscribe': 'sockets/chat',
+  'POST /api/chat/sendMessage': 'sockets/chat/send-message',
+  'GET /api/chat/connected': 'sockets/chat/connected',
   /**
    * Partial Views
    */

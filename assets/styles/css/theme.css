@@ -3733,7 +3733,7 @@ section {
 }
 
 .au-chat__content2 .recei-mess {
-    max-width: 240px;
+    max-width: 90%;
     -webkit-border-top-left-radius: 3px;
     -moz-border-radius-topleft: 3px;
     border-top-left-radius: 3px;
@@ -3749,7 +3749,7 @@ section {
 }
 
 .au-chat__content2 .send-mess {
-    max-width: 240px;
+    max-width: 90%;
     -webkit-border-top-right-radius: 3px;
     -moz-border-radius-topright: 3px;
     border-top-right-radius: 3px;

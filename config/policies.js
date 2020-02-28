@@ -48,8 +48,8 @@ module.exports.policies = {
   /**
    * Sockets
    */
+  'sockets/*': ['isAuthenticated'],
   'sockets/professionals': true,
-  'sockets/user': ['isAuthenticated']
   /**
    * Partial views
    */

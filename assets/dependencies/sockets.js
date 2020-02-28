@@ -67,7 +67,6 @@ class Sockets {
   }
 
   static mySocket(){
-    console.log("socket: user");
     io.socket.get('/api/user/subscribe', function(data, jwr) {
       console.log("socket: user");
       console.log('Server responded with status code ' + jwr.statusCode + ' and data: ', data);
@@ -91,6 +90,38 @@ class Sockets {
 
     });
   }
+
+  static myChat(myId){
+    io.socket.get('/api/chat/subscribe', function(data, jwr) {
+      console.log("socket: chat");
+      console.log('Server responded with status code ' + jwr.statusCode + ' and data: ', data);
+
+      //Notify I have connected to the chat
+      io.socket.get('/api/chat/connected', {}, function (resData, jwres){
+
+        console.log(resData);
+      });
+    });
+    io.socket.on(SOCKET_EVENTS.NEW_MESSAGE, function(data, jwr) {
+      console.log(data);
+      newMessageChat();
+    });
+    io.socket.on(SOCKET_EVENTS.USER_CONNECTED_CHAT, function(data, jwr) {
+      console.log('USER_CONNECTED_CHAT: ', data);
+      console.log('myId: ', myId);
+      if(myId!== data) {
+        newUserConnected();
+      }
+
+    });
+  }
+
+  static sendChatMessage(message){
+    io.socket.post('/api/chat/sendMessage', {message}, function (resData, jwres){
+      addMesaggeSent(message);
+    });
+  }
+
 
 }
 
