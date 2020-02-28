@@ -1,10 +1,10 @@
 module.exports = {
 
 
-  friendlyName: 'Find by',
+  friendlyName: 'Find professionals by',
 
 
-  description: '',
+  description: 'Helper to filter professionals by country or profession',
 
 
   inputs: {

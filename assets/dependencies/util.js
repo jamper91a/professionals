@@ -30,7 +30,9 @@ function chatProfessional(professionalId) {
   })
 }
 function openChatWindow(){
-  window.open('/chat', '_blank')
+  // window.open('/chat', '_blank', 'status=0,toolbar=0,location=0,menubar=0,directories=0,resizable=1,'+
+  // 'scrollbars=0,width=600,height=600');
+  window.open('/chat', '_blank');
 }
 function changeProfessionalStatus(statusId) {
   WebServices.changeProfessionalStatus(statusId,
