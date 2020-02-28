@@ -42,6 +42,11 @@ module.exports.custom = {
     CONNECTED: 9,
     DISCONNECTED: 10
   },
+  //SOCKET EVETS
+  SOCKET_EVENTS: {
+    NEW_CHAT_INCOME: 'newChat',
+    READER_CHANGE_STATUS: 'changeStatus'
+  },
 
   jwt: {
     secret: 'k{B^um3fzwP-68cN',

@@ -35,7 +35,9 @@ module.exports = {
       limit: 1,
       sort: 'id desc'
     })
-      .populate('chatState');
+      .populate('chatState')
+      .populate('professional')
+      .populate('customer');
     if (lastChat && lastChat.length>0) {
       return lastChat[0];
     } else {

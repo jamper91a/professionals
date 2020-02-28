@@ -4,7 +4,7 @@ module.exports = {
   friendlyName: 'Connect',
 
 
-  description: 'Connect sockets.',
+  description: 'Sockets to update the data of professionals even if user has not logged id',
 
 
   inputs: {

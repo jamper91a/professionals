@@ -7,7 +7,7 @@ class Sockets {
       console.log('Server responded with status code ' + jwr.statusCode + ' and data: ', data);
 
     });
-    io.socket.on('changeStatus', function(professional) {
+    io.socket.on(SOCKET_EVENTS.READER_CHANGE_STATUS, function(professional) {
       //Find the buttons
       const callButton1 = $(`[data-type-button="call-1-${professional.id}"]`);
       const callButton2 = $(`[data-type-button="call-2-${professional.id}"]`);
@@ -74,9 +74,20 @@ class Sockets {
 
     });
     //Socket io
-    io.socket.on('newMessage', function(data, jwr) {
-      console.log("socket: user");
-      console.log(data);
+    io.socket.on(SOCKET_EVENTS.NEW_CHAT_INCOME, function(data, jwr) {
+      Sounds.chatNotification();
+      OverHang.confirm(I.get(SOCKET_EVENTS.NEW_CHAT_INCOME),  function (answer) {
+        Sounds.stop();
+        // if(answer){
+        //   openChatWindow();
+        // } else {
+        //   // Notify that the chat was declined
+        // }
+      }, function () {
+        openChatWindow();
+      }, function () {
+
+      });
 
     });
   }

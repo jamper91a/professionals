@@ -22,13 +22,23 @@ class OverHang {
 
 
 
-  static show(type = 'success',message, closeConfirm=false, duration = 3, overlay = false){
+  static show(type = 'success',message, closeConfirm=false, duration = 3, overlay = false,
+    callback = null, callbackYes = null, callbackNo=null){
     $("body").overhang({
       type: type,
       message: message,
       closeConfirm: closeConfirm,
       duration: duration,
-      overlay: overlay
+      overlay: overlay,
+      callback: function (value) {
+        callback(value);
+      },
+      callbackYes: function () {
+        callbackYes()
+      },
+      callbackNo: function () {
+        callbackNo()
+      }
     });
   }
 
@@ -43,6 +53,10 @@ class OverHang {
   }
   static error(message, closeConfirm=false, duration = 3, overlay = false){
     this.show('error', message, closeConfirm, duration, overlay);
+  }
+
+  static confirm(message, callback, yes, no){
+    this.show('confirm', message, false, 10, true, callback, yes, no);
   }
 }
 

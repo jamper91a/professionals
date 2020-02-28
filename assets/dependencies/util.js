@@ -1,5 +1,6 @@
 $(document).ready(function () {
   I.init();
+  Sounds.init();
 });
 
 const PROFESSIONAL_STATES = {
@@ -8,6 +9,10 @@ const PROFESSIONAL_STATES = {
   JUST_CALLS:3,
   JUST_CHAT:4,
   BUSY: 5
+};
+const SOCKET_EVENTS = {
+    NEW_CHAT_INCOME: 'newChat',
+    READER_CHANGE_STATUS: 'changeStatus'
 };
 
 
@@ -19,12 +24,14 @@ function callProfessional(professionalId) {
 function chatProfessional(professionalId) {
   //alert("CHAT PROFESSIONAL: " + professionalId);
   WebServices.createChat(professionalId, function (chat) {
-    OverHang.error('Chat created' + chat.id);
+    $('#confirmChat').modal('show');
   }, function (error) {
     OverHang.error(I.get(error.exit));
   })
 }
-
+function openChatWindow(){
+  window.open('/chat', '_blank')
+}
 function changeProfessionalStatus(statusId) {
   WebServices.changeProfessionalStatus(statusId,
     function (professional) {

@@ -109,5 +109,7 @@
 	"ONLINE": "ONLINE",
 	"Current state": "Current state",
 	"JUST CALLS": "JUST CALLS",
-	"BUSY": "BUSY"
+	"BUSY": "BUSY",
+	"Confirm Chat": "Confirm Chat",
+	"Are you sure you want to start the chat?": "Are you sure you want to start the chat?"
 }
