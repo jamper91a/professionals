@@ -54,11 +54,15 @@ module.exports = {
           // const lastChatcustomer = await sails.helpers.customer.getLastChat(customer.id);
           if (lastChatcustomer === null || (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED)) {
             //Create a chat instance
+            //Create conversation for this chat
+            const conversation = await Conversation.create({messages: []}).fetch();
             const chat = await Chat.create({
               customer: customer.id,
               professional: professional.id,
-              chatState: sails.config.custom.CHAT_STATES.CREATED
+              chatState: sails.config.custom.CHAT_STATES.CREATED,
+              conversation: conversation.id
             }).fetch();
+
             return chat;
           } else {
             throw 'customerCanNotChat';
@@ -68,6 +72,7 @@ module.exports = {
         }
       }
     } catch (e) {
+      sails.log.error(e);
       throw e;
     }
   }

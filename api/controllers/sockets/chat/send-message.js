@@ -48,9 +48,14 @@ module.exports = {
       } else {
         return this.res.badRequest();
       }
+      //Save the message in the conversation
+      let conversation = chat.conversation;
+      conversation.messages.push({message, user: this.req.user.id});
+      await Conversation.updateOne({id: conversation.id}).set({messages: conversation.messages});
       await sails.helpers.socket.send('chat-' + chat.id, sails.config.custom.SOCKET_EVENTS.NEW_MESSAGE, {message, user: this.req.user.id});
       return {};
     } catch (e) {
+      sails.log.error(e);
       return e;
     }
 

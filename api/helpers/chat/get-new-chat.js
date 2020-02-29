@@ -49,7 +49,8 @@ module.exports = {
       limit: 1,
       sort: 'id desc'
     })
-      .populate('chatState');
+      .populate('chatState')
+      .populate('conversation');
     if (lastChat && lastChat.length>0) {
       lastChat = lastChat[0];
       //Check that the chat has not started yet
