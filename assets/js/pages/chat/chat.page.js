@@ -1,7 +1,8 @@
 /* eslint-disable */
 
-function newMessageChat() {
-
+function newMessageChat(msn, myId) {
+  if(myId!==msn.user)
+    addMessageReceived(msn.message);
 }
 
 function newUserConnected() {
@@ -15,22 +16,29 @@ function newUserConnected() {
   $("#chat_messages").html('');
 }
 
+function chatSentMenssage() {
+  let message = $('#chat_messageInput').val();
+  $('#chat_messageInput').val('');
+  Sockets.sendChatMessage(message);
+
+}
+
 function addMesaggeSent(msn){
   let html =
     `
     <div class="recei-mess-wrap">
 <!--        <span class="mess-time">Now</span>-->
         <div class="recei-mess__inner">
-            <div class="avatar avatar--tiny">
-                <img src="images/icon/avatar-02.jpg" alt="John Smith">
-            </div>
+<!--            <div class="avatar avatar&#45;&#45;tiny">-->
+<!--                <img src="images/icon/avatar-02.jpg" alt="John Smith">-->
+<!--            </div>-->
             <div class="recei-mess-list">
                 <div class="recei-mess">${msn}</div>
             </div>
         </div>
     </div>
     `;
-  $('#chatMessages').append(html);
+  $('#chat_messages').append(html);
 }
 
 function addMessageReceived(msn) {
@@ -44,6 +52,6 @@ function addMessageReceived(msn) {
       </div>
   </div>
   `;
-  $('#chatMessages').append(html);
+  $('#chat_messages').append(html);
 
 }

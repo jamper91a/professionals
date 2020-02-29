@@ -99,8 +99,7 @@ class Sockets {
       });
     });
     io.socket.on(SOCKET_EVENTS.NEW_MESSAGE, function(data, jwr) {
-      console.log(data);
-      newMessageChat();
+      newMessageChat(data, myId);
     });
     io.socket.on(SOCKET_EVENTS.USER_CONNECTED_CHAT, function(data, jwr) {
       console.log('USER_CONNECTED_CHAT: ', data);

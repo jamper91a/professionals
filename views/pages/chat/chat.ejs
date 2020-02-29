@@ -55,7 +55,7 @@ if (req.customer) {
                                     <%}%>
                                 </div>
                                 <div class="au-chat-textfield">
-                                    <form class="au-form-icon">
+                                    <form class="au-form-icon" onsubmit="chatSentMenssage();return false;">
                                         <input id="chat_messageInput" class="au-input au-input--full au-input--h65 form-control" type="text"
                                                placeholder="Type a message" <%=otherUserStatus==='online'?'':'disabled'%>>
                                         <button id="chat_sendButton" class="au-input-icon" <%=otherUserStatus==='online'?'':'disabled'%>>
