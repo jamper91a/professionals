@@ -14,7 +14,8 @@ const SOCKET_EVENTS = {
     NEW_CHAT_INCOME: 'newChat',
     READER_CHANGE_STATUS: 'changeStatus',
     NEW_MESSAGE: 'newMessage',
-    USER_CONNECTED_CHAT: 'userConnectedChat'
+    USER_CONNECTED_CHAT: 'userConnectedChat',
+    CHAT_FINISHED: 'chatFinished'
 };
 
 

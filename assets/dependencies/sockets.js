@@ -89,25 +89,22 @@ class Sockets {
 
   static myChat(myId){
     io.socket.get('/api/chat/subscribe', function(data, jwr) {
-      console.log("socket: chat");
-      console.log('Server responded with status code ' + jwr.statusCode + ' and data: ', data);
 
       //Notify I have connected to the chat
       io.socket.get('/api/chat/connected', {}, function (resData, jwres){
-
-        console.log(resData);
       });
     });
     io.socket.on(SOCKET_EVENTS.NEW_MESSAGE, function(data, jwr) {
       newMessageChat(data, myId);
     });
     io.socket.on(SOCKET_EVENTS.USER_CONNECTED_CHAT, function(data, jwr) {
-      console.log('USER_CONNECTED_CHAT: ', data);
-      console.log('myId: ', myId);
       if(myId!== data) {
         newUserConnected();
       }
-
+    });
+    io.socket.on(SOCKET_EVENTS.CHAT_FINISHED, function(data, jwr) {
+      console.log('CHAT_FINISHED: ', data);
+      alert('CHAT_FINISHED');
     });
   }
 

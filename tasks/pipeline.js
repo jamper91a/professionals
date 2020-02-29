@@ -66,8 +66,7 @@ var cssFilesToInject = [
 //
 var jsFilesToInject = [
 
-  // Load `sails.io` before everything else.
-  'dependencies/sails.io.js',
+
   <!-- Jquery JS-->
   'dependencies/jquery-3.4.1.min.js',
   <!-- Bootstrap JS-->
@@ -96,7 +95,9 @@ var jsFilesToInject = [
   // All of the rest of your custom client-side js files will be injected here,
   // in no particular order.  To customize the ordering, add additional items
   // here, _above_ this one.
-  'js/**/*.js'
+  'js/**/*.js',
+  // Load `sails.io` before everything else.
+  'dependencies/sails.io.js',
 ];
 
 

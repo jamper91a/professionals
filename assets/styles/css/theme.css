@@ -487,6 +487,10 @@ section {
     background: #4272d7;
 }
 
+.au-btn--red {
+  background: #fa4251;
+}
+
 .au-btn--green {
     background: #63c76a;
 }
@@ -511,24 +515,58 @@ section {
     right: 45px;
     z-index: 3;
 }
-
 .au-btn-plus i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    font-size: 15px;
-    font-weight: 500;
-    color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
 }
 
 .au-btn-plus:hover {
-    background: #59bd60;
+  background: #59bd60;
 }
+.au-btn-decline {
+  position: absolute;
+  height: 45px;
+  width: 45px;
+  background: #fa4251;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  bottom: -22.5px;
+  right: 45px;
+  z-index: 3;
+}
+.au-btn-decline i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.au-btn-decline:hover {
+  background: #fa343c;
+}
+
+
 
 .au-btn-load {
     background: #808080;

@@ -49,6 +49,7 @@ module.exports.routes = {
    */
   'POST /api/login': 'api/user/login',
   'POST /api/chat/create': 'api/chat/create',
+  'POST /api/chat/finish': 'api/chat/finish',
   'GET /api/customer/': 'api/customer/find-all',
   'GET /api/country/': 'api/country/find-all',
   'POST /api/user/ban': 'api/user/ban',

@@ -5,6 +5,14 @@ function newMessageChat(msn, myId) {
     addMessageReceived(msn.message);
 }
 
+function finishChat(){
+  WebServices.finishChat(function () {
+    // window.close();
+  }, function () {
+    console.error(e);
+  })
+}
+
 function newUserConnected() {
   //Enabled message and button area
   $("#chat_messageInput").removeAttr("disabled");

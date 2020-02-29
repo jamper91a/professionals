@@ -37,6 +37,15 @@ class WebServices {
         return success(data);
     })
   }
+  static finishChat(success, error) {
+    let url = "/api/chat/finish";
+    Api.post(url, {},function (err, data) {
+      if(err)
+        return error(err.responseJSON.data);
+      if(data)
+        return success(data);
+    })
+  }
 }
 
 

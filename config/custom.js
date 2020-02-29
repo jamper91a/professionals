@@ -35,7 +35,10 @@ module.exports.custom = {
   CHAT_STATES: {
     CREATED: 6,
     STARTED: 7,
-    FINISHED:8
+    FINISHED:8,
+    FINISHED_BY_CUSTOMER: 11,
+    FINISHED_BY_PROFESSIONAL: 12,
+    FINISHED_BY_ADMIN: 13,
   },
   //USER STATE ON CHAT
   CHAT_USER_STATE: {
@@ -47,7 +50,8 @@ module.exports.custom = {
     NEW_CHAT_INCOME: 'newChat',
     READER_CHANGE_STATUS: 'changeStatus',
     NEW_MESSAGE: 'newMessage',
-    USER_CONNECTED_CHAT: 'userConnectedChat'
+    USER_CONNECTED_CHAT: 'userConnectedChat',
+    CHAT_FINISHED: 'chatFinished'
   },
 
   jwt: {

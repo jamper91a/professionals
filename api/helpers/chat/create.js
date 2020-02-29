@@ -52,7 +52,11 @@ module.exports = {
             return null;
           });
           // const lastChatcustomer = await sails.helpers.customer.getLastChat(customer.id);
-          if (lastChatcustomer === null || (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED)) {
+          if (lastChatcustomer === null ||
+            (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED) ||
+            (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED_BY_CUSTOMER) ||
+            (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED_BY_PROFESSIONAL) ||
+            (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED_BY_ADMIN)) {
             //Create a chat instance
             //Create conversation for this chat
             const conversation = await Conversation.create({messages: []}).fetch();
