@@ -76,12 +76,8 @@ class Sockets {
     io.socket.on(SOCKET_EVENTS.NEW_CHAT_INCOME, function(data, jwr) {
       Sounds.chatNotification();
       OverHang.confirm(I.get(SOCKET_EVENTS.NEW_CHAT_INCOME),  function (answer) {
+        console.log('cb');
         Sounds.stop();
-        // if(answer){
-        //   openChatWindow();
-        // } else {
-        //   // Notify that the chat was declined
-        // }
       }, function () {
         openChatWindow();
       }, function () {

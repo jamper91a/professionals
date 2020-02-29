@@ -23,7 +23,7 @@ class OverHang {
 
 
   static show(type = 'success',message, closeConfirm=false, duration = 3, overlay = false,
-    callback = null, callbackYes = null, callbackNo=null){
+    callback = function () {}, callbackYes = function () {}, callbackNo=function () {}){
     $("body").overhang({
       type: type,
       message: message,
@@ -31,13 +31,19 @@ class OverHang {
       duration: duration,
       overlay: overlay,
       callback: function (value) {
+        console.log('cb');
         callback(value);
+        return true;
       },
       callbackYes: function () {
-        callbackYes()
+        console.log('cby');
+        callbackYes();
+        return true;
       },
       callbackNo: function () {
-        callbackNo()
+        console.log('cbn');
+        callbackNo();
+        return true;
       }
     });
   }
@@ -56,7 +62,7 @@ class OverHang {
   }
 
   static confirm(message, callback, yes, no){
-    this.show('confirm', message, false, 10, true, callback, yes, no);
+    this.show('confirm', message, false, 60, true, callback, yes, no);
   }
 }
 

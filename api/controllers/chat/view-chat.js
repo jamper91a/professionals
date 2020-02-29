@@ -27,7 +27,7 @@ module.exports = {
         //Check if the customer has not connected yet
         if (!chat.customerState) {
           //Send notification to the professional to tell him that there is a new chat request
-          await sails.helpers.socket.send('user-' + chat.professional.user, sails.config.custom.SOCKET_EVENTS.NEW_CHAT_INCOME, chat);
+          await sails.helpers.socket.send('user-' + chat.professional.user.id, sails.config.custom.SOCKET_EVENTS.NEW_CHAT_INCOME, chat);
         }
       } else if (this.req.professional) {
         userType = sails.config.custom.USER_PROFESSIONAL;

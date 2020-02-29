@@ -54,12 +54,7 @@ module.exports = {
       lastChat = lastChat[0];
       //Check that the chat has not started yet
       if(lastChat.chatState.id === sails.config.custom.CHAT_STATES.CREATED) {
-        //Update the status of the participant
-        if(inputs.customerId) {
-          await Chat.updateOne(where).set({customerState: sails.config.custom.CHAT_USER_STATE.CONNECTED});
-        } else if (inputs.professionalId) {
-          await Chat.updateOne(where).set({professionalState: sails.config.custom.CHAT_USER_STATE.CONNECTED});
-        }
+
         //Find the whole information of customer and professional
         const customer = await sails.helpers.customer.findOne(lastChat.customer);
         const professional = await sails.helpers.professional.findOne(lastChat.professional);
