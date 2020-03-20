@@ -103,8 +103,7 @@ class Sockets {
       }
     });
     io.socket.on(SOCKET_EVENTS.CHAT_FINISHED, function(data, jwr) {
-      console.log('CHAT_FINISHED: ', data);
-      alert('CHAT_FINISHED');
+      window.close();
     });
   }
 

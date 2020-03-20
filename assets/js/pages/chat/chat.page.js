@@ -7,7 +7,7 @@ function newMessageChat(msn, myId) {
 
 function finishChat(){
   WebServices.finishChat(function () {
-    // window.close();
+     window.close();
   }, function () {
     console.error(e);
   })
