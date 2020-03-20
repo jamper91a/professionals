@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require('stripe')('sk_test_KS4T2V877VxTDEYryoB0Zjmo00DDNyID7g');
 module.exports = {
 
 

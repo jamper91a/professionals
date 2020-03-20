@@ -24,7 +24,9 @@ module.exports.routes = {
   /**
    * WEB
    */
-
+  'GET /customer/historic': 'customer/view-historic',
+  'GET /customer/topUp': 'customer/view-top-up',
+  'GET /chat': 'chat/view-chat',
   'GET /register': 'customer/register/view-index',
   'POST /register': 'customer/register/view-index',
   'GET /professional/register': 'professional/view-register',
@@ -32,9 +34,6 @@ module.exports.routes = {
   'GET /user/logout': 'user/logout',
   'GET /user/login': 'user/view-login',
   'POST /user/login': 'user/view-login',
-  'GET /customer/historic': 'customer/view-historic',
-  'GET /chat': 'chat/view-chat',
-
   /**
    * Admin Views
    */

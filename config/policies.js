@@ -25,6 +25,7 @@ module.exports.policies = {
    * Customer pages
    */
   'customer/view-historic' : ['isAuthenticated','isCustomer'],
+  'customer/view-top-up' : ['isAuthenticated','isCustomer'],
 
   /**
    * Admin
