@@ -55,6 +55,7 @@ module.exports.routes = {
   'POST /api/user/ban': 'api/user/ban',
   'POST /api/user/remove': 'api/user/remove',
   'POST /api/customer': 'api/customer/create',
+  'POST /api/payment/create': 'api/payment/create',
   'POST /api/professional': 'api/professional/create',
   'POST /api/professional/changeStatus': 'api/professional/change-status',
 

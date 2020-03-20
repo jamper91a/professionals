@@ -53,6 +53,16 @@ module.exports.custom = {
     USER_CONNECTED_CHAT: 'userConnectedChat',
     CHAT_FINISHED: 'chatFinished'
   },
+  //GATEWAYS
+  GATEWAYS: {
+    STRIPE: 'STRIPE',
+    PAYPAL: 'PAYPAL'
+  },
+
+  PAYMENT_URL: {
+    SUCCESS: '/success',
+    FAIL: '/fail'
+  },
 
   jwt: {
     secret: 'k{B^um3fzwP-68cN',
