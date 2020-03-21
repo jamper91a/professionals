@@ -32,26 +32,23 @@
                 </nav>
                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                   <% data.gateways.forEach(function(gateway, index) {
+                    active = '';
                     if(index===0) {
                       active = 'active'
                     }
                     %>
 
                     <div class="tab-pane fade show <%=active%>" id="nav-<%=gateway.name%>" role="tabpanel" aria-labelledby="nav-<%=gateway.name%>-tab">
-<!--                      <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth-->
-<!--                        master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh-->
-<!--                        dreamcatcher synth. Cosby sweater eu banh mi, irure terry richardson ex sd. Alip placeat salvia cillum iphone.-->
-<!--                        Seitan alip s cardigan american apparel, butcher voluptate nisi .</p>-->
-
-                      <div class="form-check">
+                      <form id="gateway-<%=gateway.id%>" class="gatewayForm" action="javascript:buying('<%=gateway.id%>')">
+                        <div class="form-check">
                         <% data.offers[gateway.id].forEach(function(offer) { %>
-                        <div class="radio">
+                        <div id="offers-<%=gateway.id%>">
                           <label for="radio<%=offer.id%>" class="form-check-label ">
                             <input
                                     type="radio"
-                                    id="radio<%=offer.id%>"
-                                    name="radios"
-                                    value="option<%=offer.id%>"
+                                    id="<%=offer.id%>"
+                                    name="offers-<%=gateway.id%>"
+                                    value="<%=offer.id%>"
                                     class="form-check-input">
                             <%=offer.amount%> <%=offer.domain.currency.symbol%>
                             <%if(offer.bonus && offer.bonus>0){%>
@@ -60,23 +57,18 @@
                           </label>
                         </div>
                           <% }); %>
-
+                        <div>
+                          <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                            <i class="fa fa-lock fa-lg"></i>&nbsp;
+                            <span id="payment-button-amount">Pay</span>
+                            <!--                            <span id="payment-button-sending" style="display:none;">Sending…</span>-->
+                          </button>
+                        </div>
                       </div>
+                      </form>
                     </div>
                   <% }); %>
 
-<!--                  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">-->
-<!--                    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth-->
-<!--                      master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh-->
-<!--                      dreamcatcher synth. Cosby sweater eu banh mi, irure terry richardson ex sd. Alip placeat salvia cillum iphone.-->
-<!--                      Seitan alip s cardigan american apparel, butcher voluptate nisi .</p>-->
-<!--                  </div>-->
-<!--                  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">-->
-<!--                    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth-->
-<!--                      master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh-->
-<!--                      dreamcatcher synth. Cosby sweater eu banh mi, irure terry richardson ex sd. Alip placeat salvia cillum iphone.-->
-<!--                      Seitan alip s cardigan american apparel, butcher voluptate nisi .</p>-->
-<!--                  </div>-->
                 </div>
 
               </div>

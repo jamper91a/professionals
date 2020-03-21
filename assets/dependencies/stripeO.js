@@ -1,11 +1,20 @@
-class Stripe {
+class StripeO {
 
   static init(){
+    console.log('initStripe');
     this.stripe =  new Stripe(window.SAILS_LOCALS.STRIPE);
   }
-  static redirect(sessionId, cb){
+
+  static getStripe(){
     if(this.stripe) {
-      this.stripe.redirectToCheckout({
+      return this.stripe;
+    } else {
+      this.stripe =  new Stripe(window.SAILS_LOCALS.STRIPE);
+      return this.stripe;
+    }
+  }
+  static redirect(sessionId, cb){
+      this.getStripe().redirectToCheckout({
         sessionId: sessionId
       }).then(function (result) {
         // If `redirectToCheckout` fails due to a browser or network
@@ -13,9 +22,6 @@ class Stripe {
         // using `result.error.message`.
         cb(result);
       });
-    } else {
-      throw 'Stripe not init';
-    }
   }
 
 

@@ -46,6 +46,16 @@ class WebServices {
         return success(data);
     })
   }
+
+  static createPayment(offerId, success, error) {
+    let url = "/api/payment/create";
+    Api.post(url, {offerId},function (err, data) {
+      if(err)
+        return error(err.responseJSON.data);
+      if(data)
+        return success(data);
+    })
+  }
 }
 
 
