@@ -80,5 +80,10 @@ module.exports.custom = {
   },
   twilio:{
     service_id: 'IS0872b122d1d64804ab94877961b169ee'
+  },
+
+  STRIPE: {
+    PUBLIC: 'pk_test_jL5O5x8MhXW1TJuhoNxY3TLu00VhZo5Awb',
+    SECRET: 'sk_test_KS4T2V877VxTDEYryoB0Zjmo00DDNyID7g'
   }
 };

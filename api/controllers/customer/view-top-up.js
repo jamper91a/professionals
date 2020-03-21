@@ -18,13 +18,16 @@ module.exports = {
 
   fn: async function () {
     try {
-      const offers = await sails.helpers.offer.getByCurrentDomain(this.req.hostname);
-      console.log(offers);
+      const data = await sails.helpers.offer.getByCurrentDomain(this.req.hostname);
+      return {
+        data,
+        STRIPE: sails.config.custom.STRIPE.PUBLIC
+      };
     } catch (e) {
       console.error(e);
+      throw e;
     }
-    // Respond with view.
-    return {};
+
 
   }
 

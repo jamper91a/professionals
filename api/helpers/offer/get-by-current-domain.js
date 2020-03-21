@@ -40,11 +40,15 @@ module.exports = {
       }, {});
 
     const groupByGateway = groupBy('gateway');
-    const domain = await Domain.findOne({domain: domainName});
+    const domain = await Domain.findOne({domain: domainName}).populate('currency');
+    const gateways = await Gateway.find({});
     if(domain) {
       const offers = await Offer.find({domain: domain.id, active: 1});
       if(offers && offers.length>0) {
-        return groupByGateway(offers);
+        offers.forEach(function (offer) {
+          offer.domain = domain;
+        });
+        return {offers: groupByGateway(offers), gateways: gateways};
       } else {
         throw 'noOffers';
       }
