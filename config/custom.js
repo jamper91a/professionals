@@ -64,6 +64,13 @@ module.exports.custom = {
     FAIL: '/fail'
   },
 
+  PAYMENT_STATE: {
+    CREATED: 'CREATED',
+    PROCESSING: 'PROCESSING',
+    FINISHED: 'FINISHED',
+    DENIED: 'DENIED'
+  },
+
   jwt: {
     secret: 'k{B^um3fzwP-68cN',
     options: {
@@ -84,6 +91,9 @@ module.exports.custom = {
 
   STRIPE: {
     PUBLIC: 'pk_test_jL5O5x8MhXW1TJuhoNxY3TLu00VhZo5Awb',
-    SECRET: 'sk_test_KS4T2V877VxTDEYryoB0Zjmo00DDNyID7g'
+    SECRET: 'sk_test_KS4T2V877VxTDEYryoB0Zjmo00DDNyID7g',
+    WEBHOOKS:{
+      SIGNATURE: 'whsec_BF1VDRnAZUmLXCrewWPEiGuPt24YOy3n'
+    }
   }
 };

@@ -7,9 +7,7 @@ class I {
     //  Load the JSON File
     $.ajax("/dependencies/i18n/english.json").done(function (text) {
       //  Set the data
-      console.log('text', text);
       self.en = i18n.create(text);
-      console.log(self.en);
     });
     //Get default language
     this.userLang = localStorage.getItem('userLang');

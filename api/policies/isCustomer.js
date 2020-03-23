@@ -14,6 +14,6 @@ module.exports = (req, res, next) => {
     return res.forbidden();
   }
   // otherwise if this is an HTML-wanting browser, do a redirect.
-  return res.redirect('/admin/login');
+  return res.redirect('/user/login');
 
 };

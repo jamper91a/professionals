@@ -46,6 +46,7 @@ module.exports.policies = {
   'api/professional/*': ['isAuthenticated', 'isAdmin'],
   'api/professional/create': true,
   'api/professional/change-status': ['isAuthenticated', 'isProfessional'],
+  'api/payment/webhook/*': true,
 
   /**
    * Sockets

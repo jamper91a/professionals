@@ -13,8 +13,20 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     state: {
-      type: 'number',
+      type: 'string',
       required: true
+    },
+    stripe: {
+      type: 'string',
+      required: false
+    },
+    paypal: {
+      type: 'string',
+      required: false
+    },
+    information: {
+      type: 'json',
+      required: false
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

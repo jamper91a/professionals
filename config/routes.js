@@ -57,6 +57,7 @@ module.exports.routes = {
   'POST /api/payment/create': 'api/payment/create',
   'POST /api/professional': 'api/professional/create',
   'POST /api/professional/changeStatus': 'api/professional/change-status',
+  'POST /api/payment/stripe': 'api/payment/webhook/stripe',
 
   /**
    * Sockets

@@ -13,6 +13,7 @@ $(document).ready(function() {
     homeCountry = parseInt($(this).find("option:selected").attr('value'));
     reloadProfessionals();
   });
+  checkPayment();
 });
 
 function reloadProfessionals() {
@@ -22,6 +23,21 @@ function reloadProfessionals() {
       // eslint-disable-next-line no-undef
       $('#professionals').html(data);
   });
+}
+
+function checkPayment() {
+  console.log('checking payments');
+  const parameters = getUrlVars();
+  console.log(parameters);
+  if(parameters['gateway']==='stripe') {
+    if(parameters['result']==='success') {
+      const sessionId = parameters ['session_id'];
+      Toast.success(I.get('TOP_UP_SUCCESSFUL'));
+    } else if (parameters['result']==='fail') {
+      Toast.success(I.get('TOP_UP_FAIL'));
+    }
+  }
+
 }
 
 

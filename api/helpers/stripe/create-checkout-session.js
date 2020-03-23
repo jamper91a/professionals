@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_KS4T2V877VxTDEYryoB0Zjmo00DDNyID7g');
+const stripe = require('stripe')(sails.config.custom.STRIPE.SECRET);
 module.exports = {
 
 
