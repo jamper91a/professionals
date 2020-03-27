@@ -1,12 +1,26 @@
 /* eslint-disable */
 
+
+
+function chatStarTimer(seconds, chatId){
+
+  var timerInstance = new easytimer.Timer();
+  timerInstance.start({target: {seconds: seconds}});
+  timerInstance.addEventListener('secondsUpdated', function (e) {
+    $('#basicUsage').html(timerInstance.getTimeValues().toString());
+  });
+  timerInstance.addEventListener('targetAchieved', function (e) {
+    finishChat(chatId, true);
+  });
+}
+
 function newMessageChat(msn, myId) {
   if(myId!==msn.user)
     addMessageReceived(msn.message);
 }
 
-function finishChat(){
-  WebServices.finishChat(function () {
+function finishChat(chatId, overTime){
+  WebServices.finishChat(chatId, overTime,function () {
      window.close();
   }, function () {
     console.error(e);

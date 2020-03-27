@@ -1,3 +1,4 @@
+
 module.exports = {
 
 
@@ -41,7 +42,7 @@ module.exports = {
     //Check customer and professional exists
     try {
       const customer = await Customer.findOne({id: inputs.customerId});
-      const professional = await Professional.findOne({id: inputs.professionalId}).populate('state');
+      const professional = await Professional.findOne({id: inputs.professionalId}).populate('state').populate('rate');
       if (customer && professional) {
         //Check professional is available to chat
         if (professional.state.id === sails.config.custom.PROFESSIONAL_STATES.ONLINE ||
@@ -53,21 +54,25 @@ module.exports = {
           });
           // const lastChatcustomer = await sails.helpers.customer.getLastChat(customer.id);
           if (lastChatcustomer === null ||
-            (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED) ||
-            (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED_BY_CUSTOMER) ||
-            (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED_BY_PROFESSIONAL) ||
-            (lastChatcustomer && lastChatcustomer.chatState.id === sails.config.custom.CHAT_STATES.FINISHED_BY_ADMIN)) {
-            //Create a chat instance
-            //Create conversation for this chat
-            const conversation = await Conversation.create({messages: []}).fetch();
-            const chat = await Chat.create({
-              customer: customer.id,
-              professional: professional.id,
-              chatState: sails.config.custom.CHAT_STATES.CREATED,
-              conversation: conversation.id
-            }).fetch();
-
-            return chat;
+            (lastChatcustomer && lastChatcustomer.chatState.id !== sails.config.custom.CHAT_STATES.STARTED)) {
+            //Validate customer has enougth founds to start the chat
+            if(customer.balance>= professional.rate.chat) {
+              //Check how much time the customer can chat
+              const maxTime = ((customer.balance / professional.rate.chat) * 60)+ (customer.balance % professional.rate.chat);
+              //Create conversation for this chat
+              const conversation = await Conversation.create({messages: []}).fetch();
+              //Create a chat instance
+              const chat = await Chat.create({
+                customer: customer.id,
+                professional: professional.id,
+                chatState: sails.config.custom.CHAT_STATES.CREATED,
+                conversation: conversation.id,
+                maxDuration: maxTime
+              }).fetch();
+              return chat;
+            } else {
+              throw 'customerNotFounds';
+            }
           } else {
             throw 'customerCanNotChat';
           }

@@ -1,3 +1,4 @@
+const moment = require('moment');
 module.exports = {
 
 
@@ -34,8 +35,9 @@ module.exports = {
       if (!this.req.isSocket) {
         return this.res.badRequest();
       }
-      let chat, type;
+      let chat, role;
       if (this.req.customer) {
+        role = sails.config.custom.USER_CUSTOMER;
         //Find the chat to join
         chat = await sails.helpers.chat.getNewChat(this.req.customer.id, undefined);
         await Chat.updateOne({id: chat.id}).set({customerState: sails.config.custom.CHAT_USER_STATE.CONNECTED});
@@ -44,13 +46,27 @@ module.exports = {
           await sails.helpers.socket.send('user-' + chat.professional.user.id, sails.config.custom.SOCKET_EVENTS.NEW_CHAT_INCOME, chat);
         }
       } else if (this.req.professional) {
+        role = sails.config.custom.USER_PROFESSIONAL;
         //Find the chat to join
         chat = await sails.helpers.chat.getNewChat(undefined, this.req.professional.id);
         await Chat.updateOne({id: chat.id}).set({professionalState: sails.config.custom.CHAT_USER_STATE.CONNECTED});
       } else {
         return this.res.badRequest();
       }
-      await sails.helpers.socket.send('chat-' + chat.id, sails.config.custom.SOCKET_EVENTS.USER_CONNECTED_CHAT, this.req.user.id);
+
+      //Check if both users connected, to set the start time
+      chat = await Chat.findOne({id:chat.id});
+      if(chat.professionalState === sails.config.custom.CHAT_USER_STATE.CONNECTED &&  chat.customerState === sails.config.custom.CHAT_USER_STATE.CONNECTED) {
+        const startTime = moment().format('YYYY-MM-DD HH:mm:ss');
+        await Chat.updateOne({id: chat.id}).set({startTime: startTime});
+      }
+      await sails.helpers.socket.send('chat-' + chat.id, sails.config.custom.SOCKET_EVENTS.USER_CONNECTED_CHAT,
+        {
+          userId: this.req.user.id,
+          role: role,
+          maxDuration: chat.maxDuration,
+          chatId: chat.id
+        });
       return {};
     } catch (e) {
       return e;

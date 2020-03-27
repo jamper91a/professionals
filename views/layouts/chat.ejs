@@ -73,7 +73,6 @@
   </div>
 
 
-
     <!--SCRIPTS-->
     <script src="/dependencies/jquery-3.4.1.min.js"></script>
     <script src="/dependencies/vendor/bootstrap-4.1/popper.min.js"></script>
@@ -91,6 +90,7 @@
     <script src="/dependencies/main.js"></script>
     <script src="/dependencies/i18n/I.js"></script>
     <script src="/dependencies/api.js"></script>
+    <script src="/dependencies/easytimer/easytimer.min.js"></script>
     <script src="/dependencies/i18n/i18n.min.js"></script>
     <script src="/dependencies/ion.sound-3.0.7/ion.sound.js"></script>
     <script src="/dependencies/ion.sound-3.0.7/ion.sound.min.js"></script>
@@ -119,10 +119,10 @@
     <script src="/js/pages/professional/register.page.js"></script>
     <script src="/js/pages/user/login.page.js"></script>
     <!--SCRIPTS END-->
-      <script src="/dependencies/sails.io.js"></script>
-      <script>
-        io.sails.reconnection = true;
-      </script>
+    <script src="/dependencies/sails.io.js"></script>
+    <script>
+      io.sails.reconnection = true;
+    </script>
   <!--Script to connect to the socket-->
   <%if(req.user){%>
     <script>
@@ -130,6 +130,7 @@
         Sockets.mySocket();
         Sockets.myChat(<%=req.user.id%>);
     </script>
+
   <%}%>
 
   </body>

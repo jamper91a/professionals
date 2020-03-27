@@ -98,8 +98,12 @@ class Sockets {
       newMessageChat(data, myId);
     });
     io.socket.on(SOCKET_EVENTS.USER_CONNECTED_CHAT, function(data, jwr) {
-      if(myId!== data) {
+      if(myId!== data.userId) {
         newUserConnected();
+        chatStarTimer(data.duration, data.chatId);
+      }
+      if(data.role === USER_ROLE.PROFESSIONAL) {
+        chatStarTimer(data.maxDuration, data.chatId);
       }
     });
     io.socket.on(SOCKET_EVENTS.CHAT_FINISHED, function(data, jwr) {

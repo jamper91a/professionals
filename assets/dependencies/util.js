@@ -9,6 +9,10 @@ const PROFESSIONAL_STATES = {
   JUST_CALLS:3,
   JUST_CHAT:4,
   BUSY: 5
+};const USER_ROLE = {
+  ADMIN: 1,
+  CUSTOMER: 2,
+  PROFESSIONAL: 3,
 };
 const SOCKET_EVENTS = {
     NEW_CHAT_INCOME: 'newChat',
@@ -25,7 +29,6 @@ function callProfessional(professionalId) {
   alert("CALL PROFESSIONAL: " + professionalId)
 }
 function chatProfessional(professionalId) {
-  //alert("CHAT PROFESSIONAL: " + professionalId);
   WebServices.createChat(professionalId, function (chat) {
     $('#confirmChat').modal('show');
   }, function (error) {

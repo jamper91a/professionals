@@ -37,9 +37,9 @@ class WebServices {
         return success(data);
     })
   }
-  static finishChat(success, error) {
+  static finishChat(chatId, overTime, success, error) {
     let url = "/api/chat/finish";
-    Api.post(url, {},function (err, data) {
+    Api.post(url, {chatId, overTime},function (err, data) {
       if(err)
         return error(err.responseJSON.data);
       if(data)

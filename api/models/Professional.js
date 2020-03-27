@@ -19,6 +19,10 @@ module.exports = {
     score: {
       type: "number"
     },
+    balance: {
+      type: 'number',
+      defaultsTo: 0
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

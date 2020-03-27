@@ -14,10 +14,23 @@ module.exports = {
     duration:{
       type: "number"
     },
-    paid: {
+    maxDuration:{
       type: "number"
     },
-
+    paid: {
+      type: "boolean"
+    },
+    startTime:{
+      type: "ref",
+      columnType: 'datetime'
+    },
+    finishTime:{
+      type: "ref",
+      columnType: 'datetime'
+    },
+    cost: {
+      type: "number"
+    },
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
