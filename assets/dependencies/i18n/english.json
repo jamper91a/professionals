@@ -6,6 +6,7 @@
     "PROFESSIONAL_STATES_JUST_CALLS": "JUST CALLS",
     "PROFESSIONAL_STATES_JUST_CHATS": "JUST CHAT",
     "PROFESSIONAL_STATES_BUSY": "BUSY",
-    "customerCanNotChat": "You have not finished your previous chat"
+    "customerCanNotChat": "You have not finished your previous chat",
+    "TOP_UP_SUCCESSFUL": "Funds added to your account"
   }
 }

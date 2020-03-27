@@ -37,31 +37,42 @@
                       active = 'active'
                     }
                     %>
-
                     <div class="tab-pane fade show <%=active%>" id="nav-<%=gateway.name%>" role="tabpanel" aria-labelledby="nav-<%=gateway.name%>-tab">
+                      <%=__('Description '+ gateway.name)%>
                       <form id="gateway-<%=gateway.id%>" class="gatewayForm" action="javascript:buying('<%=gateway.id%>')">
                         <div class="form-check">
+                          <div class="section over-hide z-bigger">
+                            <div class="section over-hide z-bigger">
+                              <div class="container pb-5">
+                                <div class="row justify-content-center pb-5">
+                                  <div class="col-xl-10 pb-5">
                         <% data.offers[gateway.id].forEach(function(offer) { %>
-                        <div id="offers-<%=gateway.id%>">
-                          <label for="radio<%=offer.id%>" class="form-check-label ">
-                            <input
-                                    type="radio"
-                                    id="<%=offer.id%>"
-                                    name="offers-<%=gateway.id%>"
-                                    value="<%=offer.id%>"
-                                    class="form-check-input">
-                            <%=offer.amount%> <%=offer.domain.currency.symbol%>
-                            <%if(offer.bonus && offer.bonus>0){%>
-                            (<%=offer.bonus%> <%=offer.domain.currency.symbol%> offer)
-                            <%}%>
-                          </label>
-                        </div>
+<!--                        <div id="offers-<%=gateway.id%>">-->
+
+                                    <input
+                                            type="radio"
+                                            id="<%=offer.id%>"
+                                            name="offers-<%=gateway.id%>"
+                                            value="<%=offer.id%>"
+                                            class="checkbox-budget">
+                                    <label for="<%=offer.id%>" class="for-checkbox-budget">
+                                      <span data-hover="<%=offer.amount%><%=offer.domain.currency.symbol%>"><%=offer.amount%><%=offer.domain.currency.symbol%></span>
+<!--                                      <%if(offer.bonus && offer.bonus>0){%>-->
+<!--                                      <small>( + <%=offer.bonus%> free)</small>-->
+<!--                                      <%}%>-->
+                                    </label>
+
+<!--                        </div>-->
                           <% }); %>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         <div>
-                          <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                          <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block btn-primary">
                             <i class="fa fa-lock fa-lg"></i>&nbsp;
                             <span id="payment-button-amount">Pay</span>
-                            <!--                            <span id="payment-button-sending" style="display:none;">Sending…</span>-->
                           </button>
                         </div>
                       </div>
@@ -76,6 +87,11 @@
           </div>
         </div>
         <!-- /# column -->
+      </div>
+
+      <div class="row">
+
+
       </div>
     </div>
 

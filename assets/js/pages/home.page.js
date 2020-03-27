@@ -26,9 +26,7 @@ function reloadProfessionals() {
 }
 
 function checkPayment() {
-  console.log('checking payments');
   const parameters = getUrlVars();
-  console.log(parameters);
   if(parameters['gateway']==='stripe') {
     if(parameters['result']==='success') {
       const sessionId = parameters ['session_id'];

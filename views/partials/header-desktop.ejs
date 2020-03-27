@@ -181,43 +181,16 @@
                     </div>
                 </div>
                 <%}%>
-                <div class="header-button-item js-item-menu">
-                    <i class="zmdi zmdi-settings"></i>
-                    <div class="setting-dropdown js-dropdown">
-                        <div class="account-dropdown__body">
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-account"></i><%=__('Account')%></a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-settings"></i><%=__('Setting')%></a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-money-box"></i><%=__('Billing')%></a>
-                            </div>
-                        </div>
-                        <div class="account-dropdown__body">
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-globe"></i><%=__('Language')%></a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-pin"></i><%=__('Location')%></a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-email"></i>Email</a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-notifications"></i>Notifications</a>
-                            </div>
-                        </div>
-                    </div>
+                <%if(req.customer){%>
+                <div class="noti__item js-item-menu">
+                    <p class="btn btn-outline-primary btn-sm disabled">
+                        <%=__('Funds')%>: $<%=req.customer.balance%>
+                    </p>
+                    <button class="btn btn-primary btn-sm" onclick="window.location.href ='customer/topUp'">
+                        <%=__('Add funds')%>
+                    </button>
                 </div>
+                <%}%>
                 <div class="account-wrap">
                     <div class="account-item account-item--style2 clearfix js-item-menu">
                         <div class="image">

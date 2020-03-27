@@ -29,10 +29,7 @@ module.exports = {
       const payment = await Payment.updateOne({stripe: session.id}).set({state: sails.config.custom.PAYMENT_STATE.FINISHED});
       //Add the fund to the customer
       const customer = await Customer.findOne({user: payment.user});
-      console.log(customer);
       const offer = await Offer.findOne({id: payment.offer});
-      console.log(offer);
-      console.log( (customer.balance + offer.amount + offer.bonus));
       await Customer.updateOne({id: customer.id}).set({balance: (customer.balance + offer.amount + offer.bonus)});
       return {};
     } catch (e) {

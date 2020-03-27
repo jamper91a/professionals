@@ -63,7 +63,6 @@ module.exports.http = {
 
       // Create and return the middleware function
       return function(req, res, next) {
-        sails.log.debug(req.headers);
         if (req.headers && req.headers['stripe-signature']) {
           // sails.log.info('request using raw parser middleware');
           return rawParser(req, res, next);

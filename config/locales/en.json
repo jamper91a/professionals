@@ -111,5 +111,9 @@
 	"JUST CALLS": "JUST CALLS",
 	"BUSY": "BUSY",
 	"Confirm Chat": "Confirm Chat",
-	"Are you sure you want to start the chat?": "Are you sure you want to start the chat?"
+	"Are you sure you want to start the chat?": "Are you sure you want to start the chat?",
+	"Funds": "Funds",
+	"Add funds": "Add funds",
+	"Description STRIPE": "Add fund using your Credit card or debit card",
+	"Description PAYPAL": "Add funds using your Paypal account"
 }
