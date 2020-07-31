@@ -21,7 +21,8 @@ module.exports = {
     },
     balance: {
       type: 'number',
-      defaultsTo: 0
+      defaultsTo: 0,
+      allowNull: true
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

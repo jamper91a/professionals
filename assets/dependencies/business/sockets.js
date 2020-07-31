@@ -73,9 +73,9 @@ class Sockets {
 
     });
     //Socket io
-    io.socket.on(SOCKET_EVENTS.NEW_CHAT_INCOME, function(data, jwr) {
+    io.socket.on(SOCKET_EVENTS.NEW_CHAT_INCOME, async function(data, jwr) {
       Sounds.chatNotification();
-      OverHang.confirm(I.get(SOCKET_EVENTS.NEW_CHAT_INCOME),  function (answer) {
+      OverHang.confirm(await I.get(SOCKET_EVENTS.NEW_CHAT_INCOME),  function (answer) {
         console.log('cb');
         Sounds.stop();
       }, function () {

@@ -156,7 +156,12 @@
     -->
 
     <!--SCRIPTS-->
-    <script src="/dependencies/jquery-3.4.1.min.js"></script>
+    <script src="/dependencies/required/sails.io.js"></script>
+    <script src="/dependencies/required/lodash.js"></script>
+    <script src="/dependencies/required/bowser.js"></script>
+    <script src="/dependencies/required/vue.js"></script>
+    <script src="/dependencies/required/parasails.js"></script>
+    <script src="/dependencies/required/jquery-3.4.1.min.js"></script>
     <script src="/dependencies/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="/dependencies/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <script src="/dependencies/vendor/slick/slick.min.js"></script>
@@ -169,25 +174,21 @@
     <script src="/dependencies/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/dependencies/vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="/dependencies/vendor/select2/select2.min.js"></script>
-    <script src="/dependencies/main.js"></script>
+    <script src="/dependencies/plugins/overhang.min.js"></script>
+    <script src="/dependencies/plugins/toastr.min.js"></script>
     <script src="/dependencies/i18n/I.js"></script>
-    <script src="/dependencies/api.js"></script>
-    <script src="/dependencies/easytimer/easytimer.min.js"></script>
     <script src="/dependencies/i18n/i18n.min.js"></script>
     <script src="/dependencies/ion.sound-3.0.7/ion.sound.js"></script>
     <script src="/dependencies/ion.sound-3.0.7/ion.sound.min.js"></script>
     <script src="/dependencies/ion.sound-3.0.7/Sounds.js"></script>
-    <script src="/dependencies/jquery-ui.min.js"></script>
-    <script src="/dependencies/OverHang.js"></script>
-    <script src="/dependencies/overhang.min.js"></script>
-    <script src="/dependencies/sails.io.js"></script>
-    <script src="/dependencies/sockets.js"></script>
-    <script src="/dependencies/stripeO.js"></script>
-    <script src="/dependencies/toast.js"></script>
-    <script src="/dependencies/toastr.min.js"></script>
-    <script src="/dependencies/util.js"></script>
-    <script src="/dependencies/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/dependencies/webServices.js"></script>
+    <script src="/dependencies/main.js"></script>
+    <script src="/dependencies/business/api.js"></script>
+    <script src="/dependencies/business/OverHang.js"></script>
+    <script src="/dependencies/business/sockets.js"></script>
+    <script src="/dependencies/business/stripeO.js"></script>
+    <script src="/dependencies/business/toast.js"></script>
+    <script src="/dependencies/business/util.js"></script>
+    <script src="/dependencies/business/webServices.js"></script>
     <script src="/js/pages/admin/customer/all.page.js"></script>
     <script src="/js/pages/admin/index.page.js"></script>
     <script src="/js/pages/admin/login.page.js"></script>
@@ -199,9 +200,9 @@
     <script src="/js/pages/home.page.js"></script>
     <script src="/js/pages/partial-view/professionals-home.page.js"></script>
     <script src="/js/pages/professional/register.page.js"></script>
+    <script src="/js/pages/test.page.js"></script>
     <script src="/js/pages/user/login.page.js"></script>
     <!--SCRIPTS END-->
-  <script src="/dependencies/sails.io.js"></script>
   <script>
     var disconnected= false;
     io.sails.reconnection = true;
