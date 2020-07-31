@@ -17,7 +17,6 @@ parasails.registerPage('admin-professionals-all', {
     _.extend(this, SAILS_LOCALS);
   },
   mounted: async function() {
-    console.log(this.professionals[0].user.id, this.professionals[0].user.banned);
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
