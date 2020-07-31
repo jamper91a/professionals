@@ -58,11 +58,12 @@ module.exports = {
             score: 5,
             profession: inputs.profession,
             rate: inputs.rate,
-            state: sails.config.custom.PROFESSIONAL_STATES.OFFLINE2,
+            state: sails.config.custom.PROFESSIONAL_STATES.OFFLINE,
             user: newUser.id
           };
           try {
-            const newProfessional = await Professional.create(professional).fetch().usingConnection(db);
+            let newProfessional = await Professional.create(professional).fetch().usingConnection(db);
+            newProfessional.user = newUser;
             if(newProfessional){
               return  newProfessional;
             }else{

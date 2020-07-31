@@ -119,13 +119,17 @@ const _onJwtStrategyAuth = async (req, payload, next) => {
       const user = await User.findOne({id: payload.user.id});
       if(user){
         payload.user = user;
-        if(payload.professional) {
+        if(payload.professional && payload.professional.id) {
           const professional = await Professional.findOne({id: payload.professional.id}).populate('state');
           payload.professional = professional;
+        } else {
+          payload.professional = null;
         }
-        if(payload.customer){
+        if(payload.customer && payload.customer.id){
           const customer = await Customer.findOne({id: payload.customer.id});
           payload.customer = customer;
+        } else {
+          payload.customer = null;
         }
           return next(null, payload, {});
       }else{

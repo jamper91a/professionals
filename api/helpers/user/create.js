@@ -39,7 +39,8 @@ module.exports = {
     },
     db: {
       type: 'ref',
-      required: true
+      required: false,
+      defaultsTo: null
     }
   },
 
@@ -58,11 +59,14 @@ module.exports = {
   fn: async function (inputs, exits) {
 
     return await sails.getDatastore()
-      .transaction(async ()=> {
+      .transaction(async (db)=> {
 
         try {
           if(inputs.password === inputs.password2){
-            const dbConnection = inputs.db;
+            let dbConnection = inputs.db;
+            if(!dbConnection) {
+              dbConnection =db;
+            }
             delete inputs.password2;
             delete inputs.db;
             var user = await User.create(inputs).fetch().usingConnection(dbConnection);

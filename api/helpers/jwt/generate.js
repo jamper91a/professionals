@@ -15,11 +15,11 @@ module.exports = {
     },
     customer: {
       type: "ref",
-      default: {}
+      default: null
     },
     professional: {
       type: "ref",
-      default: {}
+      default: null
     }
   },
 
