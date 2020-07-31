@@ -1,24 +1,24 @@
 <%
-var userName = '', otherUserName = '';
-var otherUserStatus = 'online';
-if (req.customer) {
-    otherUserName = chat.professional.user.name;
-    if(!chat.professionalState) {
-        otherUserStatus = 'offline';
-    }
-}else if(req.professional) {
-    otherUserName = chat.customer.user.name;
-    if(!chat.customerState) {
-        otherUserStatus = 'offline';
-    }
-}
+// var userName = '', otherUserName = '';
+// var otherUserStatus = 'online';
+// if (req.customer) {
+//     otherUserName = chat.professional.user.name;
+//     if(!chat.professionalState) {
+//         otherUserStatus = 'offline';
+//     }
+// }else if(req.professional) {
+//     otherUserName = chat.customer.user.name;
+//     if(!chat.customerState) {
+//         otherUserStatus = 'offline';
+//     }
+// }
 %>
 <%if(req.professional){%>
-    <script>
-      chatStarTimer(<%=chat.maxDuration%>);
-    </script>
+<!--    <script>-->
+<!--      chatStarTimer(<%=chat.maxDuration%>);-->
+<!--    </script>-->
 <%}%>
-<div class="main-content">
+<div id="chat-page" class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div class="row">
@@ -28,7 +28,7 @@ if (req.customer) {
                             <div class="bg-overlay bg-overlay--blue"></div>
                             <h3>
                                 <i class="zmdi zmdi-comment-text"></i>Chat</h3>
-                            <button class="au-btn-decline" onclick="finishChat(0, false)">
+                            <button class="au-btn-decline" @click="finishChat(0, false)">
                                 <i class="zmdi zmdi-close"></i>
                             </button>
                         </div>
@@ -36,21 +36,21 @@ if (req.customer) {
                             <div class="au-chat au-chat--border">
                                 <div class="au-chat__title">
                                     <div class="au-chat-info">
-                                        <div id="chat_otherUserAvatar" class="avatar-wrap <%=otherUserStatus%>">
+                                        <div id="chat_otherUserAvatar" class="avatar-wrap" v-bind:class="{ online: otherUserStatus}">
                                             <div class="avatar avatar--small">
                                                 <img src="/images/icon/avatar-02.jpg" alt="John Smith">
                                             </div>
                                         </div>
                                         <span class="nick">
 
-                                            <a href="#"><%=otherUserName%></a>
+                                            <a href="#">{{otherUserName}} {{otherUserStatus}}</a>
                                             <div id="basicUsage">00:00:00</div>
                                         </span>
                                     </div>
                                 </div>
                                 <div id="chat_messages" class="au-chat__content au-chat__content2 js-scrollbar5">
-                                    <% if(otherUserStatus === 'offline') {%>
-                                    <div class="recei-mess-wrap">
+
+                                    <div class="recei-mess-wrap" v-if="otherUserStatus === 'offline'">
                                         <span class="mess-time">Now</span>
                                         <div class="recei-mess__inner">
                                             <div class="avatar avatar--tiny">
@@ -61,13 +61,12 @@ if (req.customer) {
                                             </div>
                                         </div>
                                     </div>
-                                    <%}%>
                                 </div>
                                 <div class="au-chat-textfield">
-                                    <form class="au-form-icon" onsubmit="chatSentMenssage();return false;">
+                                    <form class="au-form-icon" @submit.prevent="chatSentMenssage()">
                                         <input id="chat_messageInput" class="au-input au-input--full au-input--h65 form-control" type="text"
-                                               placeholder="Type a message" <%=otherUserStatus==='online'?'':'disabled'%>>
-                                        <button id="chat_sendButton" class="au-input-icon" <%=otherUserStatus==='online'?'':'disabled'%>>
+                                               placeholder="Type a message" @disable="otherUserStatus==='online'">
+                                        <button id="chat_sendButton" class="au-input-icon" @disable="otherUserStatus==='online'">
                                             <i class="zmdi zmdi-camera"></i>
                                         </button>
                                     </form>
@@ -80,3 +79,4 @@ if (req.customer) {
         </div>
     </div>
 </div>
+<%- exposeLocalsToBrowser() %>

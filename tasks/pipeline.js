@@ -77,6 +77,7 @@ var jsFilesToInject = [
   'dependencies/required/parasails.js',
   <!-- Jquery JS-->
   'dependencies/required/jquery-3.4.1.min.js',
+  'dependencies/required/jquery-ui.min.js',
   <!-- Bootstrap JS-->
   'dependencies/vendor/bootstrap-4.1/popper.min.js',
   'dependencies/vendor/bootstrap-4.1/bootstrap.min.js',

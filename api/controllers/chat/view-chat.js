@@ -23,8 +23,10 @@ module.exports = {
       if (this.req.customer) {
         //Find the chat that the user created previously
         chat = await sails.helpers.chat.getNewChat(this.req.customer.id, undefined);
+        chat.userType = sails.config.custom.USER_CUSTOMER;
       } else if (this.req.professional) {
         chat = await sails.helpers.chat.getNewChat(undefined, this.req.professional.id);
+        chat.userType = sails.config.custom.USER_PROFESSIONAL;
       } else {
         throw  'notAuthorized';
       }

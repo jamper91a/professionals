@@ -88,6 +88,7 @@ class Sockets {
   }
 
   static myChat(myId){
+    console.log('mychat', myId);
     io.socket.get('/api/chat/subscribe', function(data, jwr) {
 
       //Notify I have connected to the chat
@@ -95,25 +96,34 @@ class Sockets {
       });
     });
     io.socket.on(SOCKET_EVENTS.NEW_MESSAGE, function(data, jwr) {
-      newMessageChat(data, myId);
+      console.log('emit chat newMessageChat');
+      ProfessionalsEvents.$emit('chat', 'newMessageChat', {msn:data, myId});
+      // newMessageChat(data, myId);
     });
     io.socket.on(SOCKET_EVENTS.USER_CONNECTED_CHAT, function(data, jwr) {
+      console.log('emit chat newUserConnected');
       if(myId!== data.userId) {
-        newUserConnected();
-        chatStarTimer(data.duration, data.chatId);
+        ProfessionalsEvents.$emit('chat', 'newUserConnected', {});
+        // newUserConnected();
+        ProfessionalsEvents.$emit('chat', 'chatStarTimer', {duration: data.duration, chatId: data.chatId});
+        // chatStarTimer(data.duration, data.chatId);
       }
       if(data.role === USER_ROLE.PROFESSIONAL) {
-        chatStarTimer(data.maxDuration, data.chatId);
+        // chatStarTimer(data.maxDuration, data.chatId);
+        ProfessionalsEvents.$emit('chat', 'chatStarTimer', {duration: data.maxDuration, chatId: data.chatId});
       }
     });
     io.socket.on(SOCKET_EVENTS.CHAT_FINISHED, function(data, jwr) {
+      console.log('emit chat newMessageChat');
       window.close();
     });
   }
 
   static sendChatMessage(message){
+    console.log('emit chat sendChatMessage');
     io.socket.post('/api/chat/sendMessage', {message}, function (resData, jwres){
-      addMesaggeSent(message);
+      ProfessionalsEvents.$emit('chat', 'addMesaggeSent', {msn:message});
+      // addMesaggeSent(message);
     });
   }
 

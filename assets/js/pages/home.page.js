@@ -1,4 +1,3 @@
-
 parasails.registerPage('home', {
   //  ╦╔╗╔╦╔╦╗╦╔═╗╦    ╔═╗╔╦╗╔═╗╔╦╗╔═╗
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
@@ -16,9 +15,11 @@ parasails.registerPage('home', {
     // _.extend(this, SAILS_LOCALS);
   },
   mounted: async function() {
+    const self=this;
     Sockets.professionals();
     await this._checkPayment();
     this._select2();
+
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
@@ -62,6 +63,9 @@ parasails.registerPage('home', {
         self.country = $('#profession').val();
         self._reloadProfessionals();
       });
+    },
+    test3: function(){
+      console.log('this is a test');
     }
   }
 });

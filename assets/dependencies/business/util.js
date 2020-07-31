@@ -1,6 +1,8 @@
+ProfessionalsEvents = new Vue();
 $(document).ready(async function () {
   await I.init();
   Sounds.init();
+
 });
 
 const PROFESSIONAL_STATES = {
