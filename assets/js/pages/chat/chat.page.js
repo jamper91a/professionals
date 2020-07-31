@@ -55,7 +55,7 @@ parasails.registerPage('chat-page', {
         if(!this.chat.customerState) {
           this.otherUserStatus = 'offline';
         }
-        this._chatStarTimer(this.chat.maxDuration, this.chat.id);
+        // this._chatStarTimer(this.chat.maxDuration, this.chat.id);
       }
     },
     _chatStarTimer: function (seconds, chatId) {
