@@ -16,9 +16,9 @@ module.exports = {
   fn: async function () {
 
     try {
-      const customers = await sails.helpers.customer.findAll();
-      var htmlEmailContents = await sails.renderView('pages/admin/customer/all-data', {
-        customers,
+      const professionals = await sails.helpers.professional.findAll();
+      var htmlEmailContents = await sails.renderView('pages/admin/professional/all-data', {
+        professionals,
         // Don't include the Sails app's default layout in the rendered template.
         layout: false
       });

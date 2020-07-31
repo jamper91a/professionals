@@ -1,12 +1,10 @@
 
-parasails.registerPage('admin-professionals-all', {
+parasails.registerPage('admin-professionals-all-data', {
   //  ╦╔╗╔╦╔╦╗╦╔═╗╦    ╔═╗╔╦╗╔═╗╔╦╗╔═╗
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
     userId: 0,
-    index: 0,
-    professionals: []
   },
 
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
@@ -17,30 +15,35 @@ parasails.registerPage('admin-professionals-all', {
     _.extend(this, SAILS_LOCALS);
   },
   mounted: async function() {
-    console.log(this.professionals[0].user.id, this.professionals[0].user.banned);
+    console.log(this);
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
   //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
+    _reloadTable: function () {
+      Api.patch('/pv/admin/professional/professional-table', {}, function (err, data) {
+        if(data)
+          // eslint-disable-next-line no-undef
+          $('.table').html(data);
+      });
+    },
     deleteUser: function () {
       const self=this;
       WebServices.deleteUser(this.userId, function () {
         $('#deletemodal').modal('hide');
         Toast.success(null, self.translations.Successful_Operation);
-        self.professionals.splice(self.index, 1);
       }, function (err) {
         alert('error');
       });
     },
     banUser: function (banned) {
+      console.log('banUser: ', banned);
+      console.log('userId: ', this.userId);
       const self=this;
-      WebServices.banUser(this.userId, banned, function (user) {
-        //Edit array
-        let newProfessional = self.professionals[self.index];
-        newProfessional.user=user;
-        self.$set(self.professionals, self.index, newProfessional);
+      WebServices.banUser(this.userId, banned, function () {
+
         switch (banned) {
           case 0:
             // eslint-disable-next-line no-undef
@@ -53,14 +56,15 @@ parasails.registerPage('admin-professionals-all', {
         }
         // eslint-disable-next-line no-undef
         Toast.success(null, self.translations.Successful_Operation);
+        self._reloadTable();
         // eslint-disable-next-line handle-callback-err
       }, function (err) {
         alert('error');
       });
     },
-    selectUser: function (userId, index) {
+    selectUser: function (userId) {
       this.userId = userId;
-      this.index = index;
+      console.log('userSelected: ', this.userId);
     },
   }
 });
