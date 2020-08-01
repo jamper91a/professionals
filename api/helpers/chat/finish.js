@@ -64,7 +64,7 @@ module.exports = {
     else if (inputs.chatId && inputs.declined) {
       //Professional decline the chat from the chat income popup
       where = {professional: inputs.professionalId};
-      chatState = sails.config.custom.CHAT_STATES.DECLINED;
+      chatState = sails.config.custom.CHAT_STATES.DECLINED_BY_READER;
     }
     else if( inputs.chatId && !inputs.overTime && !inputs.noAnswered) {
       //Admin finish the chat from the admin area
@@ -94,7 +94,7 @@ module.exports = {
       const finishTime = moment();
       const startTime = moment(chat.startTime);
 
-      if(chatState !== sails.config.custom.CHAT_STATES.DECLINED && chatState!==sails.config.custom.CHAT_STATES.FINISHED_BY_NO_ANSWER ) {
+      if(chatState !== sails.config.custom.CHAT_STATES.DECLINED_BY_READER && chatState!==sails.config.custom.CHAT_STATES.FINISHED_BY_NO_ANSWER ) {
         //Calculate difference between times
         duration = finishTime.diff(startTime, 'seconds');
         //Give a grace period of 10 sec
@@ -113,6 +113,8 @@ module.exports = {
           const customer = await Customer.findOne({id: chat.customer});
           await Customer.updateOne({id: customer.id}, {balance: customer.balance - cost});
           await Professional.updateOne({id: professional.id}, {balance: professional.balance + cost});
+          //Update professional status
+          await sails.helpers.professional.changeStatus(chat.professional, professional.previousState);
         }
       }
       await Chat.updateOne({id: chat.id}).set({chatState: chatState, duration: duration, cost: cost, finishTime:finishTime.format('YYYY-MM-DD HH:mm:ss')});
@@ -120,6 +122,7 @@ module.exports = {
       await sails.helpers.socket.send('chat-'+chat.id, sails.config.custom.SOCKET_EVENTS.CHAT_FINISHED, {});
       //Remove users from the chat
       sails.sockets.leaveAll('chat-'+chat.id);
+
 
     } else {
       throw 'noChatFound';

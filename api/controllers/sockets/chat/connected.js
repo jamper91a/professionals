@@ -9,6 +9,10 @@ module.exports = {
 
 
   inputs: {
+    chatId: {
+      type: 'number',
+      required: true
+    }
   },
 
 
@@ -29,7 +33,7 @@ module.exports = {
   },
 
 
-  fn: async function () {
+  fn: async function ({chatId}) {
 
     try {
       if (!this.req.isSocket) {
@@ -39,16 +43,18 @@ module.exports = {
       if (this.req.customer) {
         role = sails.config.custom.USER_CUSTOMER;
         //Find the chat to join
-        chat = await sails.helpers.chat.getNewChat(this.req.customer.id, undefined);
-        await Chat.updateOne({id: chat.id}).set({customerState: sails.config.custom.CHAT_USER_STATE.CONNECTED});
+        chat = await sails.helpers.chat.getNewChat(chatId);
+        await Chat.updateOne({id: chat.id}).set({customerState: sails.config.custom.CHAT_USER_STATE.CONNECTED, chatState: sails.config.custom.CHAT_STATES.ACCEPTED});
         if (!chat.customerState) {
           //Send notification to the professional to tell him that there is a new chat request
           await sails.helpers.socket.send('user-' + chat.professional.user.id, sails.config.custom.SOCKET_EVENTS.NEW_CHAT_INCOME, chat);
+          //Change status of the professional
+          await sails.helpers.professional.changeStatus(chat.professional.id, sails.config.custom.PROFESSIONAL_STATES.BUSY);
         }
       } else if (this.req.professional) {
         role = sails.config.custom.USER_PROFESSIONAL;
         //Find the chat to join
-        chat = await sails.helpers.chat.getNewChat(undefined, this.req.professional.id);
+        chat = await sails.helpers.chat.getNewChat(chatId);
         await Chat.updateOne({id: chat.id}).set({professionalState: sails.config.custom.CHAT_USER_STATE.CONNECTED});
       } else {
         return this.res.badRequest();

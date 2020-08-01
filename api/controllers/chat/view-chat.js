@@ -6,8 +6,19 @@ module.exports = {
 
   description: 'Display "Chat" page.',
 
+  inputs: {
+    chatId: {
+      type: 'number',
+      required: true
+    }
+  },
 
   exits: {
+
+    success: {
+      viewTemplatePath: 'pages/chat/chat',
+      layout: 'chat'
+    },
 
     success: {
       viewTemplatePath: 'pages/chat/chat',
@@ -17,17 +28,23 @@ module.exports = {
   },
 
 
-  fn: async function () {
+  fn: async function ({chatId}) {
     try {
       let chat, userType;
       if (this.req.customer) {
         //Find the chat that the user created previously
-        chat = await sails.helpers.chat.getNewChat(this.req.customer.id, undefined);
+        chat = await sails.helpers.chat.getNewChat(chatId);
         chat.userType = sails.config.custom.USER_CUSTOMER;
+        if(chat.customerState != null) {
+          chat.state= 'noValid';
+        }
 
       } else if (this.req.professional) {
-        chat = await sails.helpers.chat.getNewChat(undefined, this.req.professional.id);
+        chat = await sails.helpers.chat.getNewChat(chatId);
         chat.userType = sails.config.custom.USER_PROFESSIONAL;
+        if(chat.professionalState != null) {
+          chat.state= 'noValid';
+        }
       } else {
         throw  'notAuthorized';
       }

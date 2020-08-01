@@ -8,13 +8,9 @@ module.exports = {
 
 
   inputs: {
-    customerId:{
+    chatId: {
       type: "number",
-      required: false
-    },
-    professionalId: {
-      type: "number",
-      required: false
+      required: true
     }
   },
 
@@ -36,35 +32,18 @@ module.exports = {
   },
 
 
-  fn: async function (inputs) {
-    let where = {};
-    if(inputs.customerId){
-      where = {customer: inputs.customerId};
-    } else if (inputs.professionalId) {
-      where = {professional: inputs.professionalId};
-    }
+  fn: async function ({chatId}) {
     // Get last chat.
-    let lastChat = await Chat.find({
-      where: where,
-      limit: 1,
-      sort: 'id desc'
-    })
+    let lastChat = await Chat.findOne({id: chatId})
       .populate('chatState')
       .populate('conversation');
-    if (lastChat && lastChat.length>0) {
-      lastChat = lastChat[0];
-      //Check that the chat has not started yet
-      if(lastChat.chatState.id === sails.config.custom.CHAT_STATES.CREATED) {
-
+    if (lastChat) {
         //Find the whole information of customer and professional
         const customer = await sails.helpers.customer.findOne(lastChat.customer);
         const professional = await sails.helpers.professional.findOne(lastChat.professional);
         lastChat.customer = customer;
         lastChat.professional = professional;
         return lastChat;
-      } else {
-        throw 'noValidChat';
-      }
     } else {
       throw 'noChatFound';
     }

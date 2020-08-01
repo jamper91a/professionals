@@ -18,31 +18,37 @@ parasails.registerPage('chat-page', {
 
     // Attach any initial data from the server.
     _.extend(this, SAILS_LOCALS);
-    Sockets.mySocket();
-    Sockets.myChat(this.chat.userId);
-    this._initialValidation();
+    if(this.chat.state !== 'noValid'){
+      Sockets.mySocket();
+      Sockets.myChat(this.chat.userId, this.chat.id);
+      this._initialValidation();
+    }
   },
   mounted: async function() {
     const self = this;
+    if(this.chat.state !== 'noValid') {
+      ProfessionalsEvents.$on('chat', function (event, data) {
+        switch (event) {
+          case 'newMessageChat':
+            self._newMessageChat(data.msn, data.myId);
+            break;
+          case 'addMesaggeSent':
+            self._addMesaggeSent(data.msn);
+            break;
+          case 'newUserConnected':
+            self._newUserConnected();
+            break;
+          case 'chatStarTimer':
+            self._chatStarTimer(data.duration, data.chatId);
+            break;
 
-    ProfessionalsEvents.$on('chat', function (event, data) {
-      switch (event) {
-        case 'newMessageChat':
-          self._newMessageChat(data.msn, data.myId);
-          break;
-        case 'addMesaggeSent':
-          self._addMesaggeSent(data.msn);
-          break;
-        case 'newUserConnected':
-          self._newUserConnected();
-          break;
-        case 'chatStarTimer':
-          self._chatStarTimer(data.duration, data.chatId);
-          break;
+        }
+      });
+      window.addEventListener('beforeunload',  this.preventNav)
+    } else {
+      this._noValidChat();
+    }
 
-      }
-    });
-    window.addEventListener('beforeunload',  this.preventNav)
   },
 
   beforeDestroy: async function(){
@@ -122,7 +128,7 @@ parasails.registerPage('chat-page', {
     chatSentMenssage: function () {
       let message = $('#chat_messageInput').val();
       $('#chat_messageInput').val('');
-      Sockets.sendChatMessage(message);
+      Sockets.sendChatMessage(message, this.chat.id);
     },
     _addMesaggeSent: function (msn) {
       let html =
@@ -154,7 +160,20 @@ parasails.registerPage('chat-page', {
           WebServices.finishBeforeStart(this.chat.id, function (){ resolve()}, function (e){reject(e)}, this.beforeunload);
       });
 
-    }
+    },
+    _noValidChat: function (){
+      $('#chatNoValid').modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+    },
+    closeChatWindow: function (){
+      this.userCloseWindow = true;
+      window.close();
+    },
+    translate: function (key) {
+      return I.get(key);
+    },
   }
 });
 

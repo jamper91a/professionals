@@ -78,5 +78,22 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="chatNoValid" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smallmodalLabel">{{translate('Chat no valid')}}</h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        {{translate('We are sorry but the chat is not valid')}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button @click="closeChatWindow()" type="button" class="btn btn-primary">{{translate('Close')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <%- exposeLocalsToBrowser() %>

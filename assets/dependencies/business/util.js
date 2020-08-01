@@ -27,24 +27,6 @@ const SOCKET_EVENTS = {
 };
 
 
-
-//
-// function callProfessional(professionalId) {
-//   alert("CALL PROFESSIONAL: " + professionalId)
-// }
-// function chatProfessional(professionalId) {
-//   WebServices.createChat(professionalId, function (chat) {
-//     $('#confirmChat').modal('show');
-//   }, async function (error) {
-//     OverHang.error(I.get(error.exit));
-//   })
-// }
-// function openChatWindow(){
-//   // window.open('/chat', '_blank', 'status=0,toolbar=0,location=0,menubar=0,directories=0,resizable=1,'+
-//   // 'scrollbars=0,width=600,height=600');
-//   window.open('/chat', '_blank');
-//   $('#confirmChat').modal('hide');
-// }
 function changeProfessionalStatus(statusId) {
   WebServices.changeProfessionalStatus(statusId,
     async function (professional) {
@@ -61,18 +43,6 @@ function changeProfessionalStatus(statusId) {
   })
 }
 
-function getUrlParameter (url) {
-  var params = {};
-  var parser = document.createElement('a');
-  parser.href = url;
-  var query = parser.search.substring(1);
-  var vars = query.split('&');
-  for (var i = 0; i < vars.length; i++) {
-    var pair = vars[i].split('=');
-    params[pair[0]] = decodeURIComponent(pair[1]);
-  }
-  return params;
-}
 function getUrlVars() {
   var vars = {};
   var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {

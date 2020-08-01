@@ -26,7 +26,7 @@ module.exports.routes = {
    */
   'GET /customer/historic': 'customer/view-historic',
   'GET /customer/topUp': 'customer/view-top-up',
-  'GET /chat': 'chat/view-chat',
+  'GET /chat/:chatId': 'chat/view-chat',
   'GET /register': 'customer/register/view-index',
   'POST /register': 'customer/register/view-index',
   'GET /professional/register': 'professional/view-register',
@@ -50,6 +50,7 @@ module.exports.routes = {
   'POST /api/chat/create': 'api/chat/create',
   'POST /api/chat/finish': 'api/chat/finish',
   'POST /api/chat/decline': 'api/chat/decline',
+  'POST /api/chat/decline-by-customer': 'api/chat/decline-by-customer',
   'POST /api/chat/finish-before-start': 'api/chat/finish-before-start',
   'GET /api/customer/': 'api/customer/find-all',
   'GET /api/country/': 'api/country/find-all',

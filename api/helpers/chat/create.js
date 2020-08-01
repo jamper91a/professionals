@@ -54,7 +54,7 @@ module.exports = {
           });
           // const lastChatcustomer = await sails.helpers.customer.getLastChat(customer.id);
           if (lastChatcustomer === null ||
-            (lastChatcustomer && lastChatcustomer.chatState.id !== sails.config.custom.CHAT_STATES.STARTED)) {
+            (lastChatcustomer && lastChatcustomer.chatState.id !== sails.config.custom.CHAT_STATES.ACCEPTED)) {
             //Validate customer has enougth founds to start the chat
             if(customer.balance>= professional.rate.chat) {
               //Check how much time the customer can chat
@@ -69,6 +69,7 @@ module.exports = {
                 conversation: conversation.id,
                 maxDuration: maxTime
               }).fetch();
+
               return chat;
             } else {
               throw 'customerNotFounds';

@@ -11,6 +11,10 @@ module.exports = {
     message: {
       type: "string",
       required: true
+    },
+    chatId: {
+      type: "string",
+      required: true
     }
   },
 
@@ -32,7 +36,7 @@ module.exports = {
   },
 
 
-  fn: async function ({message}) {
+  fn: async function ({message, chatId}) {
 
     try {
       if (!this.req.isSocket) {
@@ -41,10 +45,10 @@ module.exports = {
       let chat;
       if (this.req.customer) {
         //Find the chat to join
-        chat = await sails.helpers.chat.getNewChat(this.req.customer.id, undefined);
+        chat = await sails.helpers.chat.getNewChat(chatId);
       } else if (this.req.professional) {
         //Find the chat to join
-        chat = await sails.helpers.chat.getNewChat(undefined, this.req.professional.id);
+        chat = await sails.helpers.chat.getNewChat(chatId);
       } else {
         return this.res.badRequest();
       }

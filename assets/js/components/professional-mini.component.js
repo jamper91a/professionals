@@ -25,7 +25,8 @@ parasails.registerComponent('professional-mini', {
         chatCssClass: '',
         disableCall: false,
         disableChat: false,
-        translations: {}
+        chat: null,
+        myProfessional: this.professional
       };
     },
 
@@ -35,20 +36,20 @@ parasails.registerComponent('professional-mini', {
     template: `
 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-1">
     <div>
-      <div class="card" :data-professional="professional.id">
+      <div class="card" :data-professional="myProfessional.id">
           <div class="card-body">
               <div class="mx-auto d-block">
                   <img class="rounded-circle mx-auto d-block" src="/images/icon/avatar-01.jpg" alt="Card image cap">
-                  <h5 class="text-sm-center mt-2 mb-1">{{professional.user.name}}</h5>
+                  <h5 class="text-sm-center mt-2 mb-1">{{myProfessional.user.name}}</h5>
                   <div class="location text-sm-center">
-                      <i class="fa fa-map-marker"></i>{{translate(professional.user.country.name)}}
+                      <i class="fa fa-map-marker"></i>{{translate(myProfessional.user.country.name)}}
                       </div>
               </div>
               <hr>
               <div class="card-text text-sm-center">
-                    {{translate(professional.profession.name)}}<br>
-                  {{professional.rate.currency.symbol}} {{professional.rate.call}} -
-                  {{professional.rate.currency.symbol}} {{professional.rate.chat}}
+                    {{translate(myProfessional.profession.name)}}<br>
+                  {{myProfessional.rate.currency.symbol}} {{myProfessional.rate.call}} -
+                  {{myProfessional.rate.currency.symbol}} {{myProfessional.rate.chat}}
               </div>
 
           </div>
@@ -64,9 +65,9 @@ parasails.registerComponent('professional-mini', {
               <div class="row">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                       <!--                    Button visible from medium devices-->
-                      <button @click="callProfessional(professional.id)"
-                              :data-type-button="'call-1-'+professional.id"
-                              :data-professional="professional.id"
+                      <button @click="callProfessional(myProfessional.id)"
+                              :data-type-button="'call-1-'+myProfessional.id"
+                              :data-professional="myProfessional.id"
                               type="button"
                               class="btn btn-lg d-none d-md-inline text"
                               v-bind:class="[callCssClass]"
@@ -76,9 +77,9 @@ parasails.registerComponent('professional-mini', {
                       </button>
                       <!--                    Button visible in super small and small devices-->
                       <button
-                              @click="callProfessional(professional.id)"
-                              :data-type-button="'call-2-'+professional.id"
-                              :data-professional="professional.id"
+                              @click="callProfessional(myProfessional.id)"
+                              :data-type-button="'call-2-'+myProfessional.id"
+                              :data-professional="myProfessional.id"
                               type="button"
                               class="btn btn-block d-block d-sm-block d-md-none"
                               v-bind:class="callCssClass"
@@ -90,9 +91,9 @@ parasails.registerComponent('professional-mini', {
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
   <!--                    Button visible from medium devices-->
                       <button
-                              @click="chatProfessional(professional.id)"
-                              :data-type-button="'chat-1-'+professional.id"
-                              :data-professional="professional.id"
+                              @click="chatProfessional(myProfessional.id)"
+                              :data-type-button="'chat-1-'+myProfessional.id"
+                              :data-professional="myProfessional.id"
                               type="button"
                               class="btn btn-lg d-none d-md-inline"
                               v-bind:class="chatCssClass"
@@ -102,9 +103,9 @@ parasails.registerComponent('professional-mini', {
                       </button>
   <!--                    Button visible in super small and small devices-->
                       <button
-                              @click="chatProfessional(professional.id)"
-                              :data-type-button="'chat-1-'+professional.id"
-                              :data-professional="professional.id"
+                              @click="chatProfessional(myProfessional.id)"
+                              :data-type-button="'chat-1-'+myProfessional.id"
+                              :data-professional="myProfessional.id"
                               type="button"
                               class="btn btn-block d-block d-sm-block d-md-none"
                               v-bind:class="chatCssClass"
@@ -135,7 +136,7 @@ parasails.registerComponent('professional-mini', {
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{translate('Cancel')}}</button>
+                    <button @click="cancelChat(chat.id)" type="button" class="btn btn-secondary" data-dismiss="modal">{{translate('Cancel')}}</button>
                     <button @click="openChatWindow()" type="button" class="btn btn-primary">{{translate('Confirm')}}</button>
                 </div>
             </div>
@@ -158,10 +159,20 @@ parasails.registerComponent('professional-mini', {
       ProfessionalsEvents.$on('professional-mini', function (event, data) {
         switch (event) {
           case 'chatAccepted':
+            self.chat = data.chat;
             self.openChatWindow();
             break;
           case 'chatDeclined':
             self._chatDeclined(data);
+            break;
+          case 'changeStatus':
+            console.log(self.myProfessional);
+            if(data.professional.id === self.myProfessional.id){
+              console.log('changeStatus');
+              self.myProfessional = data.professional;
+              self._analyzeCss();
+            }
+
             break;
 
         }
@@ -177,7 +188,7 @@ parasails.registerComponent('professional-mini', {
     //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
     methods: {
       _analyzeCss: function () {
-        switch (this.professional.state.id) {
+        switch (this.myProfessional.state.id) {
           case PROFESSIONAL_STATES.ONLINE:
             this.callCssClass = 'btn-success';
             this.chatCssClass = 'btn-success';
@@ -213,15 +224,29 @@ parasails.registerComponent('professional-mini', {
         alert("CALL PROFESSIONAL: " + professionalId)
       },
       chatProfessional: function(professionalId) {
+        const self = this;
         WebServices.createChat(professionalId, function (chat) {
-          $('#confirmChat').modal('show');
+          self.chat = chat;
+          $('#confirmChat').modal({
+            backdrop: 'static',
+            keyboard: false
+          });
         }, async function (error) {
           OverHang.error(I.get(error.exit));
         })
       },
       openChatWindow: function () {
         $('#confirmChat').modal('hide');
-        window.open('/chat', '_blank');
+        window.open('/chat/'+this.chat.id, '_blank');
+
+      },
+      cancelChat: function () {
+        $('#confirmChat').modal('hide');
+        WebServices.declineChatByCustomer(this.chat.id, function (chat) {
+        }, async function (error) {
+          OverHang.error(I.get(error.exit));
+        });
+
 
       },
       _chatDeclined: function (data) {
@@ -231,6 +256,9 @@ parasails.registerComponent('professional-mini', {
         }, async function (error) {
           OverHang.error(I.get(error.exit));
         });
+      },
+      _changeProfessionalStatus: function (statusId) {
+
       }
     },
 

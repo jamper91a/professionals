@@ -38,8 +38,16 @@ class WebServices {
     })
   }
   static declineChat(chatId, success, error) {
-    console.log('declineChat', chatId);
     let url = "/api/chat/decline";
+    Api.post(url, {chatId},function (err, data) {
+      if(err)
+        return error(err.responseJSON.data);
+      if(data)
+        return success(data);
+    })
+  }
+  static declineChatByCustomer(chatId, success, error) {
+    let url = "/api/chat/decline-by-customer";
     Api.post(url, {chatId},function (err, data) {
       if(err)
         return error(err.responseJSON.data);

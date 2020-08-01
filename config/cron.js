@@ -13,7 +13,7 @@ module.exports.cron = {
     schedule: '*/5 * * * * *',
     onTick: async function () {
       //Check all the chats that has not been answered by the professional
-      const chats = await Chat.find({chatState: sails.config.custom.CHAT_STATES.CREATED, customerState: sails.config.custom.CHAT_USER_STATE.CONNECTED, professionalState: null}).populate('professional');
+      const chats = await Chat.find({chatState: sails.config.custom.CHAT_STATES.ACCEPTED, customerState: sails.config.custom.CHAT_USER_STATE.CONNECTED, professionalState: null}).populate('professional');
       for(const chat of chats) {
         await sails.helpers.socket.send('user-' + chat.professional.user, sails.config.custom.SOCKET_EVENTS.NEW_CHAT_INCOME, chat);
       }

@@ -42,6 +42,9 @@ module.exports = {
     state: {
       model: "state"
     },
+    previousState: {
+      model: "state"
+    },
     user:{
       model: "user",
       unique: true
