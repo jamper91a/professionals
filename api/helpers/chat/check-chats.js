@@ -19,7 +19,7 @@ module.exports = {
 
   fn: async function () {
     //Check all the chats that were accepted by the customer, but the reader has not reply yet.
-    const chats = await Chat.find({chatState: [sails.config.custom.CHAT_STATES.ACCEPTED], professionalState: null}).populate('professional');
+    const chats = await Chat.find({chatState: [sails.config.custom.CHAT_STATES.ACCEPTED, sails.config.custom.CHAT_STATES.CREATED], professionalState: null}).populate('professional');
     for(const chat of chats) {
       //Check how long ago the chat was created, if is more than 60 sec, I will finished it
       var currentTime = new moment();
