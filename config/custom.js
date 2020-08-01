@@ -40,6 +40,9 @@ module.exports.custom = {
     FINISHED_BY_PROFESSIONAL: 12,
     FINISHED_BY_ADMIN: 13,
     FINISHED_BY_OVERTIME: 14,
+    FINISHED_BY_NO_ANSWER: 15,
+    DECLINED: 16,
+    FINISHED_BEFORE_START: 17
   },
   //USER STATE ON CHAT
   CHAT_USER_STATE: {
@@ -52,7 +55,8 @@ module.exports.custom = {
     READER_CHANGE_STATUS: 'changeStatus',
     NEW_MESSAGE: 'newMessage',
     USER_CONNECTED_CHAT: 'userConnectedChat',
-    CHAT_FINISHED: 'chatFinished'
+    CHAT_FINISHED: 'chatFinished',
+    CHAT_CANCELED: 'chatCanceled',
   },
   //GATEWAYS
   GATEWAYS: {

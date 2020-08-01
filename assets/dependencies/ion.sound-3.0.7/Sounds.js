@@ -19,6 +19,6 @@ class Sounds {
     ion.sound.destroy();
   }
   static chatNotification(){
-    this.play('inflicted', {loop: true});
+    this.play('inflicted', {loop: false});
   }
 }

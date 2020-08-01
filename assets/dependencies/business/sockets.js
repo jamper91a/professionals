@@ -67,23 +67,31 @@ class Sockets {
   }
 
   static mySocket(){
+    //Var to know which chat notification the use has receive
+    let chatsReceive = [];
     io.socket.get('/api/user/subscribe', function(data, jwr) {
       console.log("socket: user");
       console.log('Server responded with status code ' + jwr.statusCode + ' and data: ', data);
 
     });
     //Socket io
-    io.socket.on(SOCKET_EVENTS.NEW_CHAT_INCOME, async function(data, jwr) {
-      Sounds.chatNotification();
-      OverHang.confirm(I.get(SOCKET_EVENTS.NEW_CHAT_INCOME),  function (answer) {
-        console.log('cb');
-        Sounds.stop();
-      }, function () {
-        ProfessionalsEvents.$emit('professional-mini', 'newChatIncome', {});
-      }, function () {
-
-      });
-
+    io.socket.on(SOCKET_EVENTS.NEW_CHAT_INCOME, async function(chat, jwr) {
+      let receivePreviously = chatsReceive.indexOf(chat.id);
+      if(receivePreviously===-1){
+        chatsReceive.push(chat.id);
+        Sounds.chatNotification();
+        OverHang.confirm(I.get(SOCKET_EVENTS.NEW_CHAT_INCOME),  function (answer) {
+          Sounds.stop();
+        }, function () {
+          ProfessionalsEvents.$emit('professional-mini', 'chatAccepted', {chat});
+        }, function () {
+          ProfessionalsEvents.$emit('professional-mini', 'chatDeclined', {chat});
+        });
+      }
+    });
+    io.socket.on(SOCKET_EVENTS.CHAT_CANCELED, async function(chat, jwr) {
+      console.log('CHAT_CANCELED');
+      OverHang.warning(I.get(SOCKET_EVENTS.CHAT_CANCELED));
     });
   }
 

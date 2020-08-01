@@ -37,14 +37,48 @@ class WebServices {
         return success(data);
     })
   }
-  static finishChat(chatId, overTime, success, error) {
-    let url = "/api/chat/finish";
-    Api.post(url, {chatId, overTime},function (err, data) {
+  static declineChat(chatId, success, error) {
+    console.log('declineChat', chatId);
+    let url = "/api/chat/decline";
+    Api.post(url, {chatId},function (err, data) {
       if(err)
         return error(err.responseJSON.data);
       if(data)
         return success(data);
     })
+  }
+
+  static finishChat(chatId, overTime, success, error, beforeUnload = false) {
+    let url = "/api/chat/finish";
+    if(!beforeUnload) {
+      Api.post(url, {chatId, overTime},function (err, data) {
+        if(err)
+          return error(err.responseJSON.data);
+        if(data)
+          return success(data);
+      })
+    } else {
+      const fd = new FormData();
+      fd.append('chatId', chatId);
+      fd.append('overTime', overTime);
+      navigator.sendBeacon(url, fd);
+    }
+  }
+  static finishBeforeStart(chatId, success, error, beforeUnload) {
+    let url = "/api/chat/finish-before-start";
+    if(!beforeUnload) {
+      Api.post(url, {chatId},function (err, data) {
+        if(err)
+          return error(err.responseJSON.data);
+        if(data)
+          return success(data);
+      })
+    } else {
+      const fd = new FormData();
+      fd.append('chatId', chatId);
+      navigator.sendBeacon(url, fd);
+    }
+
   }
 
   static createPayment(offerId, success, error) {

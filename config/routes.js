@@ -49,6 +49,8 @@ module.exports.routes = {
   'POST /api/login': 'api/user/login',
   'POST /api/chat/create': 'api/chat/create',
   'POST /api/chat/finish': 'api/chat/finish',
+  'POST /api/chat/decline': 'api/chat/decline',
+  'POST /api/chat/finish-before-start': 'api/chat/finish-before-start',
   'GET /api/customer/': 'api/customer/find-all',
   'GET /api/country/': 'api/country/find-all',
   'POST /api/user/ban': 'api/user/ban',
@@ -67,11 +69,5 @@ module.exports.routes = {
   'GET /api/chat/subscribe': 'sockets/chat',
   'POST /api/chat/sendMessage': 'sockets/chat/send-message',
   'GET /api/chat/connected': 'sockets/chat/connected',
-  /**
-   * Partial Views
-   */
-  'PATCH /pv/admin/customer/customer-table': {action: 'admin/partial-view/customer/view-all/customer-table'},
-  'PATCH /pv/admin/professional/professional-table': {action: 'admin/partial-view/professional/view-all/professional-table'},
-  'PATCH /pv/professionals-home': {action: 'partial-view/professionals-home'},
 
 };

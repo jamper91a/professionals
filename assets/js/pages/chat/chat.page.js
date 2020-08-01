@@ -6,7 +6,9 @@ parasails.registerPage('chat-page', {
   data: {
     userName: '',
     otherUserName: '',
-    otherUserStatus: 'online'
+    otherUserStatus: 'offline',
+    beforeunload: false,
+    userCloseWindow: false
   },
 
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
@@ -24,7 +26,6 @@ parasails.registerPage('chat-page', {
     const self = this;
 
     ProfessionalsEvents.$on('chat', function (event, data) {
-      console.log('on chat', event);
       switch (event) {
         case 'newMessageChat':
           self._newMessageChat(data.msn, data.myId);
@@ -41,12 +42,25 @@ parasails.registerPage('chat-page', {
 
       }
     });
+    window.addEventListener('beforeunload',  this.preventNav)
+  },
+
+  beforeDestroy: async function(){
+      window.removeEventListener("beforeunload", this.preventNav);
+
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
   //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
+    preventNav: function (event){
+      this.beforeunload = true;
+      if(!this.userCloseWindow) {
+        this._finishChat(this.chat.id, false);
+      }
+      return null;
+    },
     _initialValidation: function(){
       if (this.chat.userType === USER_ROLE.CUSTOMER) {
         this.otherUserName = this.chat.professional.user.name;
@@ -62,27 +76,40 @@ parasails.registerPage('chat-page', {
       }
     },
     _chatStarTimer: function (seconds, chatId) {
+      const self = this;
       const timerInstance = new easytimer.Timer();
       timerInstance.start({target: {seconds: seconds}});
       timerInstance.addEventListener('secondsUpdated', function (e) {
         $('#basicUsage').html(timerInstance.getTimeValues().toString());
       });
       timerInstance.addEventListener('targetAchieved', function (e) {
-        this.finishChat(chatId, true);
+        self.endChat(chatId, true);
       });
     },
     _newMessageChat: function (msn, myId) {
       if(myId!==msn.user)
         this.addMessageReceived(msn.message);
     },
-    finishChat: function (chatId, overTime) {
-      WebServices.finishChat(chatId, overTime,function () {
-        window.close();
-      }, function () {
-        console.error(e);
-      })
+    endChat: function (chatId, overtime) {
+      this.userCloseWindow = true;
+      this._finishChat(chatId, overtime);
+    },
+    _finishChat: async function (chatId, overTime) {
+        if(this.otherUserStatus === 'online') {
+          WebServices.finishChat(chatId, overTime, function () {
+
+            window.close();
+          }, function (e) {
+            console.error(e);
+          }, this.beforeunload);
+        }else{
+          await this._finishChatBeforeStart();
+        }
+
+
     },
     _newUserConnected: function () {
+      this.otherUserStatus='online';
       //Enabled message and button area
       $("#chat_messageInput").removeAttr("disabled");
       $("#chat_sendButton").removeAttr("disabled");
@@ -100,33 +127,34 @@ parasails.registerPage('chat-page', {
     _addMesaggeSent: function (msn) {
       let html =
         `
-    <div class="recei-mess-wrap">
-<!--        <span class="mess-time">Now</span>-->
-        <div class="recei-mess__inner">
-<!--            <div class="avatar avatar&#45;&#45;tiny">-->
-<!--                <img src="images/icon/avatar-02.jpg" alt="John Smith">-->
-<!--            </div>-->
-            <div class="recei-mess-list">
-                <div class="recei-mess">${msn}</div>
+        <div class="recei-mess-wrap">
+            <div class="recei-mess__inner">
+                <div class="recei-mess-list">
+                    <div class="recei-mess">${msn}</div>
+                </div>
             </div>
         </div>
-    </div>
     `;
       $('#chat_messages').append(html);
     },
     addMessageReceived: function (msn) {
       let html =`
-  <div class="send-mess-wrap">
-<!--      <span class="mess-time">30 Sec ago</span>-->
+        <div class="send-mess-wrap">
       <div class="send-mess__inner">
           <div class="send-mess-list">
               <div class="send-mess">${msn}</div>
           </div>
       </div>
   </div>
-  `;
+        `;
       $('#chat_messages').append(html);
     },
+    _finishChatBeforeStart: function (){
+      return new Promise (async (resolve, reject) => {
+          WebServices.finishBeforeStart(this.chat.id, function (){ resolve()}, function (e){reject(e)}, this.beforeunload);
+      });
+
+    }
   }
 });
 

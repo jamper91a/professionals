@@ -157,8 +157,11 @@ parasails.registerComponent('professional-mini', {
       this._analyzeCss();
       ProfessionalsEvents.$on('professional-mini', function (event, data) {
         switch (event) {
-          case 'newChatIncome':
+          case 'chatAccepted':
             self.openChatWindow();
+            break;
+          case 'chatDeclined':
+            self._chatDeclined(data);
             break;
 
         }
@@ -217,8 +220,17 @@ parasails.registerComponent('professional-mini', {
         })
       },
       openChatWindow: function () {
-        window.open('/chat', '_blank');
         $('#confirmChat').modal('hide');
+        window.open('/chat', '_blank');
+
+      },
+      _chatDeclined: function (data) {
+        console.log('_chatDeclined', data);
+        $('#confirmChat').modal('hide');
+        WebServices.declineChat(data.chat.id, function (chat) {
+        }, async function (error) {
+          OverHang.error(I.get(error.exit));
+        });
       }
     },
 
