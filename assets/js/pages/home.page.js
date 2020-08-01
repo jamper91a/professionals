@@ -4,7 +4,12 @@ parasails.registerPage('home', {
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
     country: 0,
-    profession: 0
+    profession: 0,
+    professionals: []
+  },
+
+  computed: {
+
   },
 
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
@@ -12,7 +17,8 @@ parasails.registerPage('home', {
   //  ╩═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝
   beforeMount: function() {
     // Attach any initial data from the server.
-    // _.extend(this, SAILS_LOCALS);
+    _.extend(this, SAILS_LOCALS);
+    console.log(this.professionals);
   },
   mounted: async function() {
     const self=this;
@@ -26,23 +32,30 @@ parasails.registerPage('home', {
   //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
-    _reloadProfessionals: function (){
-      // eslint-disable-next-line no-undef,handle-callback-err
-      Api.patch('/pv/professionals-home', {country: this.country, profession: this.profession}, function (err, data) {
-        if(data)
-          // eslint-disable-next-line no-undef
-          $('#professionals').html(data);
+    filterProfessionals: function (professionals) {
+      const self = this;
+
+
+      return professionals.filter(function (professional) {
+        let filterByCountry = false, filterByProfession = false;
+        if(professional.user.country.id === self.country || self.country === 0 ) {
+          filterByCountry = true;
+        }
+        if(professional.profession.id === self.country || self.profession === 0 ) {
+          filterByProfession = true;
+        }
+        return filterByCountry && filterByProfession
+
       });
     },
     _checkPayment: async function () {
-      console.log('checking payment');
       const parameters = getUrlVars();
       if(parameters['gateway']==='stripe') {
         if(parameters['result']==='success') {
           const sessionId = parameters ['session_id'];
-          Toast.success(await I.get('TOP_UP_SUCCESSFUL'));
+          Toast.success(I.get('TOP_UP_SUCCESSFUL'));
         } else if (parameters['result']==='fail') {
-          Toast.success(await I.get('TOP_UP_FAIL'));
+          Toast.success(I.get('TOP_UP_FAIL'));
         }
         window.history.replaceState({}, document.title, "/");
       }
@@ -53,19 +66,16 @@ parasails.registerPage('home', {
         minimumResultsForSearch: 20,
         dropdownParent: $('#country').next('.dropDownSelect2')
       }).on('change', function(){
-          self.country = $('#country').val();
-          self._reloadProfessionals();
+          self.country = parseInt($('#country').val());
+          self.filterProfessionals(self.professionals);
       });
       $("#profession").select2({
         minimumResultsForSearch: 20,
         dropdownParent: $('#profession').next('.dropDownSelect2')
       }).on('change', function(){
-        self.country = $('#profession').val();
-        self._reloadProfessionals();
+        self.country = parseInt($('#profession').val());
+        self.filterProfessionals(self.professionals);
       });
-    },
-    test3: function(){
-      console.log('this is a test');
     }
   }
 });

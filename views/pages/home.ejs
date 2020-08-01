@@ -5,6 +5,7 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</section>-->
+<%- exposeLocalsToBrowser() %>
 <div id="home" class="container-fluid">
   <br>
   <div class="row">
@@ -33,27 +34,9 @@
   </div>
   <br>
   <div class="row" id="professionals">
-    <% professionals.forEach(function(professional) { %>
-      <%- partial('../partials/professional-mini.ejs', {professional}) %>
-    <% }); %>
-      <% professionals.forEach(function(professional) { %>
-        <%- partial('../partials/professional-mini.ejs', {professional}) %>
-      <% }); %>
-      <% professionals.forEach(function(professional) { %>
-        <%- partial('../partials/professional-mini.ejs', {professional}) %>
-      <% }); %>
-      <% professionals.forEach(function(professional) { %>
-        <%- partial('../partials/professional-mini.ejs', {professional}) %>
-      <% }); %>
-      <% professionals.forEach(function(professional) { %>
-        <%- partial('../partials/professional-mini.ejs', {professional}) %>
-      <% }); %>
-      <% professionals.forEach(function(professional) { %>
-        <%- partial('../partials/professional-mini.ejs', {professional}) %>
-      <% }); %>
-      <% professionals.forEach(function(professional) { %>
-        <%- partial('../partials/professional-mini.ejs', {professional}) %>
-      <% }); %>
+    <template v-for="(professional, index) in filterProfessionals(professionals)">
+      <professional-mini v-bind:professional="professional"></professional-mini>
+    </template>
   </div>
 </div>
 

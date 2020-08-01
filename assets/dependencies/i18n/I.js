@@ -30,36 +30,51 @@ class I {
     static get(key) {
     let max=0;
     const self = this;
-      return new Promise (async (resolve, reject) => {
-        const interval = setInterval(function () {
-          try {
-            let value = '';
-            key = key.replace(/ /g,"_");
-            if(self.userLang && self.en) {
-              value = self._obtain(key);
-              if(!value) {
-                reject('No value');
-              }
-            }
-            if(value) {
-              clearInterval(interval);
-              resolve(value);
-            }
-            max++;
-            if(max === 10) {
-              clearInterval(interval);
-              reject('TimeOut');
-            }
-
-          } catch (e) {
-            reject(e);
-          }
-
-        }, 500);
-
-      });
+      let value = '';
+      // key = key.replace(/ /g,"_");
+      if(self.userLang && self.en) {
+        value = self._obtain(key);
+        return value;
+      } else {
+        return key;
+      }
 
     }
+    static getSeveral(keys) {
+    let max=0;
+    const self = this;
+    return new Promise (async (resolve, reject) => {
+      const interval = setInterval(function () {
+        try {
+          let values = [];
+
+          if(self.userLang && self.en) {
+            keys = keys.split(",");
+            values = keys.map(function (key){
+              key = key.replace(/ /g,"_");
+              return [key, self._obtain(key)]
+            });
+            values = Object.fromEntries(values);
+          }
+          if(values) {
+            clearInterval(interval);
+            resolve(values);
+          }
+          max++;
+          if(max === 10) {
+            clearInterval(interval);
+            reject('TimeOut');
+          }
+
+        } catch (e) {
+          reject(e);
+        }
+
+      }, 500);
+
+    });
+
+  }
 
     static _obtain(key) {
     const self = this;

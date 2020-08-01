@@ -13,8 +13,11 @@ parasails.registerPage('chat-page', {
   //  ║  ║╠╣ ║╣ ║  ╚╦╝║  ║  ║╣
   //  ╩═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝
   beforeMount: function() {
+
     // Attach any initial data from the server.
     _.extend(this, SAILS_LOCALS);
+    Sockets.mySocket();
+    Sockets.myChat(this.chat.userId);
     this._initialValidation();
   },
   mounted: async function() {

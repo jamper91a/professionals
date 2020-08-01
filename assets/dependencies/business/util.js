@@ -27,33 +27,33 @@ const SOCKET_EVENTS = {
 
 
 
-
-function callProfessional(professionalId) {
-  alert("CALL PROFESSIONAL: " + professionalId)
-}
-function chatProfessional(professionalId) {
-  WebServices.createChat(professionalId, function (chat) {
-    $('#confirmChat').modal('show');
-  }, async function (error) {
-    OverHang.error(await I.get(error.exit));
-  })
-}
-function openChatWindow(){
-  // window.open('/chat', '_blank', 'status=0,toolbar=0,location=0,menubar=0,directories=0,resizable=1,'+
-  // 'scrollbars=0,width=600,height=600');
-  window.open('/chat', '_blank');
-  $('#confirmChat').modal('hide');
-}
+//
+// function callProfessional(professionalId) {
+//   alert("CALL PROFESSIONAL: " + professionalId)
+// }
+// function chatProfessional(professionalId) {
+//   WebServices.createChat(professionalId, function (chat) {
+//     $('#confirmChat').modal('show');
+//   }, async function (error) {
+//     OverHang.error(I.get(error.exit));
+//   })
+// }
+// function openChatWindow(){
+//   // window.open('/chat', '_blank', 'status=0,toolbar=0,location=0,menubar=0,directories=0,resizable=1,'+
+//   // 'scrollbars=0,width=600,height=600');
+//   window.open('/chat', '_blank');
+//   $('#confirmChat').modal('hide');
+// }
 function changeProfessionalStatus(statusId) {
   WebServices.changeProfessionalStatus(statusId,
     async function (professional) {
 
-      OverHang.success(await I.get('state_changed'));
+      OverHang.success(I.get('state_changed'));
       const state = professional.state.name;
       professional.state.name = state.replace(" ","_");
       //Change the status in the area
-      $("#notify_current_state").html(await I.get(`PROFESSIONAL_STATES_${professional.state.name}`));
-      $("#notify_current_state_mobile").html(await I.get(`PROFESSIONAL_STATES_${professional.state.name}`));
+      $("#notify_current_state").html(I.get(`PROFESSIONAL_STATES_${professional.state.name}`));
+      $("#notify_current_state_mobile").html(I.get(`PROFESSIONAL_STATES_${professional.state.name}`));
   }, function () {
     OverHang.error('State not change');
 
