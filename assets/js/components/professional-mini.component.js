@@ -157,6 +157,7 @@ parasails.registerComponent('professional-mini', {
       const self = this;
       this._analyzeCss();
       ProfessionalsEvents.$on('professional-mini', function (event, data) {
+        if(data.professional.id === self.myProfessional.id){
         switch (event) {
           case 'chatAccepted':
             self.chat = data.chat;
@@ -166,15 +167,10 @@ parasails.registerComponent('professional-mini', {
             self._chatDeclined(data);
             break;
           case 'changeStatus':
-            console.log(self.myProfessional);
-            if(data.professional.id === self.myProfessional.id){
-              console.log('changeStatus');
               self.myProfessional = data.professional;
               self._analyzeCss();
-            }
-
             break;
-
+        }
         }
       });
     },
@@ -242,7 +238,7 @@ parasails.registerComponent('professional-mini', {
       },
       cancelChat: function () {
         $('#confirmChat').modal('hide');
-        WebServices.declineChatByCustomer(this.chat.id, function (chat) {
+        WebServices.finishChat(this.chat.id, CHAT_STATES.DECLINED_BY_CUSTOMER, function (chat) {
         }, async function (error) {
           OverHang.error(I.get(error.exit));
         });
@@ -252,7 +248,7 @@ parasails.registerComponent('professional-mini', {
       _chatDeclined: function (data) {
         console.log('_chatDeclined', data);
         $('#confirmChat').modal('hide');
-        WebServices.declineChat(data.chat.id, function (chat) {
+        WebServices.finishChat(data.chat.id, CHAT_STATES.DECLINED_BY_PROFESSIONAL, function (chat) {
         }, async function (error) {
           OverHang.error(I.get(error.exit));
         });

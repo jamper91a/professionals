@@ -24,6 +24,8 @@ module.exports.cron = {
     schedule: '*/30 * * * * *',
     onTick: async function () {
       await sails.helpers.chat.checkChats();
+      await sails.helpers.chat.billChats();
+      await sails.helpers.chat.checkChatsUsersConnection();
     },
     runOnInit: true
   }

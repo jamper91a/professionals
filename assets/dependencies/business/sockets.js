@@ -32,9 +32,9 @@ class Sockets {
         OverHang.confirm(I.get(SOCKET_EVENTS.NEW_CHAT_INCOME),  function (answer) {
           Sounds.stop();
         }, function () {
-          ProfessionalsEvents.$emit('professional-mini', 'chatAccepted', {chat});
+          ProfessionalsEvents.$emit('professional-mini', 'chatAccepted', {chat, professional: chat.professional});
         }, function () {
-          ProfessionalsEvents.$emit('professional-mini', 'chatDeclined', {chat});
+          ProfessionalsEvents.$emit('professional-mini', 'chatDeclined', {chat, professional: chat.professional});
         });
       }
     });
@@ -70,8 +70,7 @@ class Sockets {
       }
     });
     io.socket.on(SOCKET_EVENTS.CHAT_FINISHED, function(data, jwr) {
-      console.log('emit chat newMessageChat');
-      window.close();
+      ProfessionalsEvents.$emit('chat', 'chatFinished', {});
     });
   }
 

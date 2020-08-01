@@ -37,29 +37,11 @@ class WebServices {
         return success(data);
     })
   }
-  static declineChat(chatId, success, error) {
-    let url = "/api/chat/decline";
-    Api.post(url, {chatId},function (err, data) {
-      if(err)
-        return error(err.responseJSON.data);
-      if(data)
-        return success(data);
-    })
-  }
-  static declineChatByCustomer(chatId, success, error) {
-    let url = "/api/chat/decline-by-customer";
-    Api.post(url, {chatId},function (err, data) {
-      if(err)
-        return error(err.responseJSON.data);
-      if(data)
-        return success(data);
-    })
-  }
 
-  static finishChat(chatId, overTime, success, error, beforeUnload = false) {
+  static finishChat(chatId, reason, success, error, beforeUnload = false) {
     let url = "/api/chat/finish";
     if(!beforeUnload) {
-      Api.post(url, {chatId, overTime},function (err, data) {
+      Api.post(url, {chatId, reason},function (err, data) {
         if(err)
           return error(err.responseJSON.data);
         if(data)
@@ -68,25 +50,9 @@ class WebServices {
     } else {
       const fd = new FormData();
       fd.append('chatId', chatId);
-      fd.append('overTime', overTime);
+      fd.append('reason', reason);
       navigator.sendBeacon(url, fd);
     }
-  }
-  static finishBeforeStart(chatId, success, error, beforeUnload) {
-    let url = "/api/chat/finish-before-start";
-    if(!beforeUnload) {
-      Api.post(url, {chatId},function (err, data) {
-        if(err)
-          return error(err.responseJSON.data);
-        if(data)
-          return success(data);
-      })
-    } else {
-      const fd = new FormData();
-      fd.append('chatId', chatId);
-      navigator.sendBeacon(url, fd);
-    }
-
   }
 
   static createPayment(offerId, success, error) {
@@ -96,7 +62,15 @@ class WebServices {
         return error(err.responseJSON.data);
       if(data)
         return success(data);
-    })
+    });
+  }
+  static pingChat(chatId, role) {
+    let url = "/api/chat/ping";
+      Api.post(url, {chatId, role},function (err, data) {
+        if(err)
+          console.log(error(err.responseJSON.data));
+      });
+
   }
 }
 

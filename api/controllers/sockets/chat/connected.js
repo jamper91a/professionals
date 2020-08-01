@@ -64,7 +64,7 @@ module.exports = {
       chat = await Chat.findOne({id:chat.id});
       if(chat.professionalState === sails.config.custom.CHAT_USER_STATE.CONNECTED &&  chat.customerState === sails.config.custom.CHAT_USER_STATE.CONNECTED) {
         const startTime = moment().format('YYYY-MM-DD HH:mm:ss');
-        await Chat.updateOne({id: chat.id}).set({startTime: startTime});
+        await Chat.updateOne({id: chat.id}).set({startTime: startTime, chatState: sails.config.custom.CHAT_STATES.STARTED});
       }
       await sails.helpers.socket.send('chat-' + chat.id, sails.config.custom.SOCKET_EVENTS.USER_CONNECTED_CHAT,
         {

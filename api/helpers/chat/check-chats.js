@@ -5,7 +5,7 @@ module.exports = {
   friendlyName: 'Check chats',
 
 
-  description: 'Check the chats and finish the ones who does not fill the requirements',
+  description: 'Check the chats that has not been answered by the professional',
 
 
   exits: {
@@ -18,7 +18,8 @@ module.exports = {
 
 
   fn: async function () {
-    const chats = await Chat.find({chatState: [sails.config.custom.CHAT_STATES.CREATED,sails.config.custom.CHAT_STATES.ACCEPTED]}).populate('professional');
+    //Check all the chats that were accepted by the customer, but the reader has not reply yet.
+    const chats = await Chat.find({chatState: [sails.config.custom.CHAT_STATES.ACCEPTED], professionalState: null}).populate('professional');
     for(const chat of chats) {
       //Check how long ago the chat was created, if is more than 60 sec, I will finished it
       var currentTime = new moment();
@@ -26,10 +27,10 @@ module.exports = {
       const difference = currentTime.diff(chatTime, 'seconds');
       if(difference>60) {
         console.log('Finish chat because no reply')
-        await sails.helpers.chat.finish(undefined, undefined, chat.id, undefined, true, undefined);
+        await sails.helpers.chat.finish.with({chatId: chat.id, reason: sails.config.custom.CHAT_STATES.FINISHED_BY_NO_ANSWER});
       }
-      // await sails.helpers.socket.send('user-' + chat.professional.user, sails.config.custom.SOCKET_EVENTS.NEW_CHAT_INCOME, chat);
     }
+    return {};
   }
 
 

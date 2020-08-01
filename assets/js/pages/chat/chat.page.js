@@ -8,7 +8,9 @@ parasails.registerPage('chat-page', {
     otherUserName: '',
     otherUserStatus: 'offline',
     beforeunload: false,
-    userCloseWindow: false
+    userCloseWindow: false,
+    //Var to know who will finish the chat, customer or professioanl
+    finishBy: 0
   },
 
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
@@ -41,10 +43,18 @@ parasails.registerPage('chat-page', {
           case 'chatStarTimer':
             self._chatStarTimer(data.duration, data.chatId);
             break;
+          case 'chatFinished':
+            self.closeChatWindow();
+            break;
 
         }
       });
-      window.addEventListener('beforeunload',  this.preventNav)
+      window.addEventListener('beforeunload',  this.preventNav);
+      WebServices.pingChat(self.chat.id, self.chat.userType);
+      self._chatPing(self.chat.id, self.chat.userType)
+      if(this.chat.userType === USER_ROLE.PROFESSIONAL) {
+        self._newUserConnected();
+      }
     } else {
       this._noValidChat();
     }
@@ -62,8 +72,9 @@ parasails.registerPage('chat-page', {
   methods: {
     preventNav: function (event){
       this.beforeunload = true;
+      //In case user close the window pressing the x button at the top
       if(!this.userCloseWindow) {
-        this._finishChat(this.chat.id, false);
+        this._finishChat(this.chat.id, this.finishBy);
       }
       return null;
     },
@@ -73,12 +84,13 @@ parasails.registerPage('chat-page', {
         if(!this.chat.professionalState) {
           this.otherUserStatus = 'offline';
         }
+        this.finishBy = CHAT_STATES.FINISHED_BY_CUSTOMER;
       }else if(this.chat.userType === USER_ROLE.PROFESSIONAL) {
         this.otherUserName = this.chat.customer.user.name;
         if(!this.chat.customerState) {
           this.otherUserStatus = 'offline';
         }
-        // this._chatStarTimer(this.chat.maxDuration, this.chat.id);
+        this.finishBy = CHAT_STATES.FINISHED_BY_PROFESSIONAL;
       }
     },
     _chatStarTimer: function (seconds, chatId) {
@@ -89,20 +101,20 @@ parasails.registerPage('chat-page', {
         $('#basicUsage').html(timerInstance.getTimeValues().toString());
       });
       timerInstance.addEventListener('targetAchieved', function (e) {
-        self.endChat(chatId, true);
+        self.endChat(chatId, CHAT_STATES.FINISHED_BY_OVERTIME);
       });
     },
     _newMessageChat: function (msn, myId) {
       if(myId!==msn.user)
         this.addMessageReceived(msn.message);
     },
-    endChat: function (chatId, overtime) {
+    endChat: function (chatId, reason) {
       this.userCloseWindow = true;
-      this._finishChat(chatId, overtime);
+      this._finishChat(chatId, reason);
     },
-    _finishChat: async function (chatId, overTime) {
+    _finishChat: async function (chatId, reason) {
         if(this.otherUserStatus === 'online') {
-          WebServices.finishChat(chatId, overTime, function () {
+          WebServices.finishChat(chatId, reason, function () {
 
             window.close();
           }, function (e) {
@@ -157,7 +169,7 @@ parasails.registerPage('chat-page', {
     },
     _finishChatBeforeStart: function (){
       return new Promise (async (resolve, reject) => {
-          WebServices.finishBeforeStart(this.chat.id, function (){ resolve()}, function (e){reject(e)}, this.beforeunload);
+          WebServices.finishChat(this.chat.id, CHAT_STATES.FINISHED_BEFORE_START, function (){ resolve()}, function (e){reject(e)}, this.beforeunload);
       });
 
     },
@@ -174,6 +186,11 @@ parasails.registerPage('chat-page', {
     translate: function (key) {
       return I.get(key);
     },
+    _chatPing: function(chatId, role) {
+      setInterval(function (){
+        WebServices.pingChat(chatId, role);
+      }, 25000);
+    }
   }
 });
 

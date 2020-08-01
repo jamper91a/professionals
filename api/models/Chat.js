@@ -31,6 +31,18 @@ module.exports = {
     cost: {
       type: "number"
     },
+    customerLastPing:{
+      type: "ref",
+      columnType: 'datetime'
+    },
+    professionalLastPing:{
+      type: "ref",
+      columnType: 'datetime'
+    },
+    billed: {
+      type: "boolean",
+      defaultsTo: false
+    },
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
