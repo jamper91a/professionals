@@ -36,6 +36,11 @@ module.exports = {
     },
     group: {
       type: "number"
+    },
+    db: {
+      type: 'ref',
+      required: false,
+      defaultsTo: null
     }
   },
 
@@ -52,17 +57,29 @@ module.exports = {
 
 
   fn: async function (inputs, exits) {
-    try {
-      if(inputs.password === inputs.password2){
-        delete inputs.password2;
-        var user = await User.create(inputs).fetch();
-        return exits.success(user);
-      }else{
-        return exits.serverError(sails.__('Passwords does not match'));
-      }
-    } catch (e) {
-      return exits.serverError(e);
-    }
+
+    return await sails.getDatastore()
+      .transaction(async (db)=> {
+
+        try {
+          if(inputs.password === inputs.password2){
+            let dbConnection = inputs.db;
+            if(!dbConnection) {
+              dbConnection =db;
+            }
+            delete inputs.password2;
+            delete inputs.db;
+            var user = await User.create(inputs).fetch().usingConnection(dbConnection);
+            return exits.success(user);
+          }else{
+            return exits.serverError(sails.__('Passwords does not match'));
+          }
+        } catch (e) {
+          return exits.serverError(e);
+        }
+      })
+
+
   }
 
 

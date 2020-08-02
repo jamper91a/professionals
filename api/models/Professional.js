@@ -19,6 +19,11 @@ module.exports = {
     score: {
       type: "number"
     },
+    balance: {
+      type: 'number',
+      defaultsTo: 0,
+      allowNull: true
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -35,6 +40,9 @@ module.exports = {
       model: "rate"
     },
     state: {
+      model: "state"
+    },
+    previousState: {
       model: "state"
     },
     user:{

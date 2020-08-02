@@ -1,0 +1,99 @@
+
+    <div id="customer-top-up" class="container-fluid">
+      <br>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>Default Tab</h4>
+            </div>
+            <div class="card-body">
+              <div class="default-tab">
+                <nav>
+                  <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+                    <% data.gateways.forEach(function(gateway, index) {
+                      var active = '';
+                      if(index===0) {
+                        active = 'active'
+                      }
+                    %>
+                      <a class="nav-item nav-link <%=active%>"
+                         id="nav-<%=gateway.name%>-tab"
+                         data-toggle="tab"
+                         href="#nav-<%=gateway.name%>"
+                         role="tab"
+                         aria-controls="nav-<%=gateway.name%>"
+                         aria-selected="true">
+                        <%=gateway.name%>
+                      </a>
+                    <% }); %>
+
+                  </div>
+                </nav>
+                <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                  <% data.gateways.forEach(function(gateway, index) {
+                    active = '';
+                    if(index===0) {
+                      active = 'active'
+                    }
+                    %>
+                    <div class="tab-pane fade show <%=active%>" id="nav-<%=gateway.name%>" role="tabpanel" aria-labelledby="nav-<%=gateway.name%>-tab">
+                      <%=__('Description '+ gateway.name)%>
+                      <form id="gateway-<%=gateway.id%>" class="gatewayForm" v-on:submit.prevent="buying('<%=gateway.id%>')" >
+                        <div class="form-check">
+                          <div class="section over-hide z-bigger">
+                            <div class="section over-hide z-bigger">
+                              <div class="container pb-5">
+                                <div class="row justify-content-center pb-5">
+                                  <div class="col-xl-10 pb-5">
+                        <% data.offers[gateway.id].forEach(function(offer) { %>
+<!--                        <div id="offers-<%=gateway.id%>">-->
+
+                                    <input
+                                            type="radio"
+                                            id="<%=offer.id%>"
+                                            name="offers-<%=gateway.id%>"
+                                            value="<%=offer.id%>"
+                                            class="checkbox-budget">
+                                    <label for="<%=offer.id%>" class="for-checkbox-budget">
+                                      <span data-hover="<%=offer.amount%><%=offer.domain.currency.symbol%>"><%=offer.amount%><%=offer.domain.currency.symbol%></span>
+<!--                                      <%if(offer.bonus && offer.bonus>0){%>-->
+<!--                                      <small>( + <%=offer.bonus%> free)</small>-->
+<!--                                      <%}%>-->
+                                    </label>
+
+<!--                        </div>-->
+                          <% }); %>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <div>
+                          <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block btn-primary">
+                            <i class="fa fa-lock fa-lg"></i>&nbsp;
+                            <span id="payment-button-amount">Pay</span>
+                          </button>
+                        </div>
+                      </div>
+                      </form>
+                    </div>
+                  <% }); %>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /# column -->
+      </div>
+
+      <div class="row">
+
+
+      </div>
+    </div>
+
+
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

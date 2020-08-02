@@ -28,37 +28,57 @@ module.exports = {
     success: {
       description: 'All done.',
     },
+    professionalNoCreated: {
+      description: 'Professional was not created'
+    },
+    userNoCreated: {
+      description: 'User was not created'
+    }
 
   },
 
 
   fn: async function (inputs) {
-    //Create user
-    try{
-      inputs.user.group = sails.config.custom.USER_PROFESSIONAL;
-      const newUser = await sails.helpers.user.create.with(inputs.user);
-      if(newUser){
-        const professional = {
-          picture: "",
-          score: 5,
-          profession: inputs.profession,
-          rate: inputs.rate,
-          state: sails.config.custom.STATUS_OFFLINE,
-          user: newUser.id
-        };
-        const newProfessional  = await Professional.create(professional).fetch();
-        if(newProfessional){
-          return  newProfessional;
-        }else{
-          throw {serverError: {message: "Professional not created"}};
-        }
-      }else{
-        throw {serverError: {message: "User not created"}};
-      }
 
-    } catch (e) {
-      throw {serverError: e};
-    }
+    return await sails.getDatastore()
+      .transaction(async (db)=> {
+
+        //Create user
+        let newUser;
+        try {
+          inputs.user.group = sails.config.custom.USER_PROFESSIONAL;
+          inputs.user.db = db;
+          newUser = await sails.helpers.user.create.with(inputs.user);
+        } catch (e) {
+          throw 'userNoCreated';
+        }
+        if(newUser){
+          const professional = {
+            picture: "",
+            score: 5,
+            profession: inputs.profession,
+            rate: inputs.rate,
+            state: sails.config.custom.PROFESSIONAL_STATES.OFFLINE,
+            user: newUser.id
+          };
+          try {
+            let newProfessional = await Professional.create(professional).fetch().usingConnection(db);
+            newProfessional.user = newUser;
+            if(newProfessional){
+              return  newProfessional;
+            }else{
+              throw 'professionalNoCreated';
+            }
+          } catch (e) {
+            throw 'professionalNoCreated';
+          }
+
+        }else{
+          throw 'userNoCreated';
+        }
+      });
+
+
   }
 
 

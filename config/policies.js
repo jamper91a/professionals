@@ -25,6 +25,7 @@ module.exports.policies = {
    * Customer pages
    */
   'customer/view-historic' : ['isAuthenticated','isCustomer'],
+  'customer/view-top-up' : ['isAuthenticated','isCustomer'],
 
   /**
    * Admin
@@ -41,15 +42,17 @@ module.exports.policies = {
   'api/customer/create': true,
   'api/country/*': ['isAuthenticated', 'isAdmin'],
   'api/country/find-all': true,
+  'api/payment/*': ['isAuthenticated', 'isCustomer'],
   'api/professional/*': ['isAuthenticated', 'isAdmin'],
   'api/professional/create': true,
   'api/professional/change-status': ['isAuthenticated', 'isProfessional'],
+  'api/payment/webhook/*': true,
 
   /**
    * Sockets
    */
+  'sockets/*': ['isAuthenticated'],
   'sockets/professionals': true,
-  'sockets/user': ['isAuthenticated']
   /**
    * Partial views
    */

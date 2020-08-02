@@ -24,7 +24,9 @@ module.exports.routes = {
   /**
    * WEB
    */
-
+  'GET /customer/historic': 'customer/view-historic',
+  'GET /customer/topUp': 'customer/view-top-up',
+  'GET /chat/:chatId': 'chat/view-chat',
   'GET /register': 'customer/register/view-index',
   'POST /register': 'customer/register/view-index',
   'GET /professional/register': 'professional/view-register',
@@ -32,8 +34,6 @@ module.exports.routes = {
   'GET /user/logout': 'user/logout',
   'GET /user/login': 'user/view-login',
   'POST /user/login': 'user/view-login',
-  'GET /customer/historic': 'customer/view-historic',
-
   /**
    * Admin Views
    */
@@ -47,24 +47,26 @@ module.exports.routes = {
    * Api
    */
   'POST /api/login': 'api/user/login',
+  'POST /api/chat/create': 'api/chat/create',
+  'POST /api/chat/finish': 'api/chat/finish',
+  'POST /api/chat/ping': 'api/chat/ping',
   'GET /api/customer/': 'api/customer/find-all',
   'GET /api/country/': 'api/country/find-all',
   'POST /api/user/ban': 'api/user/ban',
   'POST /api/user/remove': 'api/user/remove',
   'POST /api/customer': 'api/customer/create',
+  'POST /api/payment/create': 'api/payment/create',
   'POST /api/professional': 'api/professional/create',
   'POST /api/professional/changeStatus': 'api/professional/change-status',
+  'POST /api/payment/stripe': 'api/payment/webhook/stripe',
 
   /**
    * Sockets
    */
   'GET /api/professionals/subscribe': 'sockets/professionals',
   'GET /api/user/subscribe': 'sockets/user',
-  /**
-   * Partial Views
-   */
-  'PATCH /pv/admin/customer/customer-table': {action: 'admin/partial-view/customer/view-all/customer-table'},
-  'PATCH /pv/admin/professional/professional-table': {action: 'admin/partial-view/professional/view-all/professional-table'},
-  'PATCH /pv/professionals-home': {action: 'partial-view/professionals-home'},
+  'GET /api/chat/subscribe': 'sockets/chat',
+  'POST /api/chat/sendMessage': 'sockets/chat/send-message',
+  'GET /api/chat/connected': 'sockets/chat/connected',
 
 };

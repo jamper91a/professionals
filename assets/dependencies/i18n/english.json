@@ -5,6 +5,16 @@
     "PROFESSIONAL_STATES_OFFLINE": "OFFLINE",
     "PROFESSIONAL_STATES_JUST_CALLS": "JUST CALLS",
     "PROFESSIONAL_STATES_JUST_CHATS": "JUST CHAT",
-    "PROFESSIONAL_STATES_BUSY": "BUSY"
+    "PROFESSIONAL_STATES_BUSY": "BUSY",
+    "customerCanNotChat": "You have not finished your previous chat",
+    "TOP_UP_SUCCESSFUL": "Funds added to your account",
+    "FINISHED_BY_CUSTOMER":"The customer has finished the chat. Thank you",
+    "FINISHED_BY_PROFESSIONAL":"The professional has finished the chat. Thank you",
+    "FINISHED_BY_ADMIN":"The system has finished the chat. Sorry if this cause you anny issue",
+    "FINISHED_BY_OVERTIME":"The chat has reach its time limit. You can add funds and start a new chat",
+    "FINISHED_BY_NO_ANSWER":"We are sorry, but the professional did not reply to the chat request",
+    "DECLINED_BY_PROFESSIONAL":"We are sorry, but the professional decline the chat request",
+    "LOST_CONNECTION_CUSTOMER":"We are sorry, but the chat has been finish because we can not reach the customer",
+    "LOST_CONNECTION_PROFESSIONAL":"We are sorry, but the chat has been finish because we can not reach the professional"
   }
 }

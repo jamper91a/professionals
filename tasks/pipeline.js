@@ -65,11 +65,19 @@ var cssFilesToInject = [
 // Client-side javascript files to inject as <script> tags, in order.
 //
 var jsFilesToInject = [
+// Load `sails.io` before everything else.
+  'dependencies/required/sails.io.js',
 
-  // Load `sails.io` before everything else.
-  'dependencies/sails.io.js',
+  // Bring in `.js` files for any other client-side JavaScript dependencies.
+  // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)
+  // > Be sure to list dependencies that depend on each other in the right order!
+  'dependencies/required/lodash.js',
+  'dependencies/required/bowser.js',
+  'dependencies/required/vue.js',
+  'dependencies/required/parasails.js',
   <!-- Jquery JS-->
-  'dependencies/jquery-3.4.1.min.js',
+  'dependencies/required/jquery-3.4.1.min.js',
+  'dependencies/required/jquery-ui.min.js',
   <!-- Bootstrap JS-->
   'dependencies/vendor/bootstrap-4.1/popper.min.js',
   'dependencies/vendor/bootstrap-4.1/bootstrap.min.js',
@@ -85,18 +93,22 @@ var jsFilesToInject = [
   // 'dependencies/vendor/perfect-scrollbar/perfect-scrollbar.js',
   'dependencies/vendor/chartjs/Chart.bundle.min.js',
   'dependencies/vendor/select2/select2.min.js',
+  //Plugins extra
+  'dependencies/plugins/*.js',
+  //To manage different languages
+  'dependencies/i18n/*.js',
+  //To play sounds
+  'dependencies/ion.sound-3.0.7/*.js',
+  //Base js from the template
   'dependencies/main.js',
-  'dependencies/i18n/I.js',
 
-  // Bring in `.js` files for any other client-side JavaScript dependencies.
-  // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)
-  // > Be sure to list dependencies that depend on each other in the right order!
-  'dependencies/**/*.js',
+  //Js files created to manage logic of the system
+  'dependencies/business/*.js',
 
   // All of the rest of your custom client-side js files will be injected here,
   // in no particular order.  To customize the ordering, add additional items
   // here, _above_ this one.
-  'js/**/*.js'
+  'js/**/*.js',
 ];
 
 

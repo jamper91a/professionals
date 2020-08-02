@@ -1,147 +1,148 @@
 <%- exposeLocalsToBrowser() %>
 <!-- USER DATA-->
 
-<div class="user-data m-b-30">
-  <h3 class="title-3 m-b-30">
-    <i class="zmdi zmdi-account-calendar"></i><%__('customers')%></h3>
-  <div class="table-responsive table-data">
-    <table class="table">
-      <thead>
-      <tr>
-        <td>
-          <label class="au-checkbox">
-            <input type="checkbox">
-            <span class="au-checkmark"></span>
-          </label>
-        </td>
-        <td><%=__('Name')%></td>
-        <td><%=__('Email')%></td>
-        <td><%=__('Balance')%></td>
-        <td><%=__('Date')%></td>
-        <td></td>
-      </tr>
-      </thead>
-      <tbody>
-      <% customers.forEach(function(customer) { %>
-      <tr>
-        <td>
-          <label class="au-checkbox">
-            <input type="checkbox">
-            <span class="au-checkmark"></span>
-          </label>
-        </td>
-        <td>
-          <div class="table-data__info">
-            <h6><%=customer.user.name%></h6>
-            <% if (customer.user.banned){%>
-            <span class="badge badge-warning">
-                <%if(customer.user.banned) {%><a href="#"><%=__('Banned')%></a> <%}%>
-            </span>
-            <% } %>
-          </div>
-        </td>
-        <td>
-          <span class="table-data__info"><%=customer.user.username%></span>
-        </td>
-        <td>
-          <span class="table-data__info">$<%=customer.balance%></span>
-        </td>
-        <td>
-          <span class="table-data__info"><%=customer.createdAt%></span>
-        </td>
-        <td>
-          <div class="table-data__info">
-
-            <%if(customer.user.banned) {%>
-            <button data-toggle="modal" data-target="#unbanmodal" onclick="selectUser(<%=customer.user.id%>)" type="button" class="btn btn-outline-warning">
-              <i class="zmdi zmdi-close-circle-o"></i>&nbsp; <%=__('UnBan')%>
-            </button>
-            <%} else {%>
-            <button data-toggle="modal" data-target="#banmodal" onclick="selectUser(<%=customer.user.id%>)" type="button" class="btn btn-outline-danger">
-              <i class="zmdi zmdi-close-circle-o"></i>&nbsp; <%=__('Ban')%>
-            </button>
-            <%}%>
-            <button data-toggle="modal" data-target="#deletemodal" onclick="selectUser(<%=customer.user.id%>)" type="button" class="btn btn-outline-danger">
-              <i class="zmdi zmdi-delete"></i>&nbsp; <%=__('Delete')%>
-            </button>
-          </div>
-        </td>
-      </tr>
-      <% }) %>
-      </tbody>
-    </table>
+<div id="admin-customer-all">
+  <div class="user-data m-b-30">
+    <h3 class="title-3 m-b-30">
+      <i class="zmdi zmdi-account-calendar"></i>
+      <% __('customers'); %>
+    </h3>
+    <div class="table-responsive table-data">
+      <table class="table">
+        <thead>
+        <tr>
+          <td>
+            <label class="au-checkbox">
+              <input type="checkbox">
+              <span class="au-checkmark"></span>
+            </label>
+          </td>
+          <td><%= __('Name') ;%></td>
+          <td><%= __('Email') ;%></td>
+          <td><%= __('Balance') ;%></td>
+          <td><%= __('Date') ;%></td>
+          <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(customer, index) in customers">
+          <td>
+            <label class="au-checkbox">
+              <input type="checkbox">
+              <span class="au-checkmark"></span>
+            </label>
+          </td>
+          <td>
+            <div class="table-data__info">
+              <h6>{{customer.user.name}}</h6>
+              <span class="badge badge-warning" v-if="customer.user.banned">
+                    <a href="#" v-if="customer.user.banned"><%= __('Banned'); %></a>
+                </span>
+            </div>
+          </td>
+          <td>
+            <span class="table-data__info">{{customer.user.username}}</span>
+          </td>
+          <td>
+            <span class="table-data__info">${{customer.balance}}</span>
+          </td>
+          <td>
+            <span class="table-data__info">{{customer.createdAt}}</span>
+          </td>
+          <td>
+            <div class="table-data__info">
+              <button data-toggle="modal" data-target="#unbanmodal"
+                      @click="selectUser(customer.user.id, index)"
+                      type="button" class="btn btn-outline-warning" v-if="customer.user.banned">
+                <i class="zmdi zmdi-close-circle-o"></i>&nbsp; <%= __('UnBan'); %>
+              </button>
+              <button data-toggle="modal" data-target="#banmodal"
+                      @click="selectUser(customer.user.id, index)"
+                      type="button" class="btn btn-outline-danger" v-if="!customer.user.banned">
+                <i class="zmdi zmdi-close-circle-o"></i>&nbsp; <%= __('Ban'); %>
+              </button>
+              <button data-toggle="modal" data-target="#deletemodal"
+                      @click="selectUser(customer.user.id, index)"
+                      type="button" class="btn btn-outline-danger">
+                <i class="zmdi zmdi-delete"></i>&nbsp; <%= __('Delete'); %>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div class="user-data__footer">
-    <button onclick="experiment()" class="au-btn au-btn-load">load more</button>
-    <button onclick="experiment()">try</button>
-  </div>
-</div>
-<!-- END USER DATA-->
+  <!-- END USER DATA-->
 
-<!-- modal Ban -->
-<div class="modal fade" id="banmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="smallmodalLabel"><%=__('Ban_User')%></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>
-          <%=__('Are_you_sure_you_want_to_ban_this_user')%>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%=__('Cancel')%></button>
-        <button onclick="banUser(1)" type="button" class="btn btn-primary"><%=__('Confirm')%></button>
+  <!-- modal Ban -->
+  <div class="modal fade" id="banmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="smallmodalLabel"><%= __('Ban_User') %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <%= __('Are_you_sure_you_want_to_ban_this_user') %>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= __('Cancel') %></button>
+          <button @click="banUser(1)" type="button" class="btn btn-primary"><%= __('Confirm') %></button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- end modal Ban -->
-<!-- modal UnBan -->
-<div class="modal fade" id="unbanmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="smallmodalLabel"><%=__('Un_Ban_User')%></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>
-          <%=__('Are_you_sure_you_want_to_un_ban_this_user')%>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%=__('Cancel')%></button>
-        <button onclick="banUser(0)" type="button" class="btn btn-primary"><%=__('Confirm')%></button>
+  <!-- end modal Ban -->
+  <!-- modal UnBan -->
+  <div class="modal fade" id="unbanmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="smallmodalLabel"><%= __('Un_Ban_User') %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <%= __('Are_you_sure_you_want_to_un_ban_this_user') %>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= __('Cancel') %></button>
+          <button @click="banUser(0)" type="button" class="btn btn-primary"><%= __('Confirm') %></button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- end modal UnBan -->
-<!-- modal Delete -->
-<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="smallmodalLabel"><%=__('Delete_User')%></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>
-          <%=__('Are_you_sure_you_want_to_delete_this_user')%>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%=__('Cancel')%></button>
-        <button onclick="deleteUser()" type="button" class="btn btn-primary"><%=__('Confirm')%></button>
+  <!-- end modal UnBan -->
+  <!-- modal Delete -->
+  <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="smallmodalLabel"><%= __('Delete_User') %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <%= __('Are_you_sure_you_want_to_delete_this_user') %>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= __('Cancel') %></button>
+          <button @click="deleteUser()" type="button" class="btn btn-primary"><%= __('Confirm') %></button>
+        </div>
       </div>
     </div>
   </div>

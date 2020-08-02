@@ -27,7 +27,7 @@ module.exports = {
         const socketId = sails.sockets.getId(this.req);
         //Save the socketId to disconnect in the future
         await Socket.create({socketId, user: this.req.user.id});
-        return 'Connected to my socket';
+        return 'Connected to my socket: ' + this.req.user.id;
       }else{
         return this.res.badRequest();
       }
