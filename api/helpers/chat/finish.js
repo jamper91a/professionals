@@ -84,7 +84,7 @@ module.exports = {
       }
       await Chat.updateOne({id: chat.id}).set({chatState: reason, finishTime:finishTime.format('YYYY-MM-DD HH:mm:ss'), billed: true});
       // Notify users chat has been finished
-      await sails.helpers.socket.send('chat-'+chat.id, sails.config.custom.SOCKET_EVENTS.CHAT_FINISHED, {});
+      await sails.helpers.socket.send('chat-'+chat.id, sails.config.custom.SOCKET_EVENTS.CHAT_FINISHED, {reason});
       //Remove users from the chat
       sails.sockets.leaveAll('chat-'+chat.id);
       return {};

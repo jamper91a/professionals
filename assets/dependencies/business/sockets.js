@@ -70,7 +70,7 @@ class Sockets {
       }
     });
     io.socket.on(SOCKET_EVENTS.CHAT_FINISHED, function(data, jwr) {
-      ProfessionalsEvents.$emit('chat', 'chatFinished', {});
+      ProfessionalsEvents.$emit('chat', 'chatFinished', {reason: data.reason});
     });
   }
 

@@ -10,7 +10,10 @@ parasails.registerPage('chat-page', {
     beforeunload: false,
     userCloseWindow: false,
     //Var to know who will finish the chat, customer or professioanl
-    finishBy: 0
+    finishBy: 0,
+    //Var to know if the finish message has been shown
+    finishMessageShown: false,
+    reason_message: ''
   },
 
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
@@ -44,7 +47,7 @@ parasails.registerPage('chat-page', {
             self._chatStarTimer(data.duration, data.chatId);
             break;
           case 'chatFinished':
-            self.closeChatWindow();
+            self.closeChatWindow(data.reason);
             break;
 
         }
@@ -113,10 +116,10 @@ parasails.registerPage('chat-page', {
       this._finishChat(chatId, reason);
     },
     _finishChat: async function (chatId, reason) {
+      const self = this;
         if(this.otherUserStatus === 'online') {
           WebServices.finishChat(chatId, reason, function () {
-
-            window.close();
+              window.close();
           }, function (e) {
             console.error(e);
           }, this.beforeunload);
@@ -179,9 +182,22 @@ parasails.registerPage('chat-page', {
         keyboard: false
       });
     },
-    closeChatWindow: function (){
-      this.userCloseWindow = true;
-      window.close();
+    closeChatWindow: function (reason){
+      if(!this.finishMessageShown) {
+        this.finishMessageShown = true;
+        this.reason_message = Object.keys(CHAT_STATES).filter(function(key) {return CHAT_STATES[key] === reason})[0];
+        //Logic to know which message to show
+        this.userCloseWindow = true;
+        $('#finishMessage').modal({
+          backdrop: 'static',
+          keyboard: false
+        });
+        setTimeout(function (){
+          window.close();
+        }, 5000)
+      }
+
+
     },
     translate: function (key) {
       return I.get(key);
