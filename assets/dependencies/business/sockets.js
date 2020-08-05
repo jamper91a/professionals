@@ -74,6 +74,13 @@ class Sockets {
     });
   }
 
+  static myAdmin(){
+    io.socket.on(SOCKET_EVENTS.admin.CHAT_CREATED, async function(data, jwr) {
+      console.log('socket.on', SOCKET_EVENTS.admin.CHAT_CREATED)
+      ProfessionalsEvents.$emit('all-current-chats', SOCKET_EVENTS.admin.CHAT_CREATED, data);
+    });
+  }
+
   static sendChatMessage(message, chatId){
     console.log('emit chat sendChatMessage');
     io.socket.post('/api/chat/sendMessage', {message, chatId}, function (resData, jwres){

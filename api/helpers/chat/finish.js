@@ -87,6 +87,8 @@ module.exports = {
       await sails.helpers.socket.send('chat-'+chat.id, sails.config.custom.SOCKET_EVENTS.CHAT_FINISHED, {reason});
       //Remove users from the chat
       sails.sockets.leaveAll('chat-'+chat.id);
+      //Notify about the changes
+      await sails.helpers.chat.getAllRunningChats();
       return {};
 
 

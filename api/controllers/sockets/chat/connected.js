@@ -66,6 +66,8 @@ module.exports = {
         const startTime = moment().format('YYYY-MM-DD HH:mm:ss');
         await Chat.updateOne({id: chat.id}).set({startTime: startTime, chatState: sails.config.custom.CHAT_STATES.STARTED});
       }
+      //Notify about the changes
+      await sails.helpers.chat.getAllRunningChats();
       await sails.helpers.socket.send('chat-' + chat.id, sails.config.custom.SOCKET_EVENTS.USER_CONNECTED_CHAT,
         {
           userId: this.req.user.id,

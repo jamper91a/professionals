@@ -1,0 +1,91 @@
+<%- exposeLocalsToBrowser() %>
+<!-- USER DATA-->
+
+<div id="all-current-chats">
+  <div class="user-data m-b-30">
+    <h3 class="title-3 m-b-30">
+      <i class="zmdi zmdi-account-calendar"></i>
+      <% __('Chats'); %>
+    </h3>
+    <div class="table-responsive table-data">
+      <table class="table">
+        <thead>
+        <tr>
+          <td>
+            <label class="au-checkbox">
+              <input type="checkbox">
+              <span class="au-checkmark"></span>
+            </label>
+          </td>
+          <td><%= __('id') ;%></td>
+          <td><%= __('Customer') ;%></td>
+          <td><%= __('Professional') ;%></td>
+          <td><%= __('State') ;%></td>
+          <td><%= __('Actions') ;%></td>
+          <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(chat, index) in chats">
+          <td>
+            <label class="au-checkbox">
+              <input type="checkbox">
+              <span class="au-checkmark"></span>
+            </label>
+          </td>
+          <td>
+            <div class="table-data__info">
+              <h6>{{chat.id}}</h6>
+            </div>
+          </td>
+          <td>
+            <span class="table-data__info">{{chat.customer.user.username}}</span>
+          </td>
+          <td>
+            <span class="table-data__info">{{chat.professional.user.username}}</span>
+          </td>
+          <td>
+            <span class="table-data__info">{{chat.chatState.name}}</span>
+          </td>
+          <td>
+            <div class="table-data__info">
+<!--              <button data-toggle="modal" data-target="#unbanmodal"-->
+<!--                      @click="selectChat(chat.id, index)"-->
+<!--                      type="button" class="btn btn-outline-warning" v-if="customer.user.banned">-->
+<!--                <i class="zmdi zmdi-close-circle-o"></i>&nbsp; <%= __('Finish Chat'); %>-->
+<!--              </button>-->
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- END USER DATA-->
+
+  <!-- modal Ban -->
+  <div class="modal fade" id="banmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="smallmodalLabel"><%= __('Ban_User') %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <%= __('Are_you_sure_you_want_to_ban_this_user') %>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= __('Cancel') %></button>
+          <button @click="banUser(1)" type="button" class="btn btn-primary"><%= __('Confirm') %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal Ban -->
+</div>
+<!-- end modal small -->

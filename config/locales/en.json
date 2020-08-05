@@ -117,5 +117,10 @@
 	"Description STRIPE": "Add fund using your Credit card or debit card",
 	"Description PAYPAL": "Add funds using your Paypal account",
 	"professionals": "professionals",
-	"customers": "customers"
+	"customers": "customers",
+	"id": "id",
+	"Customer": "Customer",
+	"State": "State",
+	"Actions": "Actions",
+	"Finish Chat": "Finish Chat"
 }

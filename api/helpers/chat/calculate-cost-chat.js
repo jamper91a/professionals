@@ -60,6 +60,8 @@ module.exports = {
         billed: true
       });
     }
+    //Notify about the changes
+    await sails.helpers.chat.getAllRunningChats();
     return {};
   }
 

@@ -24,6 +24,9 @@ const SOCKET_EVENTS = {
     USER_CONNECTED_CHAT: 'userConnectedChat',
     CHAT_FINISHED: 'chatFinished',
     CHAT_CANCELED: 'chatCanceled',
+    admin:{
+      CHAT_CREATED: 'CHAT_CREATED'
+    }
 };
 const CHAT_STATES= {
   CREATED: 6,

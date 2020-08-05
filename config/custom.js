@@ -61,6 +61,9 @@ module.exports.custom = {
     USER_CONNECTED_CHAT: 'userConnectedChat',
     CHAT_FINISHED: 'chatFinished',
     CHAT_CANCELED: 'chatCanceled',
+    admin:{
+      CHAT_CREATED: 'CHAT_CREATED'
+    }
   },
   //GATEWAYS
   GATEWAYS: {

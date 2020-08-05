@@ -70,6 +70,8 @@ module.exports = {
                 maxDuration: maxTime
               }).fetch();
 
+              //Notify the admins
+              await sails.helpers.chat.getAllRunningChats();
               return chat;
             } else {
               throw 'customerNotFounds';
